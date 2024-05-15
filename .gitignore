@@ -1,0 +1,9 @@
+**/.idea/**
+/build/tmp
+/build/k8s/app/deploy
+/build/logs
+/build/k8s/app/certs
+*.lock
+node_modules
+dist
+.vscode
