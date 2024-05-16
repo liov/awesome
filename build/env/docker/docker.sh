@@ -103,3 +103,19 @@ docker run --rm -v /mnt/d/SDK/gopath:/go -v $PWD:/work -w /work/server/go golang
 docker run --net=host
 
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t gcr.io/my-project/my-image:latest .
+
+
+# 日志清理
+#!/bin/sh
+
+echo "======== start clean docker containers logs ========"
+
+logs=$(find /var/lib/docker/containers/ -name *-json.log)
+
+for log in $logs
+        do
+                echo "clean logs : $log"
+                cat /dev/null > $log
+        done
+
+echo "======== end clean docker containers logs ========"

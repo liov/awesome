@@ -7,14 +7,15 @@ import (
 	"gorm.io/gorm/utils/tests"
 )
 
-type AppNode struct {
+type A struct {
 	ID     int    `json:"id" gorm:"primaryKey"`
 	Status string `json:"status"`
-	Node   Node   `json:"nodeInfo"`
+	B      B      `json:"B"`
 }
 
-type Node struct {
+type B struct {
 	ID   int    `json:"id" gorm:"primaryKey"`
+	AID  int    `json:"a_id"`
 	Name string `json:"name"`
 }
 

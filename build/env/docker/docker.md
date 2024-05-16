@@ -715,3 +715,15 @@ docker run --rm -v /var/lib/docker:/var/lib/docker alpine sh -c "echo '' > $(doc
 
 truncate -s 0 /var/lib/docker/containers/*/*-json.log
 sudo truncate -s 0 `docker inspect --format='{{.LogPath}}' <container>`
+
+# 要删除所有标签为 <none> 的 Docker 镜像，可以使用以下命令：
+
+docker rmi $(docker images -q -f "dangling=true")
+这条命令首先使用 docker images -q -f "dangling=true" 查找所有没有标签（即 <none>）的镜像的 ID，并且 -q 参数使得命令只输出镜像ID，随后 docker rmi 命令利用这些 ID 删除这些镜像。
+
+请注意，在执行这个操作之前，确保没有正在运行的容器依赖于这些镜像，否则 docker rmi 命令会失败。如果需要同时停止并删除依赖于这些镜像的容器，可以先执行以下命令：
+
+Bash
+docker stop $(docker ps -a -q -f "ancestor=<none>")
+docker rm $(docker ps -a -q -f "ancestor=<none>")
+但请注意，上面的 ancestor=<none> 过滤条件可能不会直接按预期工作，因为 <none> 镜像通常不直接作为容器的 ancestor 列出。更安全的做法是先检查容器状态和关联镜像，确保不会误删重要容器。通常，直接删除 <none> 镜像是安全的，因为这些镜像不再被任何容器使用。
