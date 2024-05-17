@@ -1,10 +1,14 @@
 package main
 
-import "log"
+import (
+	"gorm.io/gorm"
+	"log"
+	"test/custom/gorm/model"
+)
 
-func Select() {
-	var models []*Model
-	err := db.Table(ModelTable).Find(&models).Error
+func Select(db *gorm.DB) {
+	var models []*model.Model
+	err := db.Table(model.ModelTable).Find(&models).Error
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -13,9 +17,9 @@ func Select() {
 	}
 }
 
-func SelectStrTime() {
-	var models []*ModelA
-	err := db.Table(ModelTable).Find(&models).Error
+func SelectStrTime(db *gorm.DB) {
+	var models []*model.ModelA
+	err := db.Table(model.ModelTable).Find(&models).Error
 	if err != nil {
 		log.Fatal(err)
 	}

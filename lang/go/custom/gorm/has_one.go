@@ -5,19 +5,8 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 	"gorm.io/gorm/utils/tests"
+	"test/custom/gorm/model"
 )
-
-type A struct {
-	ID     int    `json:"id" gorm:"primaryKey"`
-	Status string `json:"status"`
-	B      B      `json:"B"`
-}
-
-type B struct {
-	ID   int    `json:"id" gorm:"primaryKey"`
-	AID  int    `json:"a_id"`
-	Name string `json:"name"`
-}
 
 func main() {
 
@@ -28,14 +17,14 @@ func main() {
 	})
 
 	var (
-		appNodes []*AppNode
+		abs []*model.AB
 	)
-	tx := db.Model(&AppNode{}).Joins("Node").Where(`app_version_id = ?`, 10)
+	tx := db.Joins("Node").Where(`id = ?`, 1)
 	sql := tx.ToSQL(func(db *gorm.DB) *gorm.DB {
 		return db.Limit(1).
 			Offset(0).
 			Order("id DESC").
-			Find(&appNodes)
+			Find(&abs)
 	})
 	fmt.Println(sql)
 

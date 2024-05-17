@@ -5,25 +5,8 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 	"gorm.io/gorm/utils/tests"
+	"test/custom/gorm/model"
 )
-
-type AB struct {
-	Id  int `json:"id" gorm:"primaryKey"`
-	BId int `json:"aId" gorm:"index"`
-	AId int `json:"bId"`
-	B   B   `json:"b"`
-	A   A   `json:"a"`
-}
-
-type A struct {
-	Id   int    `json:"id" gorm:"primaryKey"`
-	Name string `json:"name" gorm:"uniqueIndex"`
-}
-
-type B struct {
-	Id   int    `json:"id" gorm:"primaryKey"`
-	Name string `json:"name" gorm:"uniqueIndex"`
-}
 
 func main() {
 	db, _ := gorm.Open(tests.DummyDialector{}, &gorm.Config{
@@ -33,10 +16,10 @@ func main() {
 	})
 
 	var (
-		count    int64
-		appNodes = []*AB{}
+		count int64
+		abs   = []*model.AB{}
 	)
-	tx := db.Model(&AB{}).Preload("A").Joins("B").Where(`id = ?`, 11)
+	tx := db.Model(&model.AB{}).Preload("A").Joins("B").Where(`id = ?`, 11)
 
 	db.Count(&count)
 
@@ -44,7 +27,7 @@ func main() {
 		return db.Limit(1).
 			Offset(0).
 			Order("id DESC").
-			Find(&appNodes)
+			Find(&abs)
 	})
 	log.Info(sql)
 }
