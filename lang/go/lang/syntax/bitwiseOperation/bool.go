@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/cherry/utils/number"
+	"github.com/hopeio/cherry/utils/math"
 )
 
 const (
@@ -23,7 +23,7 @@ func main() {
 	fmt.Printf("%08b,%d\n", ^i1, ^i1)
 	var i2 int8 = 0
 	fmt.Printf("%08b,%d\n", ^i2, ^i2) //补码，第一位符号位，所有位取反加1
-	number.ViewBin(-2)
+	math.ViewBin(-2)
 	/*	var b uint8
 		reader := bufio.NewReader(os.Stdin)
 		for {
@@ -45,8 +45,8 @@ func main() {
 				break
 			}
 		}*/
-	number.ViewBin(^int8(-1))
-	number.ViewBin(^uint8(1))
+	math.ViewBin(^int8(-1))
+	math.ViewBin(^uint8(1))
 }
 
 //go中三种返回ok值的操作,均是取值操作

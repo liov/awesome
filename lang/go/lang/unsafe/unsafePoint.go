@@ -10,11 +10,11 @@ import (
 func main() {
 	var f interface{}
 	f = 1
-	b := (*reflecti.EmptyInterface)(unsafe.Pointer(&f))
-	fmt.Println(b.Typ)
-	fmt.Printf("%d\n", &b.Typ)
-	fmt.Printf("%d\n", b.Word)
-	fmt.Println(*(*[2]uintptr)(b.Word))
+	b := (*reflecti.Eface)(unsafe.Pointer(&f))
+	fmt.Println(b.Type)
+	fmt.Printf("%d\n", &b.Type)
+	fmt.Printf("%d\n", b.Value)
+	fmt.Println(*(*[2]uintptr)(b.Value))
 	v := reflect.ValueOf(&f).Elem()
 	array := v.InterfaceData()
 	fmt.Println(array)

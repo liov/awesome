@@ -7,10 +7,10 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"test/lang/cgo/crosscompile/mobile"
 
 	_ "golang.org/x/exp/shiny/driver"
-	_ "test/cgo/crosscompile/a"
-	"test/cgo/crosscompile/mobile"
+	_ "test/lang/cgo/crosscompile/a"
 )
 
 func main() {
