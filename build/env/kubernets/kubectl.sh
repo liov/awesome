@@ -19,6 +19,9 @@ kubectl describe deployment data-center
 
 kubectl logs -f $(kubectl get pods --selector=app=${PWD##*/} --output=jsonpath={.items..metadata.name})
 
+kubectl logs <POD_NAME> --since=5h
+kubectl logs -l app=label_NAME
+
 # deploy
 ../deploy/main -flow all -env dev -name ${PWD##*/} -ns ${USER} -path . -ver v1.1.0-$(date "+%Y%m%d%H%M%S")
 
