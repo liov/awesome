@@ -261,3 +261,6 @@ git config --global credential.helper store
 
 1.3即可
 git submodule foreach -q --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'
+# git更改远程仓库
+git remote set-url origin https://github.com/新的仓库.git
+git remote set-url origin https://github.com/xxx.git
