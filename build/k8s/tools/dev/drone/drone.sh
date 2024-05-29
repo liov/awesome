@@ -21,6 +21,7 @@ DRONE_SERVER_HOST
 DRONE_SERVER_PROTO
 必需的字符串值提供您的外部协议方案。此值应设置为 http 或 https。如果您配置 ssl 或 acme，此字段默认为 https。如果您将 Drone 部署在负载均衡器或带有 SSL 终止的反向代理后面，则应设置此值。https
 
+# 使用自定义js配置转换器 docker run   --publish=443:443 --restart=always  --detach=true  --name=convert jybl/convert:latest
 docker run \
   --volume=/var/lib/drone:/data \
   --env=DRONE_GITHUB_CLIENT_ID=your-id \
@@ -28,6 +29,8 @@ docker run \
   --env=DRONE_RPC_SECRET=super-duper-secret \
   --env=DRONE_SERVER_HOST=drone.company.com \
   --env=DRONE_SERVER_PROTO=https \
+  --env=DRONE_CONVERT_PLUGIN_ENDPOINT=${url} \
+  --env=DRONE_CONVERT_PLUGIN_SECRET=${DRONE_CONVERT_PLUGIN_SECRET} \
   --publish=80:80 \
   --publish=443:443 \
   --restart=always \
