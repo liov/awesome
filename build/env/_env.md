@@ -72,7 +72,8 @@ maven { url "https://jitpack.io" }
 
 # etcd
 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key member list
-
+## minikube
+etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/var/lib/minikube/certs/etcd/ca.crt --cert=/var/lib/minikube/certs/etcd/peer.crt --key=/var/lib/minikube/certs/etcd/peer.key get --prefix /apisix
 
 # [helm](https://helm.sh/)
 wget https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz
