@@ -14,8 +14,10 @@ git commit -m 'xxx'
 
 ## 修改历史提交,删除*.jpg
 git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *.jpg" --prune-empty --tag-name-filter cat -- --all
-
+### 指定提交
 git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *.jpg" --prune-empty $commit-id..HEAD
+### 最近8个提交
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *.jpg" --prune-empty HEAD~8..HEAD
 
 git rm -rf .git/refs/original/
 
