@@ -29,6 +29,7 @@ workflow: 工作流相关文件修改
 scope
 commit 影响的范围, 比如: route, component, utils, build...
 optimize 优化
+depend 依赖升级
 subject
 commit 的概述
 
