@@ -1,23 +1,41 @@
-# win10教育版
+# win10教育版（过时）
 slmgr /ipk NW6C2-QMPVW-D7KKK-3GKT6-VCFB2
 
 slmgr /skms kms.03k.org
 
 slmgr /ato
 
-## win11专业版
+## win11专业版（报错）
 slmgr -ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
 
 slmgr -skms kms.0t.net.cn
 
 slmgr -ato
-## win激活，出现“非核心版本的计算机”的处理方法
+## win激活，出现“非核心版本的计算机”的处理方法（无效）
 1 打开“注册表编辑器”；（Windows + R然后输入 Regedit）
 
 2 修改SkipRearm 的值为1；（在HKEY_LOCAL_MACHINE–》SOFTWARE–》Microsoft–》Windows NT–》CurrentVersion–》SoftwareProtectionPlatform里面，将SkipRearm的值修改为1）重启电脑
 
-3 以管理员身份启动cmd，输入SLMGR   -REARM，根据提示，再次重启电脑！
+3 以管理员身份启动cmd，slmgr -rearm，根据提示，再次重启电脑！
 
+## massgrave
+https://massgrave.dev/#download--how-to-use-it
+网上搜个密钥
+如 Windows11 激活密钥：NBQWQ-W9PTV-B4YWP-4K773-T6PKG
+断网,系统更改密钥输入密钥,安装重启
+```powershell
+irm https://get.activated.win | iex
+```
+# 彻底关闭windows defender
+
+win+R gpedit.msc
+在【本地组策略编辑器】-【计算机配置】中依次打开【管理模板】、【Windows组件】、【Microsoft Defender防病毒】
+在【Microsoft Defender防病毒】中双击【关闭Microsoft Defender防病毒】。选择【已启用】
+然后双击【允许反恶意软件服务始终保持运行状态】。选择【已禁用】
+双击【实时保护】。【关闭实时保护】 选择【已启用】
+双击【扫描所有下载文件和附件】。【已禁用】
+打开Microsoft Defender 全关
+鼠标右击任务栏，点击【任务管理器】，【进程】和【启动】，相关的全部【关闭】和【禁用】。
 # windows修改盘符
 盘符修改是指更改电脑中分区或设备的驱动器号1。修改盘符的一般步骤是234：
 按下组合键“Win+R”，输入“diskmgmt.msc”后按“回车”，打开磁盘管理器。
