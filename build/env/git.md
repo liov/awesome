@@ -225,11 +225,11 @@ branch=`git rev-parse --abbrev-ref HEAD` && git checkout dev && git merge $branc
 `git log --format='%an' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --since=2022-02-07 --until=2023-01-30 --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done`
 
 ## git amend 改提交时间
-git commit --amend --date="2024-04-07 19:00:00"
+git commit --amend --date="2024-04-07 19:00:00" --no-edit
 ### 固定减去10小时
-git commit --amend --date="$(date -d '-10 hours' '+%Y-%m-%d %H:%M:%S')"
+git commit --amend --date="$(date -d '-10 hours' '+%Y-%m-%d %H:%M:%S')" --no-edit
 ### 改提交人
-git commit --amend --author="贾一饼 <xxx@.xxx>"
+git commit --amend --author="贾一饼 <xxx@.xxx>" --no-edit
 ### 修改提交
 从HEAD版本开始往过去数3个版本
 $ git rebase -i HEAD~3
