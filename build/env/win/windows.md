@@ -49,3 +49,4 @@ taskkill /f /pid 12732
 # windows 强制关应用
 taskkill /im workwinlm.exe -f -t
 taskkill /im system.dll -f -t
+
