@@ -45,13 +45,13 @@ Oh My Zsh#
 GitHub: https://github.com/ohmyzsh/ohmyzsh
 
 pacman -S zsh
-
+export PATH=$PATH:"/d/Program Files/Git/cmd"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # 或者
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 所以这时的zsh 基本已经配置完成,你需要一行命令就可以切换到 zsh 模式，终端下输入zsh切换，输入bash切回去。
-
+export PATH=$PATH:"/d/Program Files/Git/cmd"
 ohmyzsh插件，路径：
 
 ~/.oh-my-zsh/plugins/
