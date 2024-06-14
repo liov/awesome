@@ -219,5 +219,8 @@ https://blog.csdn.net/hustlei/article/details/86687621
 https://www.cnblogs.com/52fhy/p/9571463.html
 
 
-
-pacman install -S zsh
+# 乱码
+安装字体
+https://www.nerdfonts.com/font-downloads
+https://github.com/ryanoasis/nerd-fonts/releases
+选一个安装
