@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 46. 全排列

@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 447. 回旋镖的数量

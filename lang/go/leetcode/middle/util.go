@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 func Abs(a int) int {
 	if a >= 0 {

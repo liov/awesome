@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 688. 骑士在棋盘上的概率

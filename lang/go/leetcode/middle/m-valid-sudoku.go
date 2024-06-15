@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 36. 有效的数独

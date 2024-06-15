@@ -1,6 +1,7 @@
 package leetcode
 
-/**
+/*
+*
 108. 将有序数组转换为二叉搜索树
 
 将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。
@@ -20,17 +21,21 @@ package leetcode
 -10  5
 
 https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/
- */
-fun sortedArrayToBST(nums: IntArray): TreeNode? {
-  return helper(nums, 0, nums.size - 1)
+*/
+func sortedArrayToBST(nums []int) *TreeNode {
+	return helper(nums, 0, len(nums)-1)
 }
 
-fun helper(nums: IntArray, left: Int, right: Int): TreeNode? {
-  if (left > right) return null
-  val mid = (left + right + 1) / 2
-  val root = TreeNode(nums[mid])
-  if (left == right) return root
-  root.left = helper(nums, left, mid - 1)
-  root.right = helper(nums, mid + 1, right)
-  return root
+func helper(nums []int, left int, right int) *TreeNode {
+	if left > right {
+		return nil
+	}
+	mid := (left + right + 1) / 2
+	root := &TreeNode{Val: nums[mid]}
+	if left == right {
+		return root
+	}
+	root.Left = helper(nums, left, mid-1)
+	root.Right = helper(nums, mid+1, right)
+	return root
 }

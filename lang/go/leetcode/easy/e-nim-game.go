@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 292. Nim 游戏

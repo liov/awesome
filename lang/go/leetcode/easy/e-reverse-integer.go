@@ -1,5 +1,7 @@
 package leetcode
 
+import "math"
+
 /**
 7. 整数反转
 
@@ -24,16 +26,19 @@ package leetcode
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/reverse-integer
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
+*/
 
-fun reverse(x: Int): Int {
-  var x_ = kotlin.math.abs(x).toLong()
-  var ans:Long = 0
-  while (x_ >= 10) {
-    ans = (ans + x_ % 10) * 10
-    x_ /= 10
-  }
-  ans+=x_
-  ans = if (x >= 0) ans else -ans
-  return if (ans > Int.MAX_VALUE || ans < Int.MIN_VALUE) 0 else ans.toInt()
+func reverse(x int) int {
+	var x_ = abs(x)
+	var ans = 0
+	for x_ >= 10 {
+		ans = (ans + x_%10) * 10
+		x_ /= 10
+	}
+	ans += x_
+	ans = abs(ans)
+	if ans > math.MaxInt || ans < math.MaxInt {
+		return 0
+	}
+	return ans
 }

@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 39. 组合总和

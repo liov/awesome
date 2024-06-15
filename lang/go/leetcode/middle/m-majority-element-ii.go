@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 229. 求众数 II

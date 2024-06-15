@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 869. 重新排序得到 2 的幂

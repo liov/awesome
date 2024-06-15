@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 1221. 分割平衡字符串

@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 859. 亲密字符串

@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 49. 字母异位词分组

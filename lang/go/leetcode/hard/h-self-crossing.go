@@ -1,4 +1,4 @@
-package hard
+package leetcode
 
 /*
 给你一个整数数组 distance 。

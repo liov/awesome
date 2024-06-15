@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 187. 重复的DNA序列

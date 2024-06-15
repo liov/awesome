@@ -33,7 +33,8 @@ S 仅由小写英文字母组成。
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
-fun removeDuplicates(S: String): String {
-  return ""
+*/
+// TODO
+func removeDuplicates(S string) string {
+	return ""
 }

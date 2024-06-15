@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 6. Z 字形变换

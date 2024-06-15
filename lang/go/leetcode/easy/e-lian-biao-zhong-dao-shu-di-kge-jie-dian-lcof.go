@@ -1,6 +1,4 @@
-package easy
-
-import "test/leetcode"
+package leetcode
 
 /*
 剑指 Offer 22. 链表中倒数第k个节点
@@ -22,7 +20,7 @@ import "test/leetcode"
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 
-func getKthFromEnd(head *leetcode.ListNode, k int) *leetcode.ListNode {
+func getKthFromEnd(head *ListNode, k int) *ListNode {
 	var ret = head
 	var end = head
 	for i := 1; i < k; i++ {

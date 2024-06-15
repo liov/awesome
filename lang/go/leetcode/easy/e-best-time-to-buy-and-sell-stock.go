@@ -1,6 +1,9 @@
 package leetcode
 
-/**
+import "math"
+
+/*
+*
 121. 买卖股票的最佳时机
 
 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
@@ -8,8 +11,6 @@ package leetcode
 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
 
 注意：你不能在买入股票前卖出股票。
-
-
 
 示例 1:
 
@@ -26,28 +27,35 @@ package leetcode
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
-fun maxProfit(prices: IntArray): Int {
-  if(prices.size < 2) return 0
-  val dp = IntArray(prices.size)
-  dp[0] = 0
-  dp[1] = kotlin.math.max(prices[1] - prices[0], 0)
-  var max = prices[1]
-  var min = kotlin.math.min(prices[0], prices[1])
-  for(i in 2 until prices.size){
-    dp[i] = kotlin.math.max(dp[i-1] + kotlin.math.max(prices[i] - max, 0),prices[i] - min)
-    if (dp[i] > dp[i-1]) max = prices[i]
-    min = kotlin.math.min(min, prices[i])
-  }
-  return dp.last()
+*/
+func maxProfit(prices []int) int {
+	if len(prices) < 2 {
+		return 0
+	}
+	dp := make([]int, len(prices))
+	dp[0] = 0
+	dp[1] = max(prices[1]-prices[0], 0)
+	var maxV = prices[1]
+	var minV = min(prices[0], prices[1])
+	for i := 2; i < len(prices); i++ {
+		dp[i] = max(dp[i-1]+max(prices[i]-maxV, 0), prices[i]-minV)
+		if dp[i] > dp[i-1] {
+			maxV = prices[i]
+		}
+		minV = min(minV, prices[i])
+	}
+	return dp[len(dp)-1]
 }
 
-fun maxProfitV2(prices: IntArray): Int {
-  var minprice = Integer.MAX_VALUE
-  var maxprofit = 0
-  for (i in prices.indices) {
-    if (prices[i] < minprice)  minprice = prices[i]
-    else maxprofit = kotlin.math.max(prices[i] - minprice,maxprofit)
-  }
-  return maxprofit
+func maxProfitV2(prices []int) int {
+	var minprice = math.MaxInt
+	var maxprofit = 0
+	for i := range prices {
+		if prices[i] < minprice {
+			minprice = prices[i]
+		} else {
+			maxprofit = max(prices[i]-minprice, maxprofit)
+		}
+	}
+	return maxprofit
 }

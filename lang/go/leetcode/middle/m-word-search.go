@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 79. 单词搜索

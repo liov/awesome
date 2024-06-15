@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 306. 累加数

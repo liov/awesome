@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 725. 分隔链表

@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 94. 二叉树的中序遍历
@@ -32,12 +32,6 @@ package easy
 中序遍历是二叉树遍历的一种方式，也被称为中根遍历或中序周游。在二叉树中，中序遍历的访问顺序是“左—>根—>右”，即首先遍历左子树，然后访问根结点，最后遍历右子树。
 后序遍历（Late-Returning Order，LRD）是二叉树遍历的一种方式，也被称为后根遍历或后序周游。在后序遍历中，访问节点的顺序是“左->右->根”。
 */
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 func inorderTraversal(root *TreeNode) []int {
 	var ans []int

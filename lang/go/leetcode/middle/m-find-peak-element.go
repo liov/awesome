@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 162. 寻找峰值

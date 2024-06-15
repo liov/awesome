@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 1894. 找到需要补充粉笔的学生编号

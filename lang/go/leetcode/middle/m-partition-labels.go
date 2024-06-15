@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 763. 划分字母区间

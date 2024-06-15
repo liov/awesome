@@ -1,6 +1,7 @@
 package leetcode
 
-/**
+/*
+*
 392. 判断子序列
 
 给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
@@ -22,35 +23,57 @@ s = "axc", t = "ahbgdc"
 后续挑战 :
 
 如果有大量输入的 S，称作S1, S2, ... , Sk 其中 k >= 10亿，你需要依次检查它们是否为 T 的子序列。在这种情况下，你会怎样改变代码？
- */
-fun isSubsequence(s: String, t: String): Boolean {
-  if (s == "") return true
-  if (t.length < s.length) return false
-  var i = 0
-  for (c in t) {
-    if (c == s[i]) i++
-    if (i == s.length) return true
-  }
-  return false
+*/
+func isSubsequence(s string, t string) bool {
+	if s == "" {
+		return true
+	}
+	if len(t) < len(s) {
+		return false
+	}
+	var i = 0
+	for c := range t {
+		if t[c] == s[i] {
+			i++
+		}
+		if i == len(s) {
+			return true
+		}
+	}
+	return false
 }
 
-fun isSubsequenceV2(s: String, t: String): Boolean {
-  if (s == "") return true
-  if (t.length < s.length) return false
-  var i = 0
-  var j = s.length - 1
-  val even = t.length and 1 == 0
+func isSubsequenceV2(s string, t string) bool {
+	if s == "" {
+		return true
+	}
+	if len(t) < len(s) {
+		return false
+	}
+	var i = 0
+	var j = len(s) - 1
+	even := len(t)&1 == 0
 
-  for (n in 0 until t.length / 2) {
-    if (t[n] == s[i]) {
-      if (i == j) return true
-      i++
-    }
-    if (t[t.length - 1 - n] == s[j]) {
-      if (i == j) return true
-      j--
-    }
-  }
-  if (!even) if (t[t.length / 2] == s[i]) if (i == j) return true
-  return false
+	for n := range len(t) / 2 {
+		if t[n] == s[i] {
+			if i == j {
+				return true
+			}
+			i++
+		}
+		if t[len(t)-1-n] == s[j] {
+			if i == j {
+				return true
+			}
+			j--
+		}
+	}
+	if !even {
+		if t[len(t)/2] == s[i] {
+			if i == j {
+				return true
+			}
+		}
+	}
+	return false
 }

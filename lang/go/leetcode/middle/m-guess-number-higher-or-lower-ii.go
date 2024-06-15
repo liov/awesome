@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 import (
 	"math"

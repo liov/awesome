@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 3. 无重复字符的最长子串

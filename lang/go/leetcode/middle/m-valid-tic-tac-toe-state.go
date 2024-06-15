@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 794. 有效的井字游戏

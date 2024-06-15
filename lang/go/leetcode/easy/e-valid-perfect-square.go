@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 367. 有效的完全平方数

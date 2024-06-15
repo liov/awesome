@@ -1,6 +1,7 @@
 package leetcode
 
-/**
+/*
+*
 112. 路径总和
 
 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
@@ -22,15 +23,21 @@ package leetcode
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/path-sum
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
-fun hasPathSum(root: TreeNode?, sum: Int): Boolean {
-  return hasPathDfs(root, 0, sum)
+*/
+func hasPathSum(root *TreeNode, sum int) bool {
+	return hasPathDfs(root, 0, sum)
 }
 
-fun hasPathDfs(root: TreeNode?, sum: Int, target: Int): Boolean {
-  if (root == null) return false
-  val sum = sum + root.`val`
-  if (sum == target && root.left == null && root.right == null) return true
-  val exists = hasPathDfs(root.left, sum, target)
-  return if (exists) true else hasPathDfs(root.right, sum, target)
+func hasPathDfs(root *TreeNode, sum int, target int) bool {
+	if root == nil {
+		return false
+	}
+	sum = sum + root.Val
+	if sum == target && root.Left == nil && root.Right == nil {
+		return true
+	}
+	if hasPathDfs(root.Left, sum, target) {
+		return true
+	}
+	return hasPathDfs(root.Right, sum, target)
 }

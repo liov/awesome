@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 430. 扁平化多级双向链表

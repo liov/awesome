@@ -1,4 +1,4 @@
-package hard
+package leetcode
 
 /*
 689. 三个无重叠子数组的最大和

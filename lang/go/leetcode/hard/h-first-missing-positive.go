@@ -1,4 +1,4 @@
-package hard
+package leetcode
 
 /*
 41. 缺失的第一个正数

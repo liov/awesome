@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 22. 括号生成

@@ -1,6 +1,7 @@
 package leetcode
 
-/**
+/*
+*
 104. 二叉树的最大深度
 给定一个二叉树，找出其最大深度。
 
@@ -19,7 +20,10 @@ package leetcode
 返回它的最大深度 3 。
 
 https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
- */
-fun maxDepth(root: TreeNode?): Int {
-  return if (root == null)  0 else kotlin.math.max(maxDepth(root.left),maxDepth(root.right)) + 1
+*/
+func maxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
 }

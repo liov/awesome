@@ -1,6 +1,7 @@
 package leetcode
 
-/**
+/*
+*
 搜索插入位置
 
 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
@@ -27,16 +28,26 @@ package leetcode
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/search-insert-position
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
-fun searchInsert(nums: IntArray, target: Int): Int {
-  if (nums.isEmpty() || target < nums[0]) return 0
-  if(target > nums.last()) return nums.size
-  var left = 0
-  var right = nums.size
-  while (left < right) {
-    val mid = (left + right) shr 1
-    if(nums[mid] == target) return mid
-    if(nums[mid] < target) left = mid + 1 else right = mid
-  }
-  return left
+*/
+func searchInsert(nums []int, target int) int {
+	if len(nums) == 0 || target < nums[0] {
+		return 0
+	}
+	if target > nums[len(nums)-1] {
+		return len(nums)
+	}
+	var left = 0
+	var right = len(nums)
+	for left < right {
+		mid := (left + right) >> 1
+		if nums[mid] == target {
+			return mid
+		}
+		if nums[mid] < target {
+			left = mid + 1
+		} else {
+			right = mid
+		}
+	}
+	return left
 }

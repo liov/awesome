@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 223. 矩形面积

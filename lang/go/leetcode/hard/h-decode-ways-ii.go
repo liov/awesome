@@ -1,4 +1,4 @@
-package hard
+package leetcode
 
 /*
 639. 解码方法 II

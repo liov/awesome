@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 852. 山脉数组的峰顶索引

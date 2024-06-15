@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 704. 二分查找

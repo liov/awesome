@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 1218. 最长定差子序列

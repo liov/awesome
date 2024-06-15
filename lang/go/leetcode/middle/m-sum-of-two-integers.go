@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 371. 两整数之和

@@ -1,4 +1,4 @@
-package easy
+package leetcode
 
 /*
 495. 提莫攻击

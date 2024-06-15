@@ -1,4 +1,4 @@
-package hard
+package leetcode
 
 /*
 352. 将数据流变为多个不相交区间

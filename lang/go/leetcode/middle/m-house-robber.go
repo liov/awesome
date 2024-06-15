@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 198. 打家劫舍

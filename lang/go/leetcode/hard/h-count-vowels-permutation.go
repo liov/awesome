@@ -1,4 +1,4 @@
-package hard
+package leetcode
 
 /*
 1220. 统计元音字母序列的数目

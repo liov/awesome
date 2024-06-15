@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 128. 最长连续序列

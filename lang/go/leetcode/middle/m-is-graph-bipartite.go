@@ -1,4 +1,4 @@
-package middle
+package leetcode
 
 /*
 785. 判断二分图
