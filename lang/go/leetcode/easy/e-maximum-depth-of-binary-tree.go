@@ -22,8 +22,8 @@ package leetcode
 https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
 */
 func maxDepth(root *TreeNode) int {
-	if root == nil {
-		return 0
-	}
-	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
+  if root == nil {
+    return 0
+  }
+  return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
 }

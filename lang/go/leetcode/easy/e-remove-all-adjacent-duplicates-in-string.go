@@ -36,5 +36,5 @@ S 仅由小写英文字母组成。
 */
 // TODO
 func removeDuplicates(S string) string {
-	return ""
+  return ""
 }

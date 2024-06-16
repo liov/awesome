@@ -25,55 +25,55 @@ s = "axc", t = "ahbgdc"
 如果有大量输入的 S，称作S1, S2, ... , Sk 其中 k >= 10亿，你需要依次检查它们是否为 T 的子序列。在这种情况下，你会怎样改变代码？
 */
 func isSubsequence(s string, t string) bool {
-	if s == "" {
-		return true
-	}
-	if len(t) < len(s) {
-		return false
-	}
-	var i = 0
-	for c := range t {
-		if t[c] == s[i] {
-			i++
-		}
-		if i == len(s) {
-			return true
-		}
-	}
-	return false
+  if s == "" {
+    return true
+  }
+  if len(t) < len(s) {
+    return false
+  }
+  var i = 0
+  for c := range t {
+    if t[c] == s[i] {
+      i++
+    }
+    if i == len(s) {
+      return true
+    }
+  }
+  return false
 }
 
 func isSubsequenceV2(s string, t string) bool {
-	if s == "" {
-		return true
-	}
-	if len(t) < len(s) {
-		return false
-	}
-	var i = 0
-	var j = len(s) - 1
-	even := len(t)&1 == 0
+  if s == "" {
+    return true
+  }
+  if len(t) < len(s) {
+    return false
+  }
+  var i = 0
+  var j = len(s) - 1
+  even := len(t)&1 == 0
 
-	for n := range len(t) / 2 {
-		if t[n] == s[i] {
-			if i == j {
-				return true
-			}
-			i++
-		}
-		if t[len(t)-1-n] == s[j] {
-			if i == j {
-				return true
-			}
-			j--
-		}
-	}
-	if !even {
-		if t[len(t)/2] == s[i] {
-			if i == j {
-				return true
-			}
-		}
-	}
-	return false
+  for n := range len(t) / 2 {
+    if t[n] == s[i] {
+      if i == j {
+        return true
+      }
+      i++
+    }
+    if t[len(t)-1-n] == s[j] {
+      if i == j {
+        return true
+      }
+      j--
+    }
+  }
+  if !even {
+    if t[len(t)/2] == s[i] {
+      if i == j {
+        return true
+      }
+    }
+  }
+  return false
 }

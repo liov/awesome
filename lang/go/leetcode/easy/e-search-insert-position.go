@@ -30,24 +30,24 @@ package leetcode
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 func searchInsert(nums []int, target int) int {
-	if len(nums) == 0 || target < nums[0] {
-		return 0
-	}
-	if target > nums[len(nums)-1] {
-		return len(nums)
-	}
-	var left = 0
-	var right = len(nums)
-	for left < right {
-		mid := (left + right) >> 1
-		if nums[mid] == target {
-			return mid
-		}
-		if nums[mid] < target {
-			left = mid + 1
-		} else {
-			right = mid
-		}
-	}
-	return left
+  if len(nums) == 0 || target < nums[0] {
+    return 0
+  }
+  if target > nums[len(nums)-1] {
+    return len(nums)
+  }
+  var left = 0
+  var right = len(nums)
+  for left < right {
+    mid := (left + right) >> 1
+    if nums[mid] == target {
+      return mid
+    }
+    if nums[mid] < target {
+      left = mid + 1
+    } else {
+      right = mid
+    }
+  }
+  return left
 }

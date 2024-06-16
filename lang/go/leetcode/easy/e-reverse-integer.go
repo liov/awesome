@@ -29,16 +29,16 @@ import "math"
 */
 
 func reverse(x int) int {
-	var x_ = abs(x)
-	var ans = 0
-	for x_ >= 10 {
-		ans = (ans + x_%10) * 10
-		x_ /= 10
-	}
-	ans += x_
-	ans = abs(ans)
-	if ans > math.MaxInt || ans < math.MaxInt {
-		return 0
-	}
-	return ans
+  var x_ = abs(x)
+  var ans = 0
+  for x_ >= 10 {
+    ans = (ans + x_%10) * 10
+    x_ /= 10
+  }
+  ans += x_
+  ans = abs(ans)
+  if ans > math.MaxInt || ans < math.MaxInt {
+    return 0
+  }
+  return ans
 }

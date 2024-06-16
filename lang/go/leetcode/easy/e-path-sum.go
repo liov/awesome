@@ -25,19 +25,19 @@ package leetcode
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 func hasPathSum(root *TreeNode, sum int) bool {
-	return hasPathDfs(root, 0, sum)
+  return hasPathDfs(root, 0, sum)
 }
 
 func hasPathDfs(root *TreeNode, sum int, target int) bool {
-	if root == nil {
-		return false
-	}
-	sum = sum + root.Val
-	if sum == target && root.Left == nil && root.Right == nil {
-		return true
-	}
-	if hasPathDfs(root.Left, sum, target) {
-		return true
-	}
-	return hasPathDfs(root.Right, sum, target)
+  if root == nil {
+    return false
+  }
+  sum = sum + root.Val
+  if sum == target && root.Left == nil && root.Right == nil {
+    return true
+  }
+  if hasPathDfs(root.Left, sum, target) {
+    return true
+  }
+  return hasPathDfs(root.Right, sum, target)
 }
