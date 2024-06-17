@@ -28,6 +28,7 @@ BEGIN
             set i = i + 1;
         end while;
 
+
 END;
 
 INSERT INTO `d_sales_support`.`common_dict_value`

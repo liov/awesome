@@ -1,5 +1,12 @@
 # awesome
 
+Now: you don't need this
+you need
+https://tongyi.aliyun.com/qianwen/
+https://yuanbao.tencent.com/chat
+https://chatgpt.com
+
+
 ## lang
 go kotlin rust ts lua(openresty) python的语法学习,总结的坑和黑魔法,刷LeetCode的解答
 ## note

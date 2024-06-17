@@ -3,11 +3,20 @@ package main
 import (
 	"github.com/hopeio/cherry/initialize/conf_dao/duckdb"
 	"log"
+	"time"
 )
+
+type Log struct {
+	Time    time.Time
+	Level   string
+	TraceId int64
+	Caller  string
+	Message string
+}
 
 func main() {
 	config := duckdb.Config{
-		DSN:         "./duck.db?access_mode=read_only&threads=4",
+		DSN:         "./duck.db?access_mode=READ_WRITE&threads=4",
 		Path:        "",
 		AccessMode:  "",
 		Threads:     0,
@@ -17,8 +26,32 @@ func main() {
 	if err != nil {
 		log.Fatal("Build err", err)
 	}
-	_, err = db.Exec(`CREATE TABLE people (id INTEGER, name VARCHAR)`)
+	/*	_, err = db.Exec(`CREATE TYPE level AS ENUM ('debug', 'info', 'warn','error')`)
+		if err != nil {
+			log.Fatal("CREATE TYPE err", err)
+		}*/
+	/*	_, err = db.Exec(`DROP TABLE logs`)
+		if err != nil {
+			log.Println("DROP TABLE err", err)
+		}
+		_, err = db.Exec(`CREATE TABLE logs (traceId UBIGINT, time Timestamp,level level, caller VARCHAR, message TEXT)`)
+		if err != nil {
+			log.Fatal("CREATE TABLE err", err)
+		}
+		_, err = db.Exec(`INSERT INTO logs SELECT * FROM read_json_auto('D:/work/agent-1717641277076.log', format = 'newline_delimited',ignore_errors = true, columns = {traceId: 'UBIGINT', time: 'Timestamp',level :'level', caller: 'VARCHAR', message: 'TEXT'})`)
+		if err != nil {
+			log.Fatal("INSERT err", err)
+		}*/
+	rows, err := db.Query(`SELECT * FROM logs LIMIT 5;`)
 	if err != nil {
-		log.Fatal("Exec err", err)
+		log.Fatal("SELECT err", err)
+	}
+	for rows.Next() {
+		var log1 Log
+		err = rows.Scan(&log1.TraceId, &log1.Time, &log1.Level, &log1.Caller, &log1.Message)
+		if err != nil {
+			log.Fatal("Scan err", err)
+		}
+		log.Println(log1)
 	}
 }
