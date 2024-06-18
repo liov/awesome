@@ -224,3 +224,11 @@ https://www.cnblogs.com/52fhy/p/9571463.html
 https://www.nerdfonts.com/font-downloads
 https://github.com/ryanoasis/nerd-fonts/releases
 选一个安装
+
+# starship 仅是提示符，或者说主题
+export CARGO_TARGET_DIR=/d/sdk/rust
+cargo install starship --locked (失败提示设置CARGO_TARGET_DIR,设置也失败)
+
+conda install -c conda-forge starship
+eval "$(starship init zsh)"
+可移除
