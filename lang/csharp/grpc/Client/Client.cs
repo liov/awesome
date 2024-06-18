@@ -6,16 +6,15 @@ namespace Client;
 
 public class Client
 {
-    private readonly Greeter.GreeterClient _client;
+    public Greeter.GreeterClient GreeterClient
+    {
+        get;
+    }
 
     public Client(string addr)
     {
         using var channel = GrpcChannel.ForAddress(addr);
-        _client = new Greeter.GreeterClient(channel);
+        GreeterClient = new Greeter.GreeterClient(channel);
     }
 
-    public Greeter.GreeterClient GetGreeterClient()
-    {
-        return _client;
-    }
 }
