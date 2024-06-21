@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/hopeio/cherry/utils/log"
 )
 
 type Foo struct {
@@ -13,6 +14,20 @@ type Foo struct {
 type Foo1 struct {
 	Foo
 	B string
+}
+
+type Foo3 struct {
+	C chan<- int `json:"c"`
+}
+
+func MarshalChan() {
+	foo := Foo3{C: make(chan<- int, 1)}
+	foo.C <- 1
+	data, err := json.Marshal(&foo)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(string(data))
 }
 
 func main() {

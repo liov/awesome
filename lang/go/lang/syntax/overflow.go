@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	constraintsi "github.com/hopeio/cherry/utils/constraints"
+	constraintsi "github.com/hopeio/cherry/utils/types/constraints"
 	"math"
 )
 
