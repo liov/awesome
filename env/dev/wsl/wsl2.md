@@ -1,3 +1,9 @@
+wsl --update
+wsl --set-default-version 2
+ubuntu config --default-user root
+https://apps.microsoft.com/detail/9pn20msr04dw?rtc=1&hl=zh-cn&gl=CN
+https://learn.microsoft.com/zh-cn/windows/wsl/install-manual#step-6---install-your-linux-distribution-of-choice
+
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 871920D1991BC93C 7EA0A9C3F273FCD8
 
 sudo vi /etc/apt/sources.list
@@ -163,3 +169,4 @@ deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
 # deb-src [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
 
 echo 'deb http://mirrors.cloud.tencent.com/debian/ buster main non-free contrib\ndeb http://mirrors.cloud.tencent.com/debian-security buster/updates main\ndeb http://mirrors.cloud.tencent.com/debian/ buster-updates main non-free contrib\ndeb http://mirrors.cloud.tencent.com/debian/ buster-backports main non-free contrib' > /etc/apt/sources.list
+

@@ -39,3 +39,6 @@ spec:
         - serviceName: my-release-milvus
           servicePort: 19530
 EOF
+
+# 触发pod更新
+kubectl set image deployment/your-deployment-name container-name=repository/image-name:latest
