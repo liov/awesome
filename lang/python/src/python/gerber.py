@@ -1,12 +1,4 @@
-import gerber
-from gerber.render import GerberCairoContext
 
-# Read gerber and Excellon files
-top_copper = gerber.read('D:/worker/Gerber/m1')
+from pygerber.gerberx3.api.v2 import GerberFile
 
-
-# Rendering context
-ctx = GerberCairoContext()
-
-# Create SVG image
-top_copper.render(ctx, 'composite.svg')
+GerberFile.from_file("D:/work/Gerber/m1").parse().render_raster("output.jpg")
