@@ -17,3 +17,6 @@ pipreqs ./ --encoding=utf8 --force
 
 
 pip install -r requirements.txt
+
+# pdm (最新推荐)
+pdm config install.cache on

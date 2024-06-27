@@ -1,0 +1,26 @@
+[project]
+name = "python"
+version = "0.1.0"
+description = "lang test"
+authors = [
+    {name = "贾一饼", email = "lby.i@qq.com"},
+]
+dependencies = [
+    "pcb-tools>=0.1.6",
+    "flask>=3.0.3",
+    "face-recognition>=1.3.0",
+    "setuptools>=70.1.1",
+    "requests>=2.32.3",
+    "cairocffi>=0.9.0",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true

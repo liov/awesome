@@ -69,7 +69,12 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 默认是plugins=(git)
 
 在source $ZSH/oh-my-zsh.sh这行之前添加PATH
-PATH=/ucrt64/bin:/usr/local/bin:/usr/bin:/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+PATH=/ucrt64/bin:/usr/local/bin:/usr/bin:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+/usr/local/bin:/bin 这两个目录实际不存在
+/usr/bin 建议直接加入windows PATH
+PATH=/ucrt64/bin:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+
+
 source $ZSH/oh-my-zsh.sh
 
 执行下 source ~/.zshrc激活插件。
