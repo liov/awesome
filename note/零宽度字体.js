@@ -14,6 +14,48 @@
  * @param str
  * @returns {string}
  */
+
+const u2000 = {
+    '0000':'\u2000',
+    '0001':'\u2001',
+    '0010':'\u2002',
+    '0011':'\u2003',
+    '0100':'\u2004',
+    '0110':'\u2005',
+    '0111':'\u2006',
+    '1000':'\u2007',
+    '1001':'\u2008',
+    '1010':'\u2009',
+    '1011': '\u200b', // 8203
+    '1100': '\u200c',
+    '1101': '\u200d',
+    '1110': '\u200e',
+    '1111': '\u200f',
+    '1': '\uFEFF' // 65279
+};
+
+
+const rep2 = {
+    '\u2000': ' ',
+    '\u2001': ' ',
+    '\u2002': ' ',
+    '\u2003': ' ',
+    '\u2004': ' ',
+    '\u2005': ' ',
+    '\u2006': ' ',
+    '\u2007': ' ',
+    '\u2008': ' ',
+    '\u2009':' ',
+    '\u200a': ' ',
+    // 以下才是0宽度字体
+    '\u200b': '​', // 8203
+    '\u200c': '‌',
+    '\u200d': '‍',
+    '\u200e': '‎',
+    '\u200f': '‏',
+    '\uFEFF': '﻿'// 65279
+}
+
 // str -> 零宽字符
 function strToZeroWidth(str) {
     return str
@@ -52,12 +94,6 @@ function zeroWidthToStr(zeroWidthStr) {
         .join('')
 }
 
-const rep = { // 替换用的数据，使用了4个零宽字符代理二进制
-    '00': '\u200b',
-    '01': '\u200c',
-    '10': '\u200d',
-    '11': '\uFEFF'
-};
 
 function hide(str) {
     str = str.replace(/[^\x00-\xff]/g, function (a) { // 转码 Latin-1 编码以外的字符。
@@ -65,21 +101,19 @@ function hide(str) {
     });
 
     str = str.replace(/[\s\S]/g, function (a) { // 处理二进制数据并且进行数据替换
-        a = a.charCodeAt().toString(2);
+        a = a.charCodeAt(0).toString(2);
         a = a.length < 8 ? Array(9 - a.length).join('0') + a : a;
-        return a.replace(/../g, function (a) {
-            return rep[a];
-        });
+        return a.replace(/../g, a => String.fromCharCode(parseInt(a, 2)+8203));
     });
     return str;
 }
 
-const tpl = '("@code".replace(/.{4}/g,function(a){const rep={"\u200b":"00","\u200c":"01","\u200d":"10","\uFEFF":"11"};return String.fromCharCode(parseInt(a.replace(/./g, a=>rep[a]),2))}))';
+
 
 function hider(code, type) {
     let str = hide(code); // 生成零宽字符串
 
-    str = tpl.replace('@code', str); // 生成模版
+    str = `("${str}".replace(/.{4}/g,a=> String.fromCharCode(parseInt(a.replace(/./g, a=>(a.charCodeAt(0)-8203).toString(2).padStart(2, '0')),2))))`; // 生成模版
     if (type === 'eval') {
         str = 'eval' + str;
     } else {
@@ -91,7 +125,6 @@ function hider(code, type) {
 
 let a = strToZeroWidth("我爱你")
 console.log(a)
-console.log(rep['00'])
 console.log(zeroWidthToStr(a))
 console.log(hider('alert("我爱你")'))
 

@@ -10,7 +10,7 @@ import (
 #cgo LDFLAGS: -LD:/sdk/gerbv -lgerbv-1
 #cgo CFLAGS: -ID:/code/gerbv/src
 #cgo pkg-config: glib-2.0 gtk+-2.0
-
+// 安装msys2环境,安装相关库
 // 删除 msys64\mingw64\lib\pkgconfig目录下gkd-win32-2.0pc Libs 行的-Wl,
 
 #include <gerbv.h>
