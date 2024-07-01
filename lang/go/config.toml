@@ -1,0 +1,25 @@
+[DB]
+Charset = "utf8"
+Database = "test"
+EnablePrometheus = false
+EnableStdLogger = true
+Host = "192.168.3.111"
+MaxIdleConns = 10
+MaxOpenConns = 10
+Password = "oyeVp0Cqzd3DPJbb"
+Port = 20439
+Schema = ""
+TimeFormat = ""
+TimeZone = ""
+Type = "postgres"
+User = "postgres"
+
+[DB.Logger]
+Colorful = true
+IgnoreRecordNotFoundError = false
+LogLevel = 4
+ParameterizedQueries = false
+SlowThreshold = "200ms"
+
+[DB.NamingStrategy]
+SingularTable = true
