@@ -50,3 +50,15 @@ taskkill /f /pid 12732
 taskkill /im workwinlm.exe -f -t
 taskkill /im system.dll -f -t
 
+# 修改环境变量
+## powershell
+[Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\path\to\your\directory", "Machine")
+如果你想只在当前用户下修改PATH，可以将"Machine"改为"User"。
+
+## cmd
+setx PATH "%PATH%;C:\path\to\your\directory"
+这里"%PATH%是系统+用户的,设置的是用户的,setx /M PATH  系统的
+其他终端慎用啊,直接清空了我的PATH
+
+# zsh 
+setx PATH "$PATH;/c/path/to/your/directory"
