@@ -35,51 +35,29 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/msys/$arch
 配置好pacman 镜像源，就可以安装常用软件了。
 
 安装常用软件#
-git#
-pacman -S git
+# git
+pacman -S git(不建议这样安装,自行搜索windows版本安装添加PATH)
+export PATH=$PATH:"/d/Program Files/Git/cmd"
 命令行里输入git version 可以查看版本：
-
-Oh My Zsh#
-官方网站: http://ohmyz.sh
-
-GitHub: https://github.com/ohmyzsh/ohmyzsh
-
+# zsh
 pacman -S zsh
 export PATH=$PATH:"/d/Program Files/Git/cmd"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# 或者
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-所以这时的zsh 基本已经配置完成,你需要一行命令就可以切换到 zsh 模式，终端下输入zsh切换，输入bash切回去。
-export PATH=$PATH:"/d/Program Files/Git/cmd"
-ohmyzsh插件，路径：
+# Oh My Zsh
+参考 dev/zsh.md/oh my zsh部分
 
-~/.oh-my-zsh/plugins/
-~/.oh-my-zsh/custom/plugins/
-新增插件示例：
 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-启用插件：vim ~/.zshrc文件，示例：
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-默认是plugins=(git)
-
-在source $ZSH/oh-my-zsh.sh这行之前添加PATH
-PATH=/ucrt64/bin:/usr/local/bin:/usr/bin:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+在source ~/.zshrc这行之前添加PATH
+~~PATH=/ucrt64/bin:/usr/local/bin:/usr/bin:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl~~
 /usr/local/bin:/bin 这两个目录实际不存在
 /usr/bin 建议直接加入windows PATH
+
 PATH=/ucrt64/bin:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
 
-source $ZSH/oh-my-zsh.sh
-
 执行下 source ~/.zshrc激活插件。
 
-配置右键打开终端#
+# 配置右键打开终端(废弃，请使用Windows Terminal)
 
 新建mingw64.reg后缀文件：
 
@@ -93,7 +71,7 @@ Windows Registry Editor Version 5.00
 @="C:\\msys64\\msys2_shell.cmd -ucrt64 -here"
 双击导入即可。
 
-配置 Windows Terminal 使用 msys2 bash
+# 配置 Windows Terminal 使用 msys2 bash
 核心参数：
 
 名称：msys2
@@ -141,33 +119,6 @@ $ ls | wc -l
 $ which mvn
 /e/opt/apache-maven-3.6.3/bin/mvn
 
-$ cd ~
-附录1: pacman常用命令#
-pacman命令较多，作为新手，将个人最常用的命令总结如下：
-
-pacman -Sy: 从服务器下载新的软件包数据库（实际上就是下载远程仓库最新软件列表到本地）。
-
-pacman -Syu: 升级系统及所有已经安装的软件。
-
-pacman -S 软件名: 安装软件。也可以同时安装多个包，只需以空格分隔包名即可。
-
-pacman -Rs 软件名: 删除软件，同时删除本机上只有该软件依赖的软件。
-
-pacman -Ru 软件名: 删除软件，同时删除不再被任何软件所需要的依赖。
-
-pacman -Ssq 关键字: 在仓库中搜索含关键字的软件包，并用简洁方式显示。
-
-pacman -Qs 关键字: 搜索已安装的软件包。
-
-pacman -Qi 软件名: 查看某个软件包信息，显示软件简介,构架,依赖,大小等详细信息。
-
-pacman -Sg: 列出软件仓库上所有的软件包组。
-
-pacman -Sg 软件包组: 查看某软件包组所包含的所有软件包。
-
-pacman -Sc：清理未安装的包文件，包文件位于 /var/cache/pacman/pkg/ 目录。
-
-pacman -Scc：清理所有的缓存文件
 
 附录2：解决vscode不识别git问题#
 使用msys2环境安装git，vscode识别不出来git，在源代码管理菜单中显示当前打开的文件夹没有git存储库，打开的文件夹实际存在.git文件夹。
@@ -197,43 +148,3 @@ for /f %%1 in ('git %*') do cygpath -w %%1
 
 Have fun!
 
-附录3：Windows Terminal右键#
-编写wt.reg:
-
-Windows Registry Editor Version 5.00
-
-[HKEY_CLASSES_ROOT\Directory\Background\shell\wt]
-@="Windows Terminal Here"
-
-[HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command]
-@="C:\\Users\\你的用户名\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe"
-注意替换"你的用户名"。
-
-参考#
-1、MSYS2
-https://www.msys2.org/
-
-2、Install Terminal + git-bash + zsh + oh-my-zsh on Windows 10 | MiaoTony's小窝
-https://miaotony.xyz/2020/12/13/Server_Terminal_gitbash_zsh/
-
-3、msys2软件包管理工具pacman常用命令_hustlei的专栏
-
-https://blog.csdn.net/hustlei/article/details/86687621
-
-4、玩转 Ubuntu 20 桌面版 - 飞鸿影 - 博客园
-https://www.cnblogs.com/52fhy/p/9571463.html
-
-
-# 乱码
-安装字体
-https://www.nerdfonts.com/font-downloads
-https://github.com/ryanoasis/nerd-fonts/releases
-选一个安装
-
-# starship 仅是提示符，或者说主题
-export CARGO_TARGET_DIR=/d/sdk/rust
-cargo install starship --locked (失败提示设置CARGO_TARGET_DIR,设置也失败)
-
-conda install -c conda-forge starship
-eval "$(starship init zsh)"
-可移除

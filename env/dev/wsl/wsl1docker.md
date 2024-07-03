@@ -38,4 +38,7 @@ ExecStart=/usr/bin/dockerd -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375
 systemctl daemon-reload
 
 6.重启docker服务
+
+
+
 systemctl restart docker

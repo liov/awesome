@@ -1,7 +1,7 @@
 # windows MinGW-w64 gcc MSYS2 Cygwin  
 
 优先 https://www.msys2.org/
-包更多 但是维护不及时 终端无法进其他目录 https://cygwin.com/install.html
+https://cygwin.com/install.html 包更多 但是维护不及时 终端无法进其他目录 
 
 
 
