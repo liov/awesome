@@ -4,10 +4,12 @@ Clion
 RustRover
 
 # vscode远程开发
-sudo useradd -m newuser
+```sh
+sudo useradd -s /bin/bash -G docker,root -m newuser
 sudo passwd newuser
-sudo usermod -aG sudo newuser
-sudo usermod -s /bin/bash newuser
+#sudo usermod -aG sudo newuser
+#sudo usermod -s /bin/bash newuser
+```
 
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 sudo mkdir -p /home/newuser/.ssh
