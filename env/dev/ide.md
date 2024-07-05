@@ -24,6 +24,9 @@ sz id_rsa
 Host $host
   HostName $host
   Port 22
+
+
+
   User newuser
   ForwardAgent yes
 

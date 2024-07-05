@@ -32,4 +32,10 @@ namespace Wpf;
             PointCloud_HelixToolkit pointCloud = new PointCloud_HelixToolkit();
             pointCloud.Show();
         }
+        
+        private void Camera(object sender, RoutedEventArgs e)
+        {
+            Focus focus = new Focus();
+            focus.Show();
+        }
     }
