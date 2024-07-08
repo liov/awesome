@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+
 def plot_pointcloud_gray(points):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -26,6 +27,7 @@ def plot_pointcloud_gray(points):
     ax.set_zlabel('Z')
 
     plt.show()
+
 
 def parse_pointcloud_gray_file(file_path):
     points = []
@@ -52,6 +54,7 @@ def parse_pointcloud_gray_file(file_path):
             idx += 1
 
     return np.array(points)
+
 
 # Example usage with dummy data
 points = parse_pointcloud_gray_file("D:/work/sdk_save_cloud_csharp.pcp")  # Generate random points in the range [0, 100]

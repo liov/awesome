@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image
 import vtk
-from vtk.util import numpy_support
+from vtkmodules.util import numpy_support
 
 # 读取灰度 TIFF 图像
 tiff_path = r'D:\work\pic\1.tiff'
@@ -15,11 +15,11 @@ print(unique_count)
 # 计算灰度图像的最小值和最大值
 min_value = np.nanmin(image_array)
 max_value = np.nanmax(image_array)
-print(min_value,max_value)
+print(min_value, max_value)
 
 gary_range = 500
 # 正常化灰度值到 [0, 1000]
-normalized_image = ((image_array - min_value) / (max_value - min_value))  * gary_range
+normalized_image = ((image_array - min_value) / (max_value - min_value)) * gary_range
 print(np.nanmax(normalized_image))
 # 获取图像的尺寸
 height, width = image_array.shape
@@ -58,7 +58,7 @@ for i in range(256):
 mapper = vtk.vtkDataSetMapper()
 mapper.SetInputConnection(surface.GetOutputPort())
 mapper.SetLookupTable(color_mapper)
-#mapper.SetScalarRange(0, 0)  # 设置灰度值范围
+# mapper.SetScalarRange(0, 0)  # 设置灰度值范围
 
 # 创建 VTK 演员
 actor = vtk.vtkActor()

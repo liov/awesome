@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Lang.Opencv;
 using OpenCvSharp;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
@@ -48,7 +49,7 @@ public partial class Focus : Window
                 capture.Read(frame);
                 if (!frame.Empty())
                 {
-                    double sharpness = CalculateSharpness(frame);
+                    double sharpness = SharpnessTool.CalculateSharpness(frame);
                     Console.WriteLine(sharpness);
                     image = BitmapSourceConvert.ToBitmapImage(frame);
                     image.Freeze();
@@ -70,36 +71,7 @@ public partial class Focus : Window
         base.OnClosed(e);
     }
     
-    static double CalculateSharpness(Mat image)
-    {
-        Mat gray = new Mat();
-        Cv2.CvtColor(image, gray, ColorConversionCodes.BGR2GRAY);
-
-        // 计算拉普拉斯变换
-        Mat laplacian = new Mat();
-        Cv2.Laplacian(gray, laplacian, MatType.CV_64F);
-
-        // 计算方差
-        Scalar mean, stddev;
-        Cv2.MeanStdDev(laplacian, out mean, out stddev);
-
-        double sharpness = stddev.Val0 ; // 方差作为清晰度度量
-        
-        // 使用 Sobel 算子计算图像的梯度
-        Mat sobelX = new Mat(), sobelY = new Mat();
-        Cv2.Sobel(gray, sobelX, MatType.CV_64F, 1, 0);
-        Cv2.Sobel(gray, sobelY, MatType.CV_64F, 0, 1);
-
-        // 计算梯度幅值的平均值
-        Mat magnitude = new Mat();
-        Cv2.Magnitude(sobelX, sobelY, magnitude);
-        
-        Cv2.MeanStdDev(magnitude, out mean, out stddev);
-
-        // 返回平均梯度幅值作为图像清晰度指标
-        return sharpness + mean.Val0;
-    }
-    
+  
 }
 
 public static class BitmapSourceConvert

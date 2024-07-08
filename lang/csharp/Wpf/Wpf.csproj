@@ -18,4 +18,8 @@
     <PackageReference Include="System.Reactive.Windows.Forms" Version="6.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lang\Lang.csproj" />
+  </ItemGroup>
+
 </Project>
