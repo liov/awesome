@@ -1,4 +1,4 @@
-# You can't specify target table 'product_attr' for update in FROM clause
+-- You can't specify target table 'product_attr' for update in FROM clause
 UPDATE customer_info
 SET status     = 1,
     created_at = '2020-08-06 00:00:00',

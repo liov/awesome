@@ -175,10 +175,6 @@ SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;
 
 SELECT name, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;
 
-SELECT a.plan_order_id,a.employee_account,a.employee_name,a.department,a.position,a.email,a.mobile,
-a.amount as distribute_score,a.amount - sum(c.total_balance_amount) as exchange_score,sum(available_balance_amount) as available_score FROM d_kaop.t_plan_detail a inner join d_kaop.t_operator_employee b on a.employee_account = b.employee_account right join d_aura_jike.user_balance c on b.user_id = c.user_id WHERE (a.plan_order_id = '20200330163927629198' AND c.batch_num IN ('00062020033017021296140','00062020033017021268100')
-AND a.is_deleted = 0 AND b.is_deleted = 0 AND c.status = 0) GROUP BY b.user_id;
-
 # join
 
 -- INNER JOIN（内连接,或等值连接）：获取两个表中字段匹配关系的记录。
@@ -220,55 +216,7 @@ AND table1.status = 0 AND table1.field4 = 0;
 SELECT count(*) as t_count;
 SELECT count(case when table1.field4 = 0 then '1' end) as t_count;
 
---这是三张表的左连接查询；
-SELECT
-	a.plan_order_id,
-	a.employee_account,
-	a.employee_name,
-	a.amount AS distribute_score,
-	b.user_id,
-	a.amount - sum( c.total_balance_amount ) + sum( c.invilad ) AS exchange_score,
-	sum( c.available_balance_amount ) AS available_score
-FROM
-	d_kaop.t_plan_detail a
-	LEFT JOIN d_kaop.t_operator_employee b ON a.employee_account = b.employee_account
-	LEFT JOIN (
-	SELECT
-		d.total_balance_amount,
-		d.available_balance_amount,
-		e.invilad,
-		d.user_id,
-		d.batch_num
-	FROM
-		d_aura_jike.user_balance d
-		LEFT JOIN (
-		SELECT
-			sum( balance_amount ) AS invilad,
-			user_id,
-			batch_num
-		FROM
-			d_aura_jike.user_balance_history
-		WHERE
-			type IN ( 6, 7 )
-		GROUP BY
-			user_id,
-			batch_num
-		) e ON d.batch_num = e.batch_num
-		AND d.user_id = e.user_id
-	WHERE
-		d.STATUS = 0
-		AND d.batch_num IN (
-		SELECT
-			batch_no
-		FROM
-			`d_kaop`.`t_plan_score_batch`
-		WHERE
-		( plan_order_id = '20200330163927629198' AND is_deleted = 0 ))
-	) c ON b.user_id = c.user_id
-WHERE
-	( a.plan_order_id = '20200330163927629198' AND a.is_deleted = 0 )
-GROUP BY
-	a.employee_account;
+
 
 # FORCE INDEX
 SELECT * FROM `product_attr` FORCE INDEX(`idx_product_attr_id`) WHERE  product_id IN (SELECT product_id FROM (SELECT product_id FROM `product_attr` WHERE attr_id = 1103 GROUP BY product_id HAVING COUNT(1)>1) temp) AND attr_id = 1103 AND  created_at > 0;
