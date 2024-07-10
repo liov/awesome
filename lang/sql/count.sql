@@ -17,11 +17,6 @@ count(case when order_status =9 then '1' end),
 count(case when service_status IN (1,2) then '1' end)
 FROM `order_info`;
 
-template<T:DATE_FORMAT(create_time,'%Y-%m-%d')|WEEK(create_time)|MONTH(create_time)>
-SELECT count(*),T AS dateTime
-FROM `customer` a
-WHERE a.level = 3 OR a.`level` = 2
-GROUP BY T;
 
 SELECT `level`,count(*) FROM `customer` GROUP BY `level` HAVING `level`=1 OR `level` =2 OR `level`=3;
 
@@ -29,19 +24,4 @@ SELECT `level`,count(id) FROM `customer` WHERE `level`=1 OR `level` =2 OR `level
 
 SELECT COUNT(case when (a.level=1 OR a.level=2) then level end) as focusNum,COUNT(case when a.level=3 then level end) as totalNum FROM customer a;
 
-SELECT a.id,sum(b.contract_number),DATE_FORMAT(create_time,'%Y-%m-%d') AS dateTime FROM `trade` a,`trade_contract` b WHERE a.id = b.trade_id GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d');
 
-SELECT
-	COUNT( customerNum ) / ( SELECT count( id ) FROM `customer` WHERE `level` = 4 AND create_time BETWEEN "2017-11-30T16:00:00.000Z" AND "2018-12-13T16:00:00.000Z" ) AS rate
-FROM
-	(
-	SELECT
-		count( customer_id ) AS customerNum
-	FROM
-		`follow` a LEFT JOIN `customer` b
-	WHERE
-		a.customer_id IN ( SELECT id FROM `customer` d WHERE d.`level` = 4 AND d.create_time BETWEEN "2017-11-30T16:00:00.000Z" AND "2018-12-13T16:00:00.000Z" )
-	AND a.customer_level < 4
-	AND DATEDIFF(b.create_time,a.create_time) <=15
-	GROUP BY a.customer_id
-	) c;

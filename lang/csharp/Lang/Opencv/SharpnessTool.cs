@@ -12,7 +12,7 @@ public class SharpnessTool
             Console.Write($"\x1b[1;32m{i}\x1b[0m:{{");
             foreach (var z in new[] { "0.96", "1.72", "2.8", "3.52", "4.64" })
             {
-                var image = Cv2.ImRead($"""D:\work\WXWork\1688858122545615\Cache\File\2024-07\{z}\{i}.bmp""");
+                var image = Cv2.ImRead($"""D:\work\z\{z}\{i}.bmp""",ImreadModes.Grayscale);
                 if (i == 17)
                 {
                     // 截取区域并创建新图像
@@ -43,11 +43,8 @@ public class SharpnessTool
         }
     }
 
-    public static double CalculateSharpness(Mat image)
+    public static double CalculateSharpness(Mat gray)
     {
-        Mat gray = new Mat();
-        Cv2.CvtColor(image, gray, ColorConversionCodes.BGR2GRAY);
-
         // 计算拉普拉斯变换
         Mat laplacian = new Mat();
         Cv2.Laplacian(gray, laplacian, MatType.CV_64F);

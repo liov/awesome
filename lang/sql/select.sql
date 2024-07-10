@@ -10,7 +10,7 @@ FROM
 
 -- 每个班级前十名
 select * from 学生信息表 a
-where  (select count(*) from 学生信息表 where 班级ID = a.班级ID and 班内名次 > a.班内名次) < 10
+where  (select count(*) from 学生信息表 where 班级ID = a.班级ID and 班内名次 > a.班内名次) < 10;
 
 -- 每个班第一名
 SELECT
@@ -36,19 +36,19 @@ from
 on s.班级号=c.班级号
 join 成绩表 sc
 on s.学号=sc.学号
-group by 班级名称
+group by 班级名称;
 
 -- 一、按name分组取val最大的值所在行的数据。
 -- 方法1：
-select a.* from tb a where val = (select max(val) from tb where name = a.name) order by a.name
+select a.* from tb a where val = (select max(val) from tb where name = a.name) order by a.name;
 -- 方法2：
-select a.* from tb a where not exists(select 1 from tb where name = a.name and val > a.val)
+select a.* from tb a where not exists(select 1 from tb where name = a.name and val > a.val);
 -- 方法3：
-select a.* from tb a,(select name,max(val) val from tb group by name) b where a.name = b.name and a.val = b.val order by a.name
+select a.* from tb a,(select name,max(val) val from tb group by name) b where a.name = b.name and a.val = b.val order by a.name;
 -- 方法4：
-select a.* from tb a inner join (select name , max(val) val from tb group by name) b on a.name = b.name and a.val = b.val order by a.name
+select a.* from tb a inner join (select name , max(val) val from tb group by name) b on a.name = b.name and a.val = b.val order by a.name;
 -- 方法5
-select a.* from tb a where 1 > (select count(*) from tb where name = a.name and val > a.val ) order by a.name
+select a.* from tb a where 1 > (select count(*) from tb where name = a.name and val > a.val ) order by a.name;
 -- Group By 分组后保留最新一条记录
 select a.* from
 (select * from user order by id desc) a

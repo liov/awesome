@@ -1,9 +1,3 @@
-package mian
-
-import (
-	"sync/atomic"
-	"testing"
-)
 
 /*在计算机系统中，CPU高速缓存（英语：CPU Cache，在本文中简称缓存）是用于减少处理器访问内存所需平均时间的部件。
 在金字塔式存储体系中它位于自顶向下的第二层，仅次于CPU寄存器。其容量远小于内存，但速度却可以接近处理器的频率。
@@ -42,49 +36,57 @@ AMD则从K6-III开始引入三级缓存。基于Socket 7接口的K6-III拥有64K
 在并发编程中，经常会有共享数据被多个goroutine同时访问， 所以如何有效的进行数据的设计，就是一个相当有技巧的操作。
 最常用的技巧就是Padding。现在大部分的CPU的cahceline是64字节，将变量补足为64字节可以保证它正好可以填充一个cacheline。
 */
+```go
+package mian
+
+import (
+    "sync/atomic"
+    "testing"
+)
+
 type NoPad struct {
-	a uint64
-	b uint64
-	c uint64
+    a uint64
+    b uint64
+    c uint64
 }
 
 func (np *NoPad) Increase() {
-	atomic.AddUint64(&np.a, 1)
-	atomic.AddUint64(&np.b, 1)
-	atomic.AddUint64(&np.c, 1)
+    atomic.AddUint64(&np.a, 1)
+    atomic.AddUint64(&np.b, 1)
+    atomic.AddUint64(&np.c, 1)
 }
 
 type Pad struct {
-	a   uint64
-	_p1 [8]uint64
-	b   uint64
-	_p2 [8]uint64
-	c   uint64
-	_p3 [8]uint64
+    a   uint64
+    _p1 [8]uint64
+    b   uint64
+    _p2 [8]uint64
+    c   uint64
+    _p3 [8]uint64
 }
 
 func (p *Pad) Increase() {
-	atomic.AddUint64(&p.a, 1)
-	atomic.AddUint64(&p.b, 1)
-	atomic.AddUint64(&p.c, 1)
+    atomic.AddUint64(&p.a, 1)
+    atomic.AddUint64(&p.b, 1)
+    atomic.AddUint64(&p.c, 1)
 }
 func BenchmarkPad_Increase(b *testing.B) {
-	pad := &Pad{}
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			pad.Increase()
-		}
-	})
+    pad := &Pad{}
+    b.RunParallel(func(pb *testing.PB) {
+        for pb.Next() {
+            pad.Increase()
+        }
+    })
 }
 func BenchmarkNoPad_Increase(b *testing.B) {
-	nopad := &NoPad{}
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			nopad.Increase()
-		}
-	})
+    nopad := &NoPad{}
+        b.RunParallel(func(pb *testing.PB) {
+        for pb.Next() {
+            nopad.Increase()
+        }
+    })
 }
-
+```
 /*关于指针
 一个经验是：指针指向的数据都是在堆上分配的。因此，在程序中减少指针的运用可以减少堆分配。
 这不是绝对的，但是我们发现这是在实际问题中最常见的问题。

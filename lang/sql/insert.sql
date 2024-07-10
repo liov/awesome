@@ -1,4 +1,4 @@
-INSERT INTO `customer_extra_info`(customer_id, last_visit_time)
+INSERT INTO `customer_extra_info`(customer_id, last_visit_time);
 SELECT customer_id,
        MAX(last_visit_time)
 FROM (
@@ -16,17 +16,5 @@ FROM (
      ) a
 GROUP BY customer_id;
 
-CREATE
-    DEFINER = `web`@`%` PROCEDURE `insert`()
-BEGIN
-    declare i int;
-    set i = 6001;
-    while i < 7001
-        do
-            insert into customer_erptask(customer_id) values (i);
-            insert into customer_extra_info(customer_id) values (i);
-            set i = i + 1;
-        end while;
 
 
-END;
