@@ -1,11 +1,11 @@
 # msys2有问题，编译成功执行报错
 pacman -S mingw-w64-x86_64-opencv
-CGO_CXXFLAGS=--std=c++11 CGO_CPPFLAGS="-ID:\sdk\msys64\mingw64\include\opencv4" CGO_LDFLAGS="-LD:\sdk\msys64\mingw64\bin -LD:\sdk\msys64\mingw64\lib\opencv4\3rdparty -lopencv_core-410 -lopencv_photo-410 -lopencv_face-410 -lopencv_videoio-410 -lopencv_imgproc-410 -lopencv_highgui-410 -lopencv_imgcodecs-410 -lopencv_objdetect-410 -lopencv_features2d-410 -lopencv_video-410 -lopencv_dnn-410 -lopencv_xfeatures2d-410 -lopencv_plot-410 -lopencv_tracking-410 -lopencv_img_hash-410 -lopencv_calib3d-410"  go build -tags customenv gocv.go
+CGO_CXXFLAGS=--std=c++11 CGO_CPPFLAGS="-ID:\sdk\msys64\ucrt64\include\opencv4" CGO_LDFLAGS="-LD:\sdk\msys64\ucrt64\bin  -lopencv_core-410 -lopencv_photo-410 -lopencv_face-410 -lopencv_videoio-410 -lopencv_imgproc-410 -lopencv_highgui-410 -lopencv_imgcodecs-410 -lopencv_objdetect-410 -lopencv_features2d-410 -lopencv_video-410 -lopencv_dnn-410 -lopencv_xfeatures2d-410 -lopencv_plot-410 -lopencv_tracking-410 -lopencv_img_hash-410 -lopencv_calib3d-410"  go build -tags customenv gocv.go
 ## error
 gocv.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory
 
 ## IDEA env
-CGO_CXXFLAGS=--std=c++11;CGO_CPPFLAGS=-ID:\sdk\msys64\mingw64\include\opencv4;CGO_LDFLAGS=-LD:\sdk\msys64\mingw64\bin -lopencv_core-410 -lopencv_photo-410 -lopencv_face-410 -lopencv_videoio-410 -lopencv_imgproc-410 -lopencv_highgui-410 -lopencv_imgcodecs-410 -lopencv_objdetect-410 -lopencv_features2d-410 -lopencv_video-410 -lopencv_dnn-410 -lopencv_xfeatures2d-410 -lopencv_plot-410 -lopencv_tracking-410 -lopencv_img_hash-410 -lopencv_calib3d-410
+CGO_CXXFLAGS=--std=c++11;CGO_CPPFLAGS=-ID:\sdk\msys64\ucrt64\include\opencv4;CGO_LDFLAGS=-LD:\sdk\ucrt64\mingw64\bin -lopencv_core-410 -lopencv_photo-410 -lopencv_face-410 -lopencv_videoio-410 -lopencv_imgproc-410 -lopencv_highgui-410 -lopencv_imgcodecs-410 -lopencv_objdetect-410 -lopencv_features2d-410 -lopencv_video-410 -lopencv_dnn-410 -lopencv_xfeatures2d-410 -lopencv_plot-410 -lopencv_tracking-410 -lopencv_img_hash-410 -lopencv_calib3d-410
 
 # build.cmd
 msys2 mingw-w64 编译 or https://github.com/niXman/mingw-builds-binaries/releases posix-seh-msvcrt-rt_v11

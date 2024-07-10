@@ -73,3 +73,15 @@ x86_64-w64-mingw32 是 mingw64 目录下的一个子目录，用于指代专门�
 例如，你可以设置 LD 环境变量来指定使用该目录下的 ld 链接器进行链接操作：
 
 包括ucrt64目录下也有一个x86_64-w64-mingw32 子目录
+
+md5比对,mingw64/x86_64-w64-mingw32/bin下的文件和mingw64/bin下是一样的
+
+COLLECT_LTO_WRAPPER 是一个用于链接时优化（LTO，Link Time Optimization）的变量，它是在GNU编译器集合（GCC）中使用的
+
+LTO允许编译器在链接阶段进行更深入的优化，比如跨编译单元（CU）的内联、死代码消除和符号版本控制。LTO分为两种模式：薄LTO（Thin LTO）和全LTO（Full LTO）。
+
+薄LTO：在薄LTO模式下，编译器在每个编译单元（CU）上执行部分优化，并在链接阶段收集优化信息。这种模式的优点是速度快，占用内存较少，但可能不如全LTO优化得彻底。
+全LTO：在全LTO模式下，编译器将所有编译单元的中间表示（IR）加载到内存中，并在链接阶段进行完整的优化。这种模式的优点是优化程度更高，但速度和内存占用较大。
+COLLECT_LTO_WRAPPER 变量用于指定LTO模式。通过设置此变量，可以控制GCC在链接时使用哪种LTO模式。例如，设置 COLLECT_LTO_WRAPPER=/path/to/lto-wrapper 可以告诉GCC使用指定路径下的LTO包装器来执行LTO优化。
+
+Configured with: ../gcc-14.1.0/configure 表示GCC编译器是根据../gcc-14.1.0/configure脚本进行配置的。而这个配置链接器指向mingw64/x86_64-w64-mingw32/bin
