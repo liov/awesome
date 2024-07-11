@@ -13,6 +13,7 @@ pacman -Syu
 :: Replace mingw-w64-ucrt-x86_64-gettext with ucrt64/mingw-w64-ucrt-x86_64-gettext-tools? [Y/n] y
 :: Replace mingw-w64-x86_64-gettext with mingw64/mingw-w64-x86_64-gettext-tools? [Y/n] y
 :: Replace mingw-w64-x86_64-pkg-config with mingw64/mingw-w64-x86_64-pkgconf? [Y/n] y
+
 ## 最重要的一步
 pacman -S mingw-w64-x86_64-ca-certificates
 

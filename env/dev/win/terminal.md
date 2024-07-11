@@ -49,8 +49,8 @@ export PATH=$PATH:"/d/Program Files/Git/cmd"
 
 在source ~/.zshrc这行之前添加PATH
 ~~PATH=/mingw64/bin:/ucrt64/bin:/usr/bin:/usr/local/bin:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl~~
-/mingw64/bin 建议直接加入windows PATH
-/ucrt64/bin 较新的运行时,可与mingw64二选一,未测试cgo是否可用,建议直接加入windows PATH
+/mingw64/bin 建议直接加入windows PATH win7
+/ucrt64/bin 较新的运行时,可与mingw64二选一,未测试cgo是否可用,建议直接加入windows PATH win10+ 建议用这个
 /usr/local/bin:/bin 这两个目录实际不存在
 /usr/bin 建议直接加入windows PATH
 PATH=$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl

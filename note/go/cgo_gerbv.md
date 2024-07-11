@@ -3,7 +3,8 @@ msys2 mingw-w64 环境
 git clone https://github.com/gerbv/gerbv
 win版本直接下载或自己编译 https://github.com/gerbv/gerbv/releases
 
-pacman -S mingw-w64-x86_64-pkg-config
+
+pacman -S mingw-w64-x86_64-pkgconf (pacman -S mingw-w64-x86_64-pkg-config(废弃))
 pacman -S mingw-w64-x86_64-gcc
 pacman -S mingw-w64-x86_64-gtk2
 pacman -S mingw-w64-x86_64-atk
