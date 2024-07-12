@@ -7,8 +7,9 @@ gocv.exe: error while loading shared libraries: ?: cannot open shared object fil
 ## IDEA env
 CGO_CXXFLAGS=--std=c++11;CGO_CPPFLAGS=-ID:\sdk\msys64\ucrt64\include\opencv4;CGO_LDFLAGS=-LD:\sdk\msys64\ucrt64\lib  -lopencv_core -lopencv_photo -lopencv_face -lopencv_videoio -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs -lopencv_objdetect -lopencv_features2d -lopencv_video -lopencv_dnn -lopencv_xfeatures2d -lopencv_plot -lopencv_tracking -lopencv_img_hash -lopencv_calib3d
 ## 实测msys2的opencv动态库是可用的,可能与gocv写的包装不兼容
-## 神奇的出现了,试了试又可以了,难道是缺了啥库?(mingw-w64-x86_64-ucrt-qt6-5compat (for the HighGUI module)
+## 神奇的出现了,试了试又可以了,难道是缺了啥库?(mingw-w64-ucrt-x86_64-qt6-5compat (for the HighGUI module)
                            #mingw-w64-ucrt-x86_64-vtk (opencv_viz module)) ?
+最后确认,少的库就是mingw-w64-ucrt-x86_64-qt6-5compat,安装即可
 # build.cmd
 msys2 mingw-w64 编译 or https://github.com/niXman/mingw-builds-binaries/releases posix-seh-msvcrt-rt_v11
 

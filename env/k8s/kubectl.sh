@@ -86,3 +86,6 @@ kubectl get pod -n kube-system | grep kube-proxy |awk '{system("kubectl delete p
 
 # windows
 kubectl proxy --port=8001 --address=0.0.0.0 --accept-hosts=^.* --kubeconfig=
+
+# 文件复制
+kubectl cp <pod_name>:<path_to_file> <path_to_destination_file>
