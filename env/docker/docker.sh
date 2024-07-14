@@ -1,3 +1,41 @@
+# docker rmi:删除所有镜像
+docker rmi `docker images -q`
+docker rmi $(docker images -q)
+
+挂载目录 映射端口
+docker run -d -v /data/timepill:/data/timepill -p port:port $image_id
+
+要获取所有容器名称及其IP地址只需一个命令。
+docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
+
+# docker system prune:清理
+docker system prune
+## 日志
+{
+"log-driver": "json-file",
+"log-opts": {"max-size": "10m", "max-file": "3"}
+}
+
+ls -lh $(find /var/lib/docker/containers/ -name *-json.log)
+
+docker run --rm -v /var/lib/docker:/var/lib/docker alpine sh -c "echo '' > $(docker inspect --format='{{.LogPath}}' CONTAINER_NAME)"
+
+
+truncate -s 0 /var/lib/docker/containers/*/*-json.log
+sudo truncate -s 0 `docker inspect --format='{{.LogPath}}' <container>`
+
+# 要删除所有标签为 <none> 的 Docker 镜像，可以使用以下命令：
+
+docker rmi $(docker images -q -f "dangling=true")
+这条命令首先使用 docker images -q -f "dangling=true" 查找所有没有标签（即 <none>）的镜像的 ID，并且 -q 参数使得命令只输出镜像ID，随后 docker rmi 命令利用这些 ID 删除这些镜像。
+
+请注意，在执行这个操作之前，确保没有正在运行的容器依赖于这些镜像，否则 docker rmi 命令会失败。如果需要同时停止并删除依赖于这些镜像的容器，可以先执行以下命令：
+
+Bash
+docker stop $(docker ps -a -q -f "ancestor=<none>")
+docker rm $(docker ps -a -q -f "ancestor=<none>")
+但请注意，上面的 ancestor=<none> 过滤条件可能不会直接按预期工作，因为 <none> 镜像通常不直接作为容器的 ancestor 列出。更安全的做法是先检查容器状态和关联镜像，确保不会误删重要容器。通常，直接删除 <none> 镜像是安全的，因为这些镜像不再被任何容器使用。
+
 # 删除所有名字中带 “provider”
 docker rmi $(docker images | grep "provider" | awk '{print $3}')
 # 查看容器ip
@@ -119,3 +157,22 @@ for log in $logs
         done
 
 echo "======== end clean docker containers logs ========"
+
+## 删除日志文件
+# find /var/lib/docker/containers/ -type f -name "*-json.log" -delete # 删除
+# find /var/lib/docker/containers/ -type f -name "*-json.log" -exec rm {} \; # 删除
+# k8s需要一起删除/var/log/pods下的文件 find /var/log/pods/ -type f -name "*.log" -delete;
+不要删除文件，如果删除了，sudo systemctl restart docker
+
+## 清空日志文件
+# find /var/lib/docker/containers/ -type f -name "*-json.log" -exec truncate -s 0 {} \; 清空
+
+# 日志清理配置
+/etc/docker/daemon.json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",  // 设置每个日志文件的最大大小为10MB
+    "max-file": "3"     // 设置保留的日志文件数量
+  }
+}

@@ -1,3 +1,6 @@
+东西太多了，学不过来的，比如构建系统，cmake，make，ninja，nmake，msbuild
+用时再学，需要学再学
+
 Go js java Typescript flutter Rust python Lua
 精力有限，不要试图一个东西去尝试各种语言解决一遍
 例如幻想，不同语言组成一个跨语言的grpc后端，精力有限

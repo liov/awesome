@@ -1,3 +1,7 @@
+# get pod
+kubectl get pods -l job-name=pi --output=jsonpath={.items..metadata.name}
+# describe
+kubectl describe deploy data-center
 # 扩容
 kubectl  scale deployment nginx-deployment --replicas=4
 # 重启
@@ -11,16 +15,10 @@ kubectl create configmap my-config-3 --from-file=test
 
 # log
 # shellcheck disable=SC2006
-kubectl config use-context stage -n namespace && kubectl logs -f $(kubectl get pods |grep -oE podname[a-zA-Z0-9-]+)
-
-kubectl logs $(kubectl get pods --selector=job-name=pi --output=jsonpath={.items..metadata.name})
-
-kubectl describe deployment data-center
-
-kubectl logs -f $(kubectl get pods --selector=app=${PWD##*/} --output=jsonpath={.items..metadata.name})
 
 kubectl logs <POD_NAME> --since=5h
-kubectl logs -l app=label_NAME
+## 使用标签查看log
+kubectl logs -f --tail=-1 --since=5m -l app=label_NAME
 
 # deploy
 ../deploy/main -flow all -env dev -name ${PWD##*/} -ns ${USER} -path . -ver v1.1.0-$(date "+%Y%m%d%H%M%S")
@@ -89,3 +87,11 @@ kubectl proxy --port=8001 --address=0.0.0.0 --accept-hosts=^.* --kubeconfig=
 
 # 文件复制
 kubectl cp <pod_name>:<path_to_file> <path_to_destination_file>
+
+
+
+# 触发pod更新
+kubectl set image deployment/your-deployment-name container-name=repository/image-name:latest
+
+# 内部ip
+{{pod}}.{{svc}}.{{namespace}}.svc.cluster.local:{{port}}

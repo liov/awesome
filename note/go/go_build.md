@@ -1,6 +1,6 @@
-# go 编译动态库
-set GOOS=linux 
-set GOARCH=amd64
+# go 交叉编译
+GOOS=linux GOARCH=amd64
+
 ## go 动态库
 go install -buildmode=shared -linkshared  std
 go build -trimpath -buildmode=shared -linkshared demo
@@ -11,6 +11,8 @@ go build -trimpath -buildmode=c-shared -o libgobblob.so
 go build -trimpath -o out modname/package
 ## 带时区信息
 -tags timetzdata
+## 网络库自定义实现
+-tags netgo
 
 ## windows
 windows需要安装gcc编译器，我用的的MinGW包，解压，把bin目录加入环境变量。
@@ -21,7 +23,7 @@ windows需要安装gcc编译器，我用的的MinGW包，解压，把bin目录�
 -buildmode=c-shared not supported on windows/amd64
 这一步折腾了好久，最终在stackoverflow找到了解决方法。[[ https://stackoverflow.com/questions/40573401/building-a-dll-with-go-1-7 | building-a-dll-with-go]]
 
-编译静态库
+# 编译静态库
 go build -trimpath -buildmode=c-archive -o libgobblob.a
 gobblob.c文件，然后把go代码中要导出的函数，在gobblob.c中全部调用一遍。
 ```c
@@ -42,8 +44,10 @@ int main() {
 ```
 执行如下命令，生成dll
 gcc -shared -pthread -o libgobblob.dll gobblob.c libgobblob.a -lWinMM -lntdll -lWS2_32 -Iinclude
+
+
 # 静态编译
-go build -tags netgo
+
 CGO_ENABLED=0 go build
 go build -ldflags '-s -w -extldflags "-static -fpic"'
 可选参数-ldflags 是编译选项：
@@ -111,28 +115,7 @@ set CC=D:\SDK\Android\ndk-bundle\toolchains\llvm\prebuilt\windows-x86_64\bin\x86
 set CXX=D:\SDK\Android\ndk-bundle\toolchains\llvm\prebuilt\windows-x86_64\bin\x86_64-linux-android30-clang++.cmd
 //set CGO_LDFLAGS=-LD:\SDK\Android\ndk-bundle\toolchains\llvm\prebuilt\windows-x86_64\x86_64-linux-android\lib -g -O2
 go build -buildmode=c-shared -o libhello.so hello.go
-# go 编译静态库
-go build -buildmode=c-archive -o libgobblob.a
 
-working demo
-
-# alpine 镜像执行go二进制文件
-## 编译静态链接
-go build -tags netgo
-## alpine-glibc镜像
-
-# typescript
-
-## Locally in your project.
-npm install -D typescript
-npm install -D ts-node
-
-## Or globally with TypeScript.
-npm install -g typescript
-npm install -g ts-node
-
-## Depending on configuration, you may also need these
-npm install -D tslib @types/node
 
 # docker build go
 GOPATH=/mnt/d/SDK/gopath
@@ -141,10 +124,3 @@ GOPROXY=https://goproxy.io
 
 ## go mod tidy
 docker run --rm -v $GOPATH:/go -v $Code:/work -w /work/server/go -e GOPROXY=$GOPROXY $GOIMAGE go mod tidy
-
-## protogen
-docker run --rm -v $GOPATH:/go -v $Code:/work -w /work/server/go -e GOPROXY=$GOPROXY jybl/goprotoc protogen go --proto=/work/proto --genpath=/work/server/go/protobuf
-
-# docker build node
-docker run --rm --privileged=true -v /home/ghoper:/work -w /work/website/vhoper node:16-alpine3.16 pnpm run build
-docker run -v /home/ghoper/static:/static --net=host --restart=always --cpus=0.2 -d --name vhoper  vhoper:1.2

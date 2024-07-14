@@ -17,28 +17,4 @@ kubectl config set-context ${cluster} --cluster=${cluster} --user=${Username}
 # 启用 ${context} 
 kubectl config use-context ${cluster}
 
-
 kubectl get pod --kubeconfig=kube/stage/config
-
-
-kubectl apply -f - <<EOF
-apiVersion: apisix.apache.org/v2beta3
-kind: ApisixRoute
-metadata:
-  name: milvus
-  namespace: ingress-apisix
-spec:
-  http:
-    - name: milvus
-      match:
-        hosts:
-          - milvus.d
-        paths:
-          - /*
-      backends:
-        - serviceName: my-release-milvus
-          servicePort: 19530
-EOF
-
-# 触发pod更新
-kubectl set image deployment/your-deployment-name container-name=repository/image-name:latest
