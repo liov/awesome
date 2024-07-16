@@ -1,5 +1,12 @@
-
-
+# go
+https://golang.google.cn/dl/go1.22.5.windows-amd64.zip
+## linux
+# [go](https://golang.google.cn/doc/)
+wget https://dl.google.com/go/go1.xx.x.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.xx.x.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+export GOPRIVATE=go.hoper.xyz
+export GOPROXY=https://goproxy.io,direct
 
 # [protoc](https://github.com/protocolbuffers/protobuf/releases)
 
@@ -44,13 +51,6 @@ ssh  -fNg -L <本地端口>:<服务器数据库地址>  <用户名>@<服务器�
 exit
 ```
 
-
-# [go](https://golang.google.cn/doc/)
-wget https://dl.google.com/go/go1.xx.x.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.xx.x.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin
-export GOPRIVATE=go.hoper.xyz
-export GOPROXY=https://goproxy.io,direct
 
 # gradle maven
 ```groovy
