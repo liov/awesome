@@ -1,7 +1,7 @@
 package preformance
 
 import (
-	"github.com/hopeio/cherry/utils/cmp"
+	"github.com/hopeio/utils/cmp"
 	"testing"
 )
 

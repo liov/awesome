@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/hopeio/cherry/initialize"
-	"github.com/hopeio/cherry/utils/log"
+	"github.com/hopeio/initialize"
+	"github.com/hopeio/utils/log"
 	"test/custom/gorm/confdao"
 )
 

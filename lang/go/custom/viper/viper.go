@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/hopeio/cherry/utils/log"
+	"github.com/hopeio/utils/log"
 	"github.com/spf13/viper"
 	"time"
 )

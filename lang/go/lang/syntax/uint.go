@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/hopeio/cherry/utils/math"
+	"github.com/hopeio/utils/math"
 	"strconv"
 )
 

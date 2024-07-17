@@ -3,7 +3,7 @@ package json
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/hopeio/cherry/utils/log"
+	"github.com/hopeio/utils/log"
 	"testing"
 )
 

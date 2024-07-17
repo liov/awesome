@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hopeio/cherry/utils/log"
+	"github.com/hopeio/utils/log"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 	"gorm.io/gorm/utils/tests"

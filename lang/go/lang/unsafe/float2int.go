@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/cherry/utils/math"
-	reflecti "github.com/hopeio/cherry/utils/reflect"
+	"github.com/hopeio/utils/math"
+	reflecti "github.com/hopeio/utils/reflect"
 	"unsafe"
 )
 

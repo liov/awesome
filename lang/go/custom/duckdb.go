@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hopeio/cherry/initialize/conf_dao/duckdb"
+	"github.com/hopeio/initialize/conf_dao/duckdb"
 	"log"
 	"time"
 )

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/cherry/utils/log"
+	"github.com/hopeio/utils/log"
 	v2 "gopkg.in/yaml.v2"
 	v3 "gopkg.in/yaml.v3"
 )

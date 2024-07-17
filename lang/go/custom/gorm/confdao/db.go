@@ -1,8 +1,8 @@
 package confdao
 
 import (
-	"github.com/hopeio/cherry/initialize"
-	"github.com/hopeio/cherry/initialize/conf_dao/gormdb/postgres"
+	"github.com/hopeio/initialize"
+	"github.com/hopeio/initialize/conf_dao/gormdb/postgres"
 )
 
 type config struct {

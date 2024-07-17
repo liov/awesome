@@ -2,8 +2,8 @@ package leetcode
 
 import (
 	"bytes"
-	"github.com/hopeio/cherry/utils/slices"
-	stringsi "github.com/hopeio/cherry/utils/strings"
+	"github.com/hopeio/utils/slices"
+	stringsi "github.com/hopeio/utils/strings"
 )
 
 /*
