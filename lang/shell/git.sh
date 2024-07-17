@@ -2,8 +2,11 @@
 
 cd $1
 
-# 获取最后一次提交的日期时间戳
-last_commit_time=$(git log -1 --format=%ct)
+# 获取最后一次提交的哈希值
+last_commit_hash=$(git log -1 --format=%H)
+
+# 获取最后一次提交的时间
+last_commit_time=$(git show -s --format=%ct $last_commit_hash)
 
 # 将时间戳转换为日期时间格式（这里使用UTC时间）
 formatted_last_commit_time=$(date -u -d @$last_commit_time +"%Y-%m-%d %H:%M:%S")
