@@ -2,6 +2,11 @@
 # docker
 https://docs.docker.com/engine/install/ubuntu/#installation-methods
 
+## wsl2
+vim /etc/wsl.conf
+[boot]
+systemd=true
+wsl.exe --shutdown
 ```bash
 # Add Docker's official GPG key:
 sudo apt-get update

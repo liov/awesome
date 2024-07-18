@@ -4,6 +4,7 @@
 [boot]
 command="/usr/libexec/wsl-systemd"
 ```
+# wsl2
 -- now
 wsl.conf 的配置设置
 wsl.conf 文件基于每个分发配置设置。 (有关 WSL 2 分发版的全局配置，请参阅 .wslconfig) 。
