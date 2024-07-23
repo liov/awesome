@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-your_name="runoob.com"
+your_name="your_name"
 #注意，变量名和等号之间不能有空格，这可能和你熟悉的所有编程语言都不一样。同时，变量名的命名须遵循如下规则：
 #
 #命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。
@@ -8,9 +8,7 @@ your_name="runoob.com"
 #不能使用标点符号。
 #不能使用bash里的关键字（可用help命令查看保留关键字）。
 
-for file in $(ls /etc);do
-  echo "$file"
-done
+
 readonly variable_name="st"
 unset variable_name
 
@@ -140,118 +138,7 @@ EOF
 -L: 检测文件是否存在并且是一个符号链接。
 EOF
 
-# echo printf
-# test $[num1] -eq $[num2]
-#if
-if [ $(ps -ef | grep -c "ssh") -gt 1 ]; then echo "true"; fi
 
-a=10
-b=20
-if [ $a == $b ]
-then
-   echo "a 等于 b"
-elif [ $a -gt $b ]
-then
-   echo "a 大于 b"
-elif [ $a -lt $b ]
-then
-   echo "a 小于 b"
-else
-   echo "没有符合的条件"
-fi
-#for
-for str in 'This is a string'
-do
-    echo $str
-done
-
-for((i=1;i<=5;i++));do
-    echo "这是第 $i 次调用";
-done;
-#while
-int=1
-while(( $int<=5 ))
-do
-    echo $int
-    let "int++"
-done
-#无限循环
-while :
-do
-done
-
-for (( ; ; ))
-#util
-a=0
-
-until [ ! $a -lt 10 ]
-do
-   echo $a
-   a=`expr $a + 1`
-done
-#case
-echo '输入 1 到 4 之间的数字:'
-echo '你输入的数字为:'
-read aNum
-case $aNum in
-    1)  echo '你选择了 1'
-    ;;
-    2)  echo '你选择了 2'
-    ;;
-    3)  echo '你选择了 3'
-    ;;
-    4)  echo '你选择了 4'
-    ;;
-    *)  echo '你没有输入 1 到 4 之间的数字'
-    ;;
-esac
-
-while :
-do
-    echo -n "输入 1 到 5 之间的数字: "
-    read aNum
-    case $aNum in
-        1|2|3|4|5) echo "你输入的数字为 $aNum!"
-         break
-        ;;
-        *) echo "你输入的数字不是 1 到 5 之间的!"
-            continue
-            echo "游戏结束"
-        ;;
-    esac
-done
-
-#function
-demoFun(){
-    echo "这是我的第一个 shell 函数!"
-}
-funWithReturn(){
-    echo "这个函数会对输入的两个数字进行相加运算..."
-    echo "输入第一个数字: "
-    read aNum
-    echo "输入第二个数字: "
-    read anotherNum
-    echo "两个数字分别为 $aNum 和 $anotherNum !"
-    return $(($aNum+$anotherNum))
-}
-function demoFun1(){
-    echo "这是我的第一个 shell 函数!"
-    return `expr 1 + 1`
-}
-
-demoFun1
-echo $?
-echo $?
-funWithParam(){
-    echo "第一个参数为 $1 !"
-    echo "第二个参数为 $2 !"
-    echo "第十个参数为 $10 !"
-    echo "第十个参数为 ${10} !"
-    echo "第十一个参数为 ${11} !"
-    echo "参数总数有 $# 个!"
-    echo "作为一个字符串输出所有参数 $* !"
-}
-funWithParam 1 2 3 4 5 6 7 8 9 34 73
 :<<EOF
 注意，$10 不能获取第十个参数，获取第十个参数需要${10}。当n>=10时，需要使用${n}来获取参数。
 
@@ -296,5 +183,3 @@ command > /dev/null 2>&1
 
 # 或者使用以下包含文件代码
 # source ./test1.sh
-
-echo "菜鸟教程官网地址：$url"
