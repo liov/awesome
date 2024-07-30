@@ -29,15 +29,15 @@ func myPrintlnTramp(a ...interface{}) (n int, err error) {
 }
 
 //go:noinline
-func warpPrintln(a ...interface{}) (n int, err error) {
+func wrapPrintln(a ...interface{}) (n int, err error) {
 	return fmt.Fprintln(os.Stdout, a...)
 }
 
 func main() {
-	err := gohook.Hook(warpPrintln, myPrintln, myPrintlnTramp)
+	err := gohook.Hook(wrapPrintln, myPrintln, myPrintlnTramp)
 	if err != nil {
 		log.Println(err)
 	}
-	warpPrintln("hello world!")
+	wrapPrintln("hello world!")
 	myPrintlnTramp("测试")
 }
