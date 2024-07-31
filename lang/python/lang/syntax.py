@@ -75,7 +75,7 @@ if __name__ == '__main__':
     finally:
         print('finally...')
         print('END')
-    with open('./complex.py', 'r') as f:
+    with open('complex.py', 'r') as f:
         print(f.read())
     f = StringIO('Hello!\nHi!\nGoodbye!')
     while True:
