@@ -67,15 +67,15 @@ func TestMarshalFunc(t *testing.T) {
 	}
 	data, err := json.Marshal(&foo)
 	if err != nil {
-		log.Println(err)
+		log.Info(err)
 	}
-	log.Println(string(data))
+	log.Info(string(data))
 	data = []byte(`{"field1":1}`)
 	err = json.Unmarshal(data, &foo)
 	if err != nil {
-		log.Println(err)
+		log.Info(err)
 	}
-	log.Println(&foo)
+	log.Info(&foo)
 }
 
 type MarshalChanStruct struct {
@@ -87,7 +87,7 @@ func TestMarshalChan(t *testing.T) {
 	foo.C <- 1
 	data, err := json.Marshal(&foo)
 	if err != nil {
-		log.Println(err)
+		log.Info(err)
 	}
-	log.Println(string(data))
+	log.Info(string(data))
 }
