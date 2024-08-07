@@ -6,7 +6,9 @@ require (
 	bou.ke/monkey v1.0.2
 	github.com/blevesearch/bleve/v2 v2.4.1
 	github.com/brahma-adshonor/gohook v1.1.9
+	github.com/coocood/freecache v1.2.4
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
+	github.com/dgraph-io/ristretto v0.1.2-0.20240116140435-c67e07994f91
 	github.com/google/wire v0.6.0
 	github.com/hopeio/initialize v1.0.0
 	github.com/hopeio/utils v1.0.0
@@ -25,6 +27,7 @@ require (
 	golang.org/x/sys v0.22.0
 	gopkg.in/yaml.v2 v2.4.0
 	gopkg.in/yaml.v3 v3.0.1
+	gorm.io/driver/postgres v1.5.7
 	gorm.io/gorm v1.25.10
 )
 
@@ -55,6 +58,7 @@ require (
 	github.com/brianvoe/gofakeit/v6 v6.28.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cheggaaa/pb/v3 v3.1.5 // indirect
+	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/fatih/color v1.17.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20240306074159-ea2d69986ecb // indirect
@@ -88,6 +92,7 @@ require (
 	github.com/nxadm/tail v1.4.11 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.21 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_golang v1.19.1 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.53.0 // indirect
@@ -122,7 +127,6 @@ require (
 	google.golang.org/protobuf v1.34.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
-	gorm.io/driver/postgres v1.5.7 // indirect
 	gorm.io/plugin/prometheus v0.1.0 // indirect
 )
 

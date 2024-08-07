@@ -92,3 +92,13 @@ type Pet struct {
 	AccountID *uint
 	Name      string
 }
+type StringArray []string
+type ModelArray struct {
+	gorm.Model
+	Array  []string    `gorm:"type:[]text;serializer:string_array"`
+	Array2 StringArray `gorm:"type:[]text;serializer:string_array"`
+}
+
+func (m *ModelArray) TableName() string {
+	return "test"
+}

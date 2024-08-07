@@ -2,7 +2,10 @@ package confdao
 
 import (
 	"github.com/hopeio/initialize"
-	"github.com/hopeio/initialize/conf_dao/gormdb/postgres"
+	postgresi "github.com/hopeio/initialize/conf_dao/gormdb/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
+	"gorm.io/gorm/utils/tests"
 )
 
 type config struct {
@@ -11,8 +14,13 @@ type config struct {
 
 type dao struct {
 	initialize.EmbeddedPresets
-	DB postgres.DB
+	DB postgresi.DB
 }
 
 var Dao = &dao{}
 var Config = &config{}
+var DB, _ = gorm.Open(tests.DummyDialector{}, &gorm.Config{
+	NamingStrategy: schema.NamingStrategy{
+		SingularTable: true,
+	},
+})
