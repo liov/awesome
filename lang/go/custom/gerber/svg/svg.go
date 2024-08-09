@@ -17,20 +17,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-func minI(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func maxI(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 // An ElementType is a SVG element type.
 type ElementType string
 
@@ -95,6 +81,7 @@ type Rectangle struct {
 	RX       int
 	RY       int
 	Fill     string
+	Rotation float64
 	Attr     map[string]string
 }
 
@@ -163,10 +150,10 @@ type Path struct {
 func (e Path) Bounds() (image.Rectangle, error) {
 	bounds := image.Rectangle{Min: image.Point{math.MaxInt, math.MaxInt}, Max: image.Point{-math.MaxInt, -math.MaxInt}}
 	updateMinMax := func(x, y int) {
-		bounds.Min.X = minI(bounds.Min.X, x)
-		bounds.Max.X = maxI(bounds.Max.X, x)
-		bounds.Min.Y = minI(bounds.Min.Y, y)
-		bounds.Max.Y = maxI(bounds.Max.Y, y)
+		bounds.Min.X = min(bounds.Min.X, x)
+		bounds.Max.X = max(bounds.Max.X, x)
+		bounds.Min.Y = min(bounds.Min.Y, y)
+		bounds.Max.Y = max(bounds.Max.Y, y)
 	}
 
 	updateMinMax(e.X, e.Y)
@@ -321,13 +308,15 @@ func (p *Processor) Circle(lineIdx, x, y, diameter int, polarity bool) {
 	p.Data = append(p.Data, Circle{Line: lineIdx, X: x, Y: y, Radius: diameter / 2, Fill: p.fill(polarity)})
 }
 
-func (p *Processor) Rectangle(lineIdx, x, y, width, height int, polarity bool) {
-	p.Data = append(p.Data, Rectangle{Line: lineIdx, Aperture: "R", X: x - width/2, Y: y + height/2, Width: width, Height: height, Fill: p.fill(polarity)})
+func (p *Processor) Rectangle(lineIdx, x, y, width, height int, polarity bool, rotation float64) {
+	p.Data = append(p.Data, Rectangle{Line: lineIdx, Aperture: "R", X: x - width/2, Y: y + height/2, Width: width,
+		Height: height, Fill: p.fill(polarity), Rotation: rotation})
 }
 
-func (p *Processor) Obround(lineIdx, x, y, width, height int, polarity bool) {
-	r := minI(width, height) / 2
-	p.Data = append(p.Data, Rectangle{Line: lineIdx, Aperture: "O", X: x - width/2, Y: y + height/2, Width: width, Height: height, RX: r, RY: r, Fill: p.fill(polarity)})
+func (p *Processor) Obround(lineIdx, x, y, width, height int, polarity bool, rotation float64) {
+	r := min(width, height) / 2
+	p.Data = append(p.Data, Rectangle{Line: lineIdx, Aperture: "O", X: x - width/2, Y: y + height/2, Width: width,
+		Height: height, RX: r, RY: r, Fill: p.fill(polarity), Rotation: rotation})
 }
 
 func (p *Processor) Contour(contour parse.Contour) error {

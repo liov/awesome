@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+	"github.com/hopeio/utils/dao/database/datatypes"
 	"gorm.io/gorm"
 	"time"
 )
@@ -57,7 +58,7 @@ type AB struct {
 
 type A struct {
 	Id   int    `json:"id" gorm:"primaryKey"`
-	Name string `json:"name" g`
+	Name string `json:"name"`
 }
 
 type B struct {
@@ -95,10 +96,19 @@ type Pet struct {
 type StringArray []string
 type ModelArray struct {
 	gorm.Model
-	Array  []string    `gorm:"type:[]text;serializer:string_array"`
-	Array2 StringArray `gorm:"type:[]text;serializer:string_array"`
+	Array  []string    `gorm:"type:text[];serializer:string_array"`
+	Array2 StringArray `gorm:"type:text[];serializer:string_array"`
 }
 
 func (m *ModelArray) TableName() string {
 	return "test"
+}
+
+type ModelJson struct {
+	gorm.Model
+	Json datatypes.JsonT[Tag] `gorm:"type:jsonb"`
+}
+
+type Tag struct {
+	gorm.Model
 }

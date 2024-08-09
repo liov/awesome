@@ -68,14 +68,14 @@ type circlePrimitive struct {
 	CenterY  float64
 }
 
-type vectorPrimitive struct {
+type rectPrimitive struct {
 	Exposure    bool
 	Width       float64
 	Height      float64
 	CenterX     float64
 	CenterY     float64
 	Rotation    float64
-	SetVariable []func(float642 *float64, s string) error
+	SetVariable []func(p *rectPrimitive, f float64)
 }
 
 type vectorLinePrimitive struct {
@@ -108,9 +108,6 @@ type template struct {
 	Line       int
 	Name       string
 	Primitives []interface{}
-}
-
-type templatePrimitive interface {
 }
 
 type LinePrimitiveNotClosedError struct {
@@ -294,11 +291,11 @@ func parsePrimitive(lineIdx int, word string) (interface{}, error) {
 			return nil, errors.Wrap(err, "")
 		}
 		return line, nil
-	case primitiveCodeVector:
+	case primitiveCodeRect:
 		if len(splitted) != 7 {
 			return nil, errors.Errorf("%+v", splitted)
 		}
-		rect := vectorPrimitive{}
+		rect := rectPrimitive{}
 		exposure, err := strconv.Atoi(strings.TrimSpace(splitted[1]))
 		if err != nil {
 			return nil, errors.Wrap(err, "")
@@ -306,25 +303,44 @@ func parsePrimitive(lineIdx int, word string) (interface{}, error) {
 		if exposure == 1 {
 			rect.Exposure = true
 		}
-		// TODO
-		if err := injectFloat(&rect.Width, splitted[2], &rect.SetVariable); err != nil {
+		if isVar, err := injectFloat(&rect.Width, splitted[2]); err != nil {
 			return nil, errors.Wrap(err, "")
+		} else if isVar {
+			rect.SetVariable = append(rect.SetVariable, func(p *rectPrimitive, f float64) {
+				p.Width = f
+			})
 		}
 
-		if err := injectFloat(&rect.Height, splitted[3], &rect.SetVariable); err != nil {
+		if isVar, err := injectFloat(&rect.Height, splitted[3]); err != nil {
 			return nil, errors.Wrap(err, "")
+		} else if isVar {
+			rect.SetVariable = append(rect.SetVariable, func(p *rectPrimitive, f float64) {
+				p.Height = f
+			})
 		}
 
-		if err := injectFloat(&rect.CenterX, splitted[4], &rect.SetVariable); err != nil {
+		if isVar, err := injectFloat(&rect.CenterX, splitted[4]); err != nil {
 			return nil, errors.Wrap(err, "")
+		} else if isVar {
+			rect.SetVariable = append(rect.SetVariable, func(p *rectPrimitive, f float64) {
+				p.CenterX = f
+			})
 		}
 
-		if err := injectFloat(&rect.CenterY, splitted[5], &rect.SetVariable); err != nil {
+		if isVar, err := injectFloat(&rect.CenterY, splitted[5]); err != nil {
 			return nil, errors.Wrap(err, "")
+		} else if isVar {
+			rect.SetVariable = append(rect.SetVariable, func(p *rectPrimitive, f float64) {
+				p.CenterY = f
+			})
 		}
 
-		if err := injectFloat(&rect.Rotation, splitted[6], &rect.SetVariable); err != nil {
+		if isVar, err := injectFloat(&rect.Rotation, splitted[6]); err != nil {
 			return nil, errors.Wrap(err, "")
+		} else if isVar {
+			rect.SetVariable = append(rect.SetVariable, func(p *rectPrimitive, f float64) {
+				p.Rotation = f
+			})
 		}
 
 		return rect, nil
@@ -476,39 +492,37 @@ const (
 
 	primitiveCodeCircle        = 1
 	primitiveCodeVectorLine    = 20
-	primitiveCodeVector        = 21
+	primitiveCodeRect          = 21
 	primitiveCodeOutline       = 4
 	primitiveCodeLowerLeftLine = 22
 
 	primitiveDelimiter = ","
 
-	commandFS     = "FS"
-	commandMO     = "MO"
-	commandG04    = "G04"
-	commandIP     = "IP"
-	commandLN     = "LN"
-	commandLP     = "LP"
-	commandG74    = "G74"
-	commandG75    = "G75"
-	commandAD     = "AD"
-	commandAM     = "AM"
-	commandAMRect = "AMRect"
-	commandG36    = "G36"
-	commandG37    = "G37"
-	commandG54    = "G54"
-	commandG01    = "G01"
-	commandG02    = "G02"
-	commandG03    = "G03"
-	commandD01    = "D01"
-	commandD02    = "D02"
-	commandD03    = "D03"
-	commandSR     = "SR"
-	commandM02    = "M02"
+	commandFS  = "FS"
+	commandMO  = "MO"
+	commandG04 = "G04"
+	commandIP  = "IP"
+	commandLN  = "LN"
+	commandLP  = "LP"
+	commandG74 = "G74"
+	commandG75 = "G75"
+	commandAD  = "AD"
+	commandAM  = "AM"
+	commandG36 = "G36"
+	commandG37 = "G37"
+	commandG54 = "G54"
+	commandG01 = "G01"
+	commandG02 = "G02"
+	commandG03 = "G03"
+	commandD01 = "D01"
+	commandD02 = "D02"
+	commandD03 = "D03"
+	commandSR  = "SR"
+	commandM02 = "M02"
 
 	templateNameCircle    = "C"
 	templateNameRectangle = "R"
 	templateNameObround   = "O"
-	templateNameRect      = "Rect"
 )
 
 type commandProcessor struct {
@@ -738,9 +752,6 @@ func (p *commandProcessor) flashUserDefinedTmpl(lineIdx int) error {
 	if !p.polarity {
 		return errors.Errorf("%v", p.polarity)
 	}
-	if len(p.ap.Params) != 0 {
-		return errors.Errorf("%+v", p.ap)
-	}
 	for i, primitive := range p.ap.Template.Primitives {
 		switch pm := primitive.(type) {
 		case circlePrimitive:
@@ -779,9 +790,14 @@ func (p *commandProcessor) flashUserDefinedTmpl(lineIdx int) error {
 			}
 			p.pc.Rectangle(lineIdx, p.x+p.u(pm.X+pm.Width/2), p.y+p.u(pm.Y+pm.Height/2), p.u(pm.Width),
 				p.u(pm.Height), p.polarity, pm.Rotation)
-		case vectorPrimitive:
+		case rectPrimitive:
 			if !pm.Exposure {
 				return errors.Errorf("%d %+v", i, pm)
+			}
+			if pm.SetVariable != nil {
+				for i, f := range pm.SetVariable {
+					f(&pm, p.ap.Params[i])
+				}
 			}
 			p.pc.Rectangle(lineIdx, p.x+p.u(pm.CenterX+pm.Width/2), p.y+p.u(pm.CenterY+pm.Height/2), p.u(pm.Width),
 				p.u(pm.Height), p.polarity, pm.Rotation)
@@ -1137,12 +1153,14 @@ func (p *Parser) parse(lineIdx int, line string) error {
 // Parse parses the Gerber format stream.
 func (parser *Parser) Parse(r io.Reader) error {
 	scanner := bufio.NewScanner(r)
-	var lineIdx int = -1
+	var lineIdx int
 
 	for scanner.Scan() {
 		lineIdx++
 		line := scanner.Text()
-
+		if line == "" {
+			continue
+		}
 		if err := parser.parse(lineIdx, line); err != nil {
 			return errors.Wrap(err, fmt.Sprintf("at line %d: \"%s\"", lineIdx, line))
 		}
@@ -1154,14 +1172,34 @@ func (parser *Parser) Parse(r io.Reader) error {
 	return nil
 }
 
-func injectFloat(v *float64, s string, setVar *[]func(*float64, string) error) (err error) {
+func injectFloat(v *float64, s string) (isVariable bool, err error) {
 	if strings.HasPrefix(s, variableKey) {
-		*setVar = append(*setVar, func(f *float64, s string) error {
-			*f, err = strconv.ParseFloat(strings.TrimSpace(s), 64)
-			return err
-		})
-		return
+		return true, nil
 	}
 	*v, err = strconv.ParseFloat(strings.TrimSpace(s), 64)
 	return
 }
+
+type Loayer string
+
+const (
+	GTL Loayer = "GTL" //顶层走线
+	GBL Loayer = "GBL" //底层走线
+	GTO Loayer = "GTO" //顶层丝印
+	GBO Loayer = "GBO" //底层丝印
+	GTS Loayer = "GTS" // 顶层阻焊
+	GBS Loayer = "GBS" //底层阻焊
+	GPT Loayer = "GPT" //顶层主焊盘
+	GPB Loayer = "GPB" //底层主焊盘
+	G1  Loayer = "G1"  //内部走线层1
+	G2  Loayer = "G2"  //内部走线层2
+	G3  Loayer = "G3"  //内部走线层3
+	G4  Loayer = "G4"  //内部走线层4
+	GP1 Loayer = "GP1" //内平面1(负片)
+	GP2 Loayer = "GP2" //内平面2(负片)
+	GM1 Loayer = "GM1" //机械层1
+	GM2 Loayer = "GM2" //机械层2
+	GM3 Loayer = "GM3" //机械层3
+	GM4 Loayer = "GM4" //机械层4
+	GKO Loayer = "GKO" //禁止布线层(可做板子外形)
+)

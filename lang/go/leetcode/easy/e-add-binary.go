@@ -69,5 +69,5 @@ func addBinary(a string, b string) string {
 	if carry {
 		ret.WriteByte('1')
 	}
-	return stringsi.ToString(slices.Reverse(ret.Bytes()))
+	return stringsi.FromBytes(slices.Reverse(ret.Bytes()))
 }

@@ -55,5 +55,5 @@ func addStrings(num1 string, num2 string) string {
 	if carry == 1 {
 		ret.WriteByte('1')
 	}
-	return stringsi.ToString(slices.Reverse(ret.Bytes()))
+	return stringsi.FromBytes(slices.Reverse(ret.Bytes()))
 }
