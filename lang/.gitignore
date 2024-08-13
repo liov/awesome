@@ -14,3 +14,5 @@ ts/dist
 *.pb.go
 sql/work
 *.obj
+.vitepress/cache
+.vitepress/dist
