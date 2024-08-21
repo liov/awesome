@@ -25,25 +25,20 @@ def draw_rotated_rectangle(center, width, height, angle):
 plt.figure(figsize=(8, 6))
 
 # 绘制旋转矩形
-draw_rotated_rectangle((0.5, 0.5), 0.4, 0.2, 30)
+draw_rotated_rectangle((596, 1491), 1129.5, 2957, 0)
 
 # 在矩形内外生成一些点
 np.random.seed(0)  # 设置随机种子以保证结果可重复
-points_inside = np.random.uniform(low=[0.1, 0.1], high=[0.9, 0.9], size=(5, 2))
-points_outside = np.random.uniform(low=[0, 0], high=[1, 1], size=(5, 2))
+points = np.random.uniform(low=[0, 0], high=[2000, 3000], size=(5, 2))
 
 # 绘制点并标注坐标
-for x, y in points_inside:
+for x, y in points:
     plt.plot(x, y, 'bo', markersize=5)
     plt.text(x, y, f'({x:.2f}, {y:.2f})', fontsize=9, ha='right')
 
-for x, y in points_outside:
-    plt.plot(x, y, 'go', markersize=5)
-    plt.text(x, y, f'({x:.2f}, {y:.2f})', fontsize=9, ha='right')
-
 # 设置坐标轴范围和比例
-plt.xlim(0, 1)
-plt.ylim(0, 1)
+plt.xlim(0, 2000)
+plt.ylim(0, 3000)
 plt.gca().set_aspect('equal', adjustable='box')
 
 # 显示图形
