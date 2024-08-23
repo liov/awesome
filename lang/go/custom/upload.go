@@ -21,18 +21,10 @@ func main() {
 		log.Fatalf("Failed to open file: %v", err)
 	}
 	defer file.Close()
-
-	// 获取文件信息
-	fileInfo, _ := file.Stat()
-	size := fileInfo.Size()
-
-	// 创建Buffer用于存储文件内容
-	buffer := make([]byte, size)
-	_, err = file.Read(buffer)
+	buffer, err := io.ReadAll(file)
 	if err != nil {
-		log.Fatalf("Failed to read file: %v", err)
+		log.Fatalf("Read file error: %v", err)
 	}
-
 	// 创建HTTP POST请求的Body
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
