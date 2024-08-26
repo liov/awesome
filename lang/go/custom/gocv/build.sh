@@ -1,7 +1,7 @@
 # 直接用msys2的opencv
 pacman -S mingw-w64-ucrt-x86_64-opencv
 CGO_CXXFLAGS=--std=c++11 CGO_CPPFLAGS="-ID:\sdk\msys64\ucrt64\include\opencv4" CGO_LDFLAGS="-LD:\sdk\msys64\ucrt64\lib
- -lopencv_core -lopencv_photo -lopencv_face -lopencv_videoio -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs -lopencv_objdetect -lopencv_features2d -lopencv_video -lopencv_dnn -lopencv_xfeatures2d -lopencv_plot -lopencv_tracking -lopencv_img_hash -lopencv_calib3d"  go build -tags customenv -o D:/sdk/opencv/build/install/x64/mingw/bin/gocv.exe gocv.go
+ -lopencv_core -lopencv_photo -lopencv_face -lopencv_videoio -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs -lopencv_objdetect -lopencv_features2d -lopencv_video -lopencv_dnn -lopencv_xfeatures2d -lopencv_plot -lopencv_tracking -lopencv_img_hash -lopencv_calib3d"  go build -tags customenv gocv.go
 ## 编译出来执行报错
 gocv.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory
 
@@ -14,6 +14,7 @@ gocv.exe: error while loading shared libraries: ?: cannot open shared object fil
 ## IDEA env
 CGO_CXXFLAGS=--std=c++11;CGO_CPPFLAGS=-ID:\sdk\msys64\ucrt64\include\opencv4;CGO_LDFLAGS=-LD:\sdk\msys64\ucrt64\lib  -lopencv_core -lopencv_photo -lopencv_face -lopencv_videoio -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs -lopencv_objdetect -lopencv_features2d -lopencv_video -lopencv_dnn -lopencv_xfeatures2d -lopencv_plot -lopencv_tracking -lopencv_img_hash -lopencv_calib3d
 
+-tags customenv
 
 
 
