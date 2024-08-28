@@ -3,21 +3,19 @@ package main
 import (
 	"fmt"
 	"go/build"
+	_ "golang.org/x/exp/shiny/driver"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
-	"test/lang/cgo/crosscompile/mobile"
-
-	_ "golang.org/x/exp/shiny/driver"
-	_ "test/lang/cgo/crosscompile/a"
+	_ "test/lang/cgo/disable/a"
 )
 
 func main() {
 
 	//unicorn.Unicorn()
 	//a.Hello()
-	mobile.Mobile()
+
 	ctxt := new(build.Context)
 	*ctxt = build.Default
 	ctxt.CgoEnabled = false
@@ -26,7 +24,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	aDir := filepath.Join(wd, "a")
+	aDir := filepath.Join(wd, "lang/cgo/disable/a")
 	p, err := ctxt.ImportDir(aDir, 0)
 	if err != nil {
 		log.Fatal(err)

@@ -14,13 +14,13 @@ function final(value) {
 
 function launcher() {
     while(running < limit && items.length > 0) {
-        var item = items.shift();
+        const item = items.shift();
         async(item, function(result) {
             results.push(result);
             running--;
             if(items.length > 0) {
                 launcher();
-            } else if(running == 0) {
+            } else if(running === 0) {
                 final(results);
             }
         });

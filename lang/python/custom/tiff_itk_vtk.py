@@ -2,7 +2,7 @@ import itk
 import vtk
 
 # 读取 3D TIFF 图像
-image = itk.imread(r'D:\work\hello.tiff', itk.F)
+image = itk.imread(r'D:\ApulisAoi\JF_TEST\JF_TEST\scan-panel\11.bmp', itk.F)
 
 
 # 将 ITK 图像转换为 NumPy 数组

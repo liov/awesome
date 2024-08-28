@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/utils/log"
 	"gocv.io/x/gocv"
 	"image"
 	"image/color"
@@ -12,7 +11,7 @@ import (
 func main() {
 	fmt.Println("开始")
 
-	SearchCircle(`D:\work\4.1-单板截图.jpg`, image.Rect(0, 0, 5120, 5120))
+	SearchCircle(`D:\11.bmp`, image.Rect(0, 0, 5120, 5120))
 
 }
 
@@ -34,7 +33,7 @@ func SearchCircle(file string, rect image.Rectangle) {
 	gocv.Canny(blurred, &edges, 50, 150)
 	circles := gocv.NewMat()
 	defer circles.Close()
-	gocv.HoughCirclesWithParams(edges, &circles, gocv.HoughGradient, 1.2, 200, 200, 80, 50, 300)
+	gocv.HoughCirclesWithParams(edges, &circles, gocv.HoughGradient, 1.2, 200, 200, 80, 20, 100)
 	if !circles.Empty() {
 		for i := 0; i < circles.Cols(); i++ {
 			v := circles.GetVecfAt(0, i)
@@ -44,21 +43,20 @@ func SearchCircle(file string, rect image.Rectangle) {
 			// 检查圆是否完整，即圆的边缘不会超出图像边界
 			if (x-r) > 0 && (x+r) < gimg.Cols() && (y-r) > 0 && (y+r) < gimg.Rows() {
 				// 获取圆形边缘区域
-				edgeMask := gocv.NewMatWithSize(gimg.Rows(), gimg.Cols(), gocv.MatTypeCV8U)
-				gocv.Circle(&edgeMask, image.Pt(x, y), r, color.RGBA{R: 255, G: 0, B: 0, A: 0}, 2)
+				edgeMask := gocv.NewMatWithSize(gimg.Rows(), gimg.Cols(), gimg.Type())
+				gocv.Circle(&edgeMask, image.Pt(x, y), r, color.RGBA{R: 255, G: 255, B: 255, A: 1}, 2)
 
 				// 计算边缘区域的平均亮度
 				meanEdge := gimg.MeanWithMask(edgeMask).Val1
 
 				// 计算圆外区域的平均亮度
-				outerMask := gocv.NewMatWithSize(gimg.Rows(), gimg.Cols(), gocv.MatTypeCV8U)
-				gocv.Circle(&outerMask, image.Pt(x, y), r+10, color.RGBA{R: 255, G: 255, B: 255, A: 0}, -1)
+				outerMask := gocv.NewMatWithSize(gimg.Rows(), gimg.Cols(), gimg.Type())
+				gocv.Circle(&outerMask, image.Pt(x, y), r+10, color.RGBA{R: 255, G: 255, B: 255, A: 1}, -1)
 				gocv.Subtract(outerMask, edgeMask, &outerMask)
 				meanOutside := gimg.MeanWithMask(outerMask).Val1
 
 				// 保留边缘和外部对比度高的圆
-				if math.Abs(meanEdge-meanOutside) > 30 { // 根据需要调整此阈值
-					log.Info("有圆", x, y, r)
+				if math.Abs(meanEdge-meanOutside) > 0 { // 根据需要调整此阈值
 					// 绘制外圆
 					gocv.Circle(&rimg, image.Pt(x, y), r, color.RGBA{R: 255, G: 0, B: 0, A: 0}, 2)
 					// 绘制圆心

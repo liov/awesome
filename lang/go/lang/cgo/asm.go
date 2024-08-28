@@ -11,7 +11,7 @@ import "C"
 import (
 	"unsafe"
 
-	asmpkg "test/cgo/asm"
+	asmpkg "test/lang/cgo/asm"
 )
 
 func main() {
