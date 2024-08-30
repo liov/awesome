@@ -12,14 +12,14 @@ height, width = image.shape[:2]
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # 使用高斯模糊平滑图像
-blurred = cv2.GaussianBlur(gray_image, (9, 9), 2)
+blurred = cv2.GaussianBlur(gray_image, (11, 11), 0.0)
 
 # 使用Canny边缘检测
-edges = cv2.Canny(blurred, 50, 150)
+edges = cv2.Canny(blurred, 100, 200)
 
 # 使用HoughCircles检测圆形
-circles = cv2.HoughCircles(edges, cv2.HOUGH_GRADIENT, dp=1.2, minDist=300, param1=200, param2=80, minRadius=10,
-                           maxRadius=500)
+circles = cv2.HoughCircles(edges, cv2.HOUGH_GRADIENT, dp=1, minDist=500, param1=300, param2=10, minRadius=50,
+                           maxRadius=300)
 
 # 确保检测到了圆形
 if circles is not None:
