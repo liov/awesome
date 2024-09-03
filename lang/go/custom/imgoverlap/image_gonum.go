@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func calculateSSD(y int, img1, img2 []float64, minOverlap, maxOverlap int) int {
+func calculateMSE(y int, img1, img2 []float64, minOverlap, maxOverlap int) int {
 
 	minMean := math.MaxFloat64
 	var overlap int
@@ -25,12 +25,10 @@ func calculateSSD(y int, img1, img2 []float64, minOverlap, maxOverlap int) int {
 			sum += v * v
 			return v
 		}, diff)
-		if sum < minMean {
-			minMean = sum
+		mse := sum / float64(i*y)
+		if mse < minMean {
+			minMean = mse
 			overlap = i
-			fmt.Println(sum)
-		} else {
-			break
 		}
 	}
 
@@ -58,7 +56,7 @@ func main() {
 	file1.Close()
 	file2.Close()
 	bounds1 := img1.Bounds()
-	fmt.Println(calculateSSD(bounds1.Dy(), data1, data2, minOverlap, maXOverlap), time.Since(now))
+	fmt.Println(calculateMSE(bounds1.Dy(), data1, data2, minOverlap, maXOverlap), time.Since(now))
 }
 
 func ImageData(img1, img2 image.Image, maXOverlap int) ([]float64, []float64) {

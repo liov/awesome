@@ -76,12 +76,10 @@ func calculate(y int, img1, img2 []uint8, minOverlap, maxOverlap int) int {
 		subimg1 := img1[n-m:]
 		subimg2 := img2[:m]
 		sum = avx2SSD(subimg1, subimg2)
-		if sum < minMean {
-			minMean = sum
+		mse := sum / uint64(m)
+		if mse < minMean {
+			minMean = mse
 			overlap = o
-			fmt.Println(overlap, sum)
-		} else {
-			break
 		}
 	}
 

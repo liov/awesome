@@ -10,7 +10,7 @@ import (
 )
 
 // 恍然大悟，图片其实就是一维数组
-func calculateSSD(y int, img1, img2 []uint8, minOverlap, maxOverlap int) int {
+func calculateMSE(y int, img1, img2 []uint8, minOverlap, maxOverlap int) int {
 	n := len(img1)
 	minMean := math.MaxInt
 	var overlap int
@@ -23,12 +23,10 @@ func calculateSSD(y int, img1, img2 []uint8, minOverlap, maxOverlap int) int {
 			v := int(subimg1[i]) - int(subimg2[i])
 			sum += v * v
 		}
-		if sum < minMean {
-			minMean = sum
+		mse := sum / m
+		if mse < minMean {
+			minMean = mse
 			overlap = o
-			fmt.Println(overlap, sum)
-		} else {
-			break
 		}
 	}
 
@@ -56,7 +54,7 @@ func main() {
 	file1.Close()
 	file2.Close()
 	bounds1 := img1.Bounds()
-	fmt.Println(calculateSSD(bounds1.Dy(), data1, data2, minOverlap, maXOverlap), time.Since(now))
+	fmt.Println(calculateMSE(bounds1.Dy(), data1, data2, minOverlap, maXOverlap), time.Since(now))
 }
 
 func ImageData(img1, img2 image.Image, maXOverlap int) ([]uint8, []uint8) {

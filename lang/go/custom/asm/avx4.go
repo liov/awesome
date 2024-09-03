@@ -46,6 +46,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand/v2"
+	"test/custom/asm/goat"
 	"unsafe"
 )
 
@@ -65,13 +66,5 @@ func main() {
 
 	result := avx2SSDInt16(a, b)
 
-	fmt.Printf("SSD result: %d %d\n", result, yz(a, b))
-}
-
-func yz(a, b []int16) int {
-	sum := 0
-	for i := range a {
-		sum += int(a[i]-b[i]) * int(a[i]-b[i])
-	}
-	return sum
+	fmt.Printf("SSD result: %d %d\n", result, goat.Check(a, b))
 }
