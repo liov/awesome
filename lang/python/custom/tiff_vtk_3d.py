@@ -4,7 +4,7 @@ import vtk
 from vtkmodules.util import numpy_support
 
 # 读取灰度 TIFF 图像
-tiff_path = r'D:\work\pic\1.tiff'
+tiff_path = r'D:\result.tiff'
 tiff_img = Image.open(tiff_path)
 
 image_array = np.array(tiff_img)

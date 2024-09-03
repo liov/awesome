@@ -1,15 +1,14 @@
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 # 读取灰度 TIFF 图像
-tiff_path = r'D:\work\hello.tiff'
+tiff_path = r'D:\result.tiff'
 tiff_img = Image.open(tiff_path).convert('L')
 image_array = np.array(tiff_img)
 
 # 正常化高度值
-z = image_array / np.max(image_array) * 100  # 将灰度值映射到 0-100 的范围
+z = image_array / np.max(image_array) * 500  # 将灰度值映射到 0-100 的范围
 
 # 创建网格
 x = np.linspace(0, image_array.shape[1], image_array.shape[1])
