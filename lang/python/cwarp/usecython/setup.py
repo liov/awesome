@@ -28,26 +28,22 @@ extensions = [
     Extension("wrapper", ["wrapper.pyx"],
               include_dirs=include_dirs,
               libraries=libraries,
-              library_dirs=library_dirs),
+              library_dirs=library_dirs,
+              extra_compile_args=['-O3', '-ffast-math'],  # 编译选项
+     ),
 
 ]
-
-# 定义扩展模块
-module = cythonize(
-    extensions
-)
 
 link_args = ['-static-libgcc',
              '-static-libstdc++',
              '-Wl,-Bstatic,--whole-archive',
              '-lwinpthread',
              '-Wl,--no-whole-archive']
-link_args = []
 class Build(build_ext):
     def build_extensions(self):
         if self.compiler.compiler_type == 'mingw32':
             for e in self.extensions:
-                e.extra_link_args = link_args
+                e.extra_link_args += link_args
         super(Build, self).build_extensions()
 
 # python setup.py build_ext --inplace --compiler=mingw32
@@ -55,6 +51,7 @@ setup(
     name="wrapper",
     version="1.0",
     description="My Python module",
-    ext_modules=cythonize(extensions),
+    ext_modules=cythonize(extensions, language_level=3),
     cmdclass={'build_ext': Build},
+    zip_safe=False,
 )

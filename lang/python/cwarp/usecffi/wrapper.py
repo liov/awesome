@@ -10,8 +10,7 @@ ffi.cdef("""
 lib = ffi.dlopen("wrapper.dll")
 
 # 定义add函数
-@ffi.callback("int load_image_width(const char* image_path)")
-def load_image_width(image_path):
-    return lib.load_image_width(image_path)
+def load_image_width(image_path:str):
+    return lib.load_image_width(image_path.encode("utf-8"))
 
-load_image_width(r'D:\work\1--light1.jpg')
+print(load_image_width(r'D:\work\1--light1.jpg'))

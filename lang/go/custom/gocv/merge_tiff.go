@@ -37,7 +37,7 @@ func MergeTiff(imgs [][]int, getImage func(int) ([]byte, error), bounds image.Re
 	if err != nil {
 		return err
 	}
-	img0, err := gocv.IMDecode(data, gocv.IMReadAnyDepth)
+	img0, err := gocv.IMDecode(data, gocv.IMReadGrayScale|gocv.IMReadAnyDepth)
 	if err != nil {
 		return err
 	}
@@ -48,11 +48,13 @@ func MergeTiff(imgs [][]int, getImage func(int) ([]byte, error), bounds image.Re
 	// 将 img1 复制到结果图片中
 	for i, rimg := range imgs {
 		for j, imgIdx := range rimg {
-			data, err := getImage(imgIdx)
-			if err != nil {
-				return err
+			if imgIdx != 0 {
+				data, err = getImage(imgIdx)
+				if err != nil {
+					return err
+				}
 			}
-			img, err := gocv.IMDecode(data, gocv.IMReadAnyDepth)
+			img, err := gocv.IMDecode(data, gocv.IMReadGrayScale|gocv.IMReadAnyDepth)
 			if err != nil {
 				return err
 			}
