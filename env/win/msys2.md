@@ -24,3 +24,5 @@ pacman -Sg 软件包组: 查看某软件包组所包含的所有软件包。
 pacman -Sc：清理未安装的包文件，包文件位于 /var/cache/pacman/pkg/ 目录。
 
 pacman -Scc：清理所有的缓存文件
+
+不要用msys2的软件包，node(使用nvm)，python(使用pdm)
