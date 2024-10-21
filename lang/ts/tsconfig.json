@@ -11,7 +11,7 @@
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./lang/**/*",
+    "./lang/ts/**/*",
     "./leetcode/**/*"
   ],
   "exclude": [

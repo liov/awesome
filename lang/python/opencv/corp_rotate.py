@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 读取图片
-image = cv2.imread(r"D:\ApulisAoi\1--light1.jpg")
+image = cv2.imread(r"D:\xxx")
 if image is None:
     print("Could not open or find the image!")
     exit()

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "type": "commonjs",
   "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "jimp": "^1.6.0",
+    "opencv.js": "^1.2.1",
+    "reflect-metadata": "^0.1.13",
+    "sharp": "^0.33.5"
   },
   "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e",
   "devDependencies": {

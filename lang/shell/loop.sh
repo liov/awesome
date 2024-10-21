@@ -1,8 +1,8 @@
+# for
 for file in $(ls /etc);do
   echo "$file"
 done
 
-#for
 for str in 'This is a string'
 do
     echo $str
@@ -19,11 +19,15 @@ do
     let "int++"
 done
 #无限循环
-while :
+while true;
 do
+  xxx
 done
 
-for (( ; ; ))
+for (( ; ; ));
+do
+  xxx
+done
 #util
 a=0
 
