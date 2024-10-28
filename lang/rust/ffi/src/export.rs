@@ -5,10 +5,7 @@ use std::ffi::{CString, CStr};
 #[no_mangle]
 pub extern "C" fn rust_greeting(to: *const c_char) -> *mut c_char {
     let c_str = unsafe { CStr::from_ptr(to) };
-    let recipient = match c_str.to_str() {
-        Err(_) => "there",
-        Ok(string) => string,
-    };
+    let recipient = c_str.to_str().unwrap_or_else(|_| "there");
 
     CString::new("Hello ".to_owned() + recipient).unwrap().into_raw()
 }
@@ -17,7 +14,7 @@ pub extern "C" fn rust_greeting(to: *const c_char) -> *mut c_char {
 pub extern "C" fn rust_cstr_free(s: *mut c_char) {
     unsafe {
         if s.is_null() { return }
-        CString::from_raw(s)
+        drop(CString::from_raw(s));
     };
 }
 

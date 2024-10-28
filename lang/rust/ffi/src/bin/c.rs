@@ -2,10 +2,10 @@ use libc::c_int;
 use libc::c_uint;
 use libc::c_ulonglong;
 use libc::size_t;
-use std::ffi::{CStr,CString, c_void};
+use std::ffi::{CStr, c_void};
 use std::os::raw::c_char;
-use std::time::{Duration, SystemTime};
-#[link(name = "ffi")]
+use std::time::{ SystemTime};
+#[link(name = "clib")]
 extern {
     fn fibonacci(n: c_uint) -> c_ulonglong;
     fn your_func(arg1: c_int, arg2: *mut c_void) -> size_t; // 声明ffi函数
@@ -60,7 +60,7 @@ fn c_fib(){
 
 fn rust_fib(){
     let now = SystemTime::now();
-    let value = unsafe{
+    let value = unsafe {
         rust_fibonacci(43)
     };
     println!("Rust_fib:{:?},{:?}", SystemTime::now().duration_since(now).unwrap().as_millis(),value);
@@ -74,7 +74,7 @@ fn rust_fibonacci(n:usize) -> u64{
 fn call_dynamic() {
     let now = SystemTime::now();
     unsafe {
-        let lib = libloading::Library::new("./ffi/c/ffi.o").unwrap();
+        let lib = libloading::Library::new("./c/clib.dll").unwrap();
         let func: libloading::Symbol<unsafe extern fn(u32) -> u64> = lib.get(b"fibonacci").unwrap();
         let value = func(43);
         println!("C_fib:{:?},{:?}", SystemTime::now().duration_since(now).unwrap().as_millis(),value);
