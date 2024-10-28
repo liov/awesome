@@ -4,16 +4,13 @@
 //error: `proc-macro` crate types currently cannot export any items other than functions tagged with `#[proc_macro]`, `#[proc_macro_derive]`, or `#[proc_macro_attribute]`
 //不能导出非过程宏函数
 extern crate proc_macro;
-//实测下面的已经不需要了，但是ide不友好，不添加无法识别跳转
+extern crate quote; //实测下面的已经不需要了，但是ide不友好，不添加无法识别跳转
 //extern crate proc_macro2;
 extern crate syn;
-extern crate quote;
 use proc_macro::TokenStream;
 
 use quote::quote;
-use syn::{parse_macro_input, DeriveInput,LitStr};
-
-
+use syn::{DeriveInput, LitStr, parse_macro_input};
 
 #[proc_macro_derive(Foo)]
 pub fn foo_derive(input: TokenStream) -> TokenStream {
@@ -49,10 +46,9 @@ pub fn inject(args: TokenStream, body: TokenStream) -> TokenStream {
             let syn::ItemFn {
                 attrs, vis, sig, block,
             } = func;
-            use std::ops::Deref;
             let syn::Signature {
                 ident,generics, inputs, output, ..
-            } = sig.deref();
+            } = sig;
             let gen = quote! {
                 #(#attrs)* #vis
                 fn #ident #generics (#inputs) #output {

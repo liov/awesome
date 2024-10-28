@@ -5,12 +5,16 @@ authors = ["贾一饼 <lby.i@qq.com>"]
 edition = "2018"
 build = "build.rs"
 
+[lib]
+#  --crate-type [bin|lib|rlib|dylib|cdylib|staticlib|proc-macro]
+crate-type = ["staticlib","cdylib","lib"]
+
 [dependencies]
 p_macro = { path = "../p_macro" }
 rand = "0.8"
 rayon = "1.10"
 regex = "1.10"
-hashbrown = "0.14"
+hashbrown = "0.15"
 serde = "*"
 serde_json="*"
 tracing = "0.1"
@@ -23,9 +27,11 @@ thiserror = "1.0"
 futures-timer = "3.0"
 axum = { version="0.7" }
 console = "0.15"
+libc="0.2"
+libloading = "0.8"
 
 [dependencies.windows]
-version = "0.56"
+version = "0.58"
 features = [
     "Data_Xml_Dom",
     "Win32_System_Console",
@@ -36,6 +42,9 @@ features = [
 ]
 
 [dev-dependencies]
+
+[build-dependencies]
+cc = { version = "1", features = ["parallel"] }
 
 [[bin]]
 name = "async"

@@ -8,6 +8,5 @@ opt-level = 3
 members = [
     "lang",
     "p_macro",
-    "ffi",
     "leetcode"
 ]
