@@ -2,7 +2,7 @@
 name = "lang"
 version = "0.1.0"
 authors = ["贾一饼 <lby.i@qq.com>"]
-edition = "2018"
+edition = "2021"
 build = "build.rs"
 
 [lib]
@@ -29,6 +29,8 @@ axum = { version="0.7" }
 console = "0.15"
 libc="0.2"
 libloading = "0.8"
+cxx = "1.0"
+structopt = { version = "0.3", default-features = false }
 
 [dependencies.windows]
 version = "0.58"
@@ -45,6 +47,9 @@ features = [
 
 [build-dependencies]
 cc = { version = "1", features = ["parallel"] }
+bindgen = "0.70"
+cxx-build = "1.0"
+pkg-config = "0.3"
 
 [[bin]]
 name = "async"

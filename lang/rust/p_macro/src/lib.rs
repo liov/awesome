@@ -37,7 +37,7 @@ fn impl_foo(ast: &DeriveInput) -> TokenStream {
 
 #[proc_macro_attribute]
 pub fn inject(args: TokenStream, body: TokenStream) -> TokenStream {
-    let mut param = parse_macro_input!(args as LitStr).value();
+    let param = parse_macro_input!(args as LitStr).value();
     if param.is_empty(){
         panic!("填写属性!")
     }

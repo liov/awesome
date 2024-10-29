@@ -10,3 +10,4 @@ members = [
     "p_macro",
     "leetcode"
 ]
+resolver = "2"
