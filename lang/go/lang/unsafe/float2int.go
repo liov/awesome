@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/utils/math"
+	"github.com/hopeio/utils/math/bits"
 	reflecti "github.com/hopeio/utils/reflect"
 	"unsafe"
 )
@@ -10,10 +10,10 @@ import (
 func main() {
 	var a int64 = 32
 	fmt.Println(transform(a))
-	math.ViewBin(transform(1.6e-322))
+	bits.ViewBin(transform(1.6e-322))
 	var b int32 = 32
 	fmt.Println(transform(b))
-	math.ViewBin(transform(float32(4.5e-44)))
+	bits.ViewBin(transform(float32(4.5e-44)))
 	fmt.Println(transform(int64(b)))
 }
 

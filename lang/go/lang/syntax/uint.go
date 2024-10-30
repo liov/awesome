@@ -3,17 +3,17 @@ package main
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/hopeio/utils/math"
+	"github.com/hopeio/utils/math/bits"
 	"strconv"
 )
 
 // int类型之间强转，短位转高位负数前面补1正数前面补0，高位转短位截取
 func main() {
 	var i int32 = 255
-	math.ViewBin(i)
-	math.ViewBin(uint64(i))
-	math.ViewBin(int64(i))
-	math.ViewBin(int8(i)) //-1
+	bits.ViewBin(i)
+	bits.ViewBin(uint64(i))
+	bits.ViewBin(int64(i))
+	bits.ViewBin(int8(i)) //-1
 	fmt.Println(byte(i))
 	fmt.Println(string(i))
 	var ii int64 = 255
