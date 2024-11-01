@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/hopeio/utils/log"
+	debugi "github.com/hopeio/utils/runtime/debug"
 	"image"
 	"image/draw"
 	"image/jpeg"
@@ -40,33 +41,15 @@ func main() {
 
 func do() {
 	f, _ := os.Open(`D:\xxx.jpg`)
-	printMemoryUsage(1)
+	debugi.PrintMemoryUsage(1)
 	img, _ := jpeg.Decode(f)
-	printMemoryUsage(2)
+	debugi.PrintMemoryUsage(2)
 	bounds := img.Bounds()
 	result := image.NewRGBA(image.Rect(0, 0, bounds.Dx(), bounds.Dy()))
-	printMemoryUsage(3)
+	debugi.PrintMemoryUsage(3)
 	draw.Draw(result, bounds, img, image.Point{}, draw.Src)
-	printMemoryUsage(4)
+	debugi.PrintMemoryUsage(4)
 	outFile, _ := os.Create(`xxx-copy.jpg`)
 	jpeg.Encode(outFile, img, &jpeg.Options{Quality: 99})
-	printMemoryUsage(5)
-}
-
-func printMemoryUsage(flag any) {
-	var m runtime.MemStats
-	runtime.ReadMemStats(&m)
-	log.Printf("%v Alloc = %v MiB,TotalAlloc = %v MiB, Sys = %v MiB,Mallocs = %v,HeapAlloc = %v,StackInuse = %v,StackSys = %v,NumGC = %v", flag, bToMb(m.Alloc), bToMb(m.TotalAlloc), bToMb(m.Sys), bToMb(m.Mallocs), bToMb(m.HeapAlloc), bToMb(m.StackInuse), bToMb(m.StackSys), m.NumGC)
-}
-
-func printStack() {
-	// 创建一个 1MB 的缓冲区来存储堆栈信息
-	buf := make([]byte, 1<<20) // 1MB 缓冲区
-	// 获取当前 Goroutine 的堆栈信息
-	stackLen := runtime.Stack(buf, false)
-	log.Printf("当前堆栈信息:\n%s", buf[:stackLen])
-}
-
-func bToMb(b uint64) uint64 {
-	return b / 1024 / 1024
+	debugi.PrintMemoryUsage(5)
 }
