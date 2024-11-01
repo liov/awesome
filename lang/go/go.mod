@@ -18,7 +18,7 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.0.2
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.18.2
-	github.com/unicorn-engine/unicorn v0.0.0-20191119163456-3cea38bff7bf
+	github.com/unicorn-engine/unicorn v0.0.0-20240926111503-d568885d64c8
 	github.com/xuri/excelize/v2 v2.8.1
 	go.uber.org/fx v1.21.0
 	go.uber.org/zap v1.27.0
