@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["贾一饼 <lby.i@qq.com>"]
 edition = "2021"
 build = "build.rs"
+exclude = ["index.node"]
 
 [lib]
 #  --crate-type [bin|lib|rlib|dylib|cdylib|staticlib|proc-macro]
@@ -31,6 +32,10 @@ libc="0.2"
 libloading = "0.8"
 cxx = "1.0"
 structopt = { version = "0.3", default-features = false }
+neon = { version ="1",features = ["napi-6"] }
+shared_memory = "1"
+napi = "3"
+napi-derive = "3"
 
 [dependencies.windows]
 version = "0.58"
@@ -50,6 +55,8 @@ cc = { version = "1", features = ["parallel"] }
 bindgen = "0.70"
 cxx-build = "1.0"
 pkg-config = "0.3"
+napi-build = "1"
+
 
 [[bin]]
 name = "async"
