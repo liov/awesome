@@ -1,53 +1,42 @@
-
+use std::{env, result};
+use napi::tokio::fs;
 use neon::prelude::*;
 extern crate shared_memory;
 use neon::prelude::*;
-use neon::register_module;
 use shared_memory::*;
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
 use std::ffi::{CStr, CString};
 
-/**
- * 定义缓存区块
-*/
-#[derive(SharedMemCast)]
-struct ShmemStructCache {
-    num_slaves: u32,
-    message: [u8; 256],
-}
+
 
 static GLOBAL_LOCK_ID: usize = 0;
 
 /**
  * sharedMemory全局句柄，避免对进程重复创建
 */
-static mut SHMEM_GLOBAL: Option<shared_memory::SharedMem> = None;
+static mut SHMEM_GLOBAL: Option<Shmem> = None;
 
 /**
  * 创建sharedMemory
 */
-fn create_open_mem() -> Result<shared_memory::SharedMem, SharedMemError> {
-    let shmem = match SharedMem::create_linked("shared_mem.link", LockType::Mutex, 4096) {
+fn create_open_mem() -> result::Result<Shmem, ShmemError> {
+    let shmem = match ShmemConf::new().size(4096).flink("shared_mem.link").create() {
         Ok(v) => v,
-        Err(SharedMemError::LinkExists) => SharedMem::open_linked("shared_mem.link")?,
+        Err(ShmemError::LinkExists) => ShmemConf::new().flink("shared_mem.link").open()?,
         Err(e) => return Err(e),
     };
-
-    if shmem.num_locks() != 1 {
-        return Err(SharedMemError::InvalidHeader);
-    }
     Ok(shmem)
 }
 
 /**
  * 设置SharedMemory
 */
-fn set_cache(set_cache: String) -> Result<String, SharedMemError> {
+fn set_cache(set_cache: String) -> result::Result<String, ShmemError> {
     {
-        let mut  shared_state =  unsafe { SHMEM_GLOBAL.as_mut().unwrap().wlock::<ShmemStructCache>(GLOBAL_LOCK_ID)?};
+        let mut  shared_state =  unsafe { SHMEM_GLOBAL.as_mut().unwrap().as_slice_mut()};
         let set_string: CString = CString::new(set_cache.as_str()).unwrap();
-        shared_state.message[0..set_string.to_bytes_with_nul().len()]
+        shared_state[0..set_string.to_bytes_with_nul().len()]
             .copy_from_slice(set_string.to_bytes_with_nul());
     }
     Ok("".to_owned())
@@ -56,12 +45,11 @@ fn set_cache(set_cache: String) -> Result<String, SharedMemError> {
 /**
  * 读取SharedMemory
 */
-fn get_cache() -> Result<String, SharedMemError> {
+fn get_cache() -> result::Result<String, ShmemError> {
     let   result =
     {
-        let shmem = unsafe { SHMEM_GLOBAL.as_mut().unwrap()};
-        let shared_state = shmem.rlock::<ShmemStructCache>(GLOBAL_LOCK_ID)?;
-        let shmem_str: &CStr = unsafe { CStr::from_ptr(shared_state.message.as_ptr() as *mut i8) };
+        let shared_state = unsafe { SHMEM_GLOBAL.as_mut().unwrap().as_slice_mut()};
+        let shmem_str: &CStr = unsafe { CStr::from_bytes_with_nul(shared_state).unwrap() };
          shmem_str.to_str().unwrap().into()
     };
 
@@ -82,17 +70,13 @@ fn get(mut cx: FunctionContext) -> JsResult<JsString> {
  * 暴露给js端的set方法
 */
 fn set(mut cx: FunctionContext) -> JsResult<JsString> {
-    let value = cx.argument::<JsString>(0)?.value();
+    let value = cx.argument::<JsString>(0)?.value(&mut cx);
     match set_cache(value) {
         Ok(v) => Ok(cx.string(v)),
         Err(e) => Ok(cx.string("error")),
     }
 }
 
-
-fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
-    Ok(cx.string("hello node"))
-}
 
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
@@ -102,10 +86,8 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
           _ => None,
         };
       }
-      set_cache("".to_owned());
     cx.export_function("get", get)?;
     cx.export_function("set", set)?;
-    cx.export_function("hello", hello)?;
     Ok(())
 }
 
@@ -125,24 +107,13 @@ fn get_cwd<T: Fn(String) -> Result<()>>(callback: T) {
   callback(env::current_dir().unwrap().to_string_lossy().to_string()).unwrap();
 }
 
-/// or, define the callback signature in where clause
-#[napi]
-fn test_callback<T>(callback: T)
-where T: Fn(String) -> Result<()>
-{}
-
-/// async fn, require `async` feature enabled.
-/// [dependencies]
-/// napi = {version="2", features=["async"]}
 #[napi]
 async fn read_file_async(path: String) -> Result<Buffer> {
-  tokio::fs::read(path)
-    .map(|r| match r {
+   match fs::read(path).await {
       Ok(content) => Ok(content.into()),
-      Err(e) => Err(Error::new(
+      Err(e) => Err(napi::Error::new(
         Status::GenericFailure,
         format!("failed to read file, {}", e),
       )),
-    })
-    .await
+    }
 }
