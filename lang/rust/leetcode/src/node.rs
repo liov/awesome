@@ -1,11 +1,9 @@
 use std::{env, result};
 use napi::tokio::fs;
-use neon::prelude::*;
-extern crate shared_memory;
-use neon::prelude::*;
 use shared_memory::*;
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
+use napi::module_init;
 use std::ffi::{CStr, CString};
 
 
@@ -59,36 +57,39 @@ fn get_cache() -> result::Result<String, ShmemError> {
 /**
  * 暴露给js端get的方法
 */
-fn get(mut cx: FunctionContext) -> JsResult<JsString> {
+#[napi]
+fn get() -> Result<String> {
     match get_cache() {
-        Ok(v) => Ok(cx.string(v)),
-        Err(_) => Ok(cx.string("error")),
+        Ok(v) => Ok(v),
+        Err(e) => Err(napi::Error::new(
+            Status::GenericFailure,
+            format!("failed to read file, {}", e),
+        )),
     }
 }
 
 /**
  * 暴露给js端的set方法
 */
-fn set(mut cx: FunctionContext) -> JsResult<JsString> {
-    let value = cx.argument::<JsString>(0)?.value(&mut cx);
-    match set_cache(value) {
-        Ok(v) => Ok(cx.string(v)),
-        Err(e) => Ok(cx.string("error")),
+#[napi]
+fn set(val:String)-> Result<()> {
+    match set_cache(val) {
+        Ok(v) => Ok(()),
+        Err(e) => Err(napi::Error::new(
+            Status::GenericFailure,
+            format!("failed to read file, {}", e),
+        )),
     }
 }
 
-
-#[neon::main]
-fn main(mut cx: ModuleContext) -> NeonResult<()> {
-      unsafe {
-        SHMEM_GLOBAL = match create_open_mem() {
-          Ok(v) => Some(v),
-          _ => None,
-        };
-      }
-    cx.export_function("get", get)?;
-    cx.export_function("set", set)?;
-    Ok(())
+#[module_init]
+fn init() {
+  unsafe {
+     SHMEM_GLOBAL = match create_open_mem() {
+       Ok(v) => Some(v),
+       _ => None,
+     };
+  }
 }
 
 /// module registration is done by the runtime, no need to explicitly do it now.

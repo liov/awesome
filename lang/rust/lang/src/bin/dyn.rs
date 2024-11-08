@@ -1,4 +1,4 @@
-#![feature(box_syntax)]
+
 
 trait Fly {
     fn fly(&self) -> bool;
@@ -27,7 +27,7 @@ fn foo1<'a>()->&'a impl Fly{
 }
 
 fn foo2()-> Box<dyn Fly>{
-    box Duck
+   Box::new(Duck)
 }
 
 fn foo3<T:Fly>(t:T)->T{t}

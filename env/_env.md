@@ -1,3 +1,8 @@
+# msys2
+msys2很好
+但对一些语言不是那么友好，比如python, nodejs等
+这些软件的官方版本是msvc编译的,因此大量需要与C交互的库都是msvc编译的,因此使用gnu的版本就会时不时受到限制,例如python使用numpy就要安装gnu版本的
+还好，rust提供了msvc和gnu两个版本，写扩展都可以使用rust
 # go
 https://golang.google.cn/dl/go1.22.5.windows-amd64.zip
 ## linux

@@ -1,7 +1,7 @@
 {
   "name": "tsjs",
   "version": "1.0.0",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "jimp": "^1.6.0",
     "opencv.js": "^1.2.1",
@@ -18,10 +18,16 @@
     "docs:dev": "vitepress dev .",
     "docs:build": "vitepress build .",
     "docs:preview": "vitepress preview .",
-    "build:rustbind": "napi build --manifest-path ../rust/lang/Cargo.toml --release",
-    "build:rustbind:debug": "napi build --manifest-path ../rust/lang/Cargo.toml"
+    "build:rustbind": "napi build --manifest-path ../rust/leetcode/Cargo.toml --release",
+    "build:rustbind:debug": "napi build --manifest-path ../rust/leetcode/Cargo.toml"
   },
   "napi": {
-    "binaryName": "nodebind"
+    "binaryName": "nodebind",
+    "wasm": {
+      "initialMemory": 16384,
+      "browser": {
+        "fs": true
+      }
+    }
   }
 }

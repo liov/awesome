@@ -17,3 +17,6 @@ https://github.com/ProarchwasTaken/pybind_test/blob/6bd59668cde03b58ccc65883f211
 要不就是直接ffi
 凡是需要手写动态库的都应该rust or zig 啊
 mingw 就是配合cgo的啊
+
+错误原因可能是因为用msvc的python调用gnu的扩展（用gnu的python也找不到模块）
+全部使用gnu工具链（mingw-w64-ucrt-x86_64-python,mingw-w64-ucrt-x86_64-python-setuptools,mingw-w64-ucrt-x86_64-cython）成功调用wrapper.cp311-mingw_x86_64_ucrt.pyd
