@@ -8,7 +8,7 @@ if image is None:
     exit()
 
 # 定义矩形框的参数
-x, y, w, h = 4540, 3713, 5120, 5120  # (x, y, width, height)
+x, y, w, h = 4116, 15897, 5120, 5120  # (x, y, width, height)
 
 x1 = int(x - w / 2)
 y1 = int(y - h / 2)

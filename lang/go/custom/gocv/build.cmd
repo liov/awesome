@@ -7,7 +7,7 @@ if not exist %cvdir%\build mkdir %cvdir%\build
 
 echo Downloading OpenCV sources
 echo.
-echo For monitoring the download progress please check the D:\sdk\opencv directory.
+echo For monitoring the download progress please check the %cvdir% directory.
 echo.
 
 REM This is why there is no progress bar:
@@ -36,7 +36,7 @@ if [%1]==[static] (
 ) else (
   set enable_shared=ON
 )
-cmake %cvdir%\opencv-4.10.0 -G "MinGW Makefiles" -B%cvdir%\build -DENABLE_CXX11=ON -DOPENCV_EXTRA_MODULES_PATH=%cvdir%\opencv_contrib-4.10.0\modules -DBUILD_SHARED_LIBS=%enable_shared% -DWITH_IPP=OFF -DWITH_MSMF=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=ON -DBUILD_opencv_java=OFF -DBUILD_opencv_python=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DBUILD_DOCS=OFF -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_opencv_saliency=OFF -DBUILD_opencv_wechat_qrcode=ON -DCPU_DISPATCH= -DOPENCV_GENERATE_PKGCONFIG=ON -DWITH_OPENCL_D3D11_NV=OFF -DOPENCV_ALLOCATOR_STATS_COUNTER_TYPE=int64_t -Wno-dev
+cmake %cvdir%\opencv-4.10.0 -G "MinGW Makefiles" -B%cvdir%\build -DENABLE_CXX11=ON -DCMAKE_ASM_NASM_COMPILER=D:\sdk\msys64\clang64\bin\nasm.exe -DOPENCV_EXTRA_MODULES_PATH=%cvdir%\opencv_contrib-4.10.0\modules -DBUILD_SHARED_LIBS=%enable_shared% -DWITH_IPP=OFF -DWITH_MSMF=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=ON -DBUILD_opencv_java=OFF -DBUILD_opencv_python=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DBUILD_DOCS=OFF -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_opencv_saliency=OFF -DBUILD_opencv_wechat_qrcode=ON -DCPU_DISPATCH= -DOPENCV_GENERATE_PKGCONFIG=ON -DWITH_OPENCL_D3D11_NV=OFF -DOPENCV_ALLOCATOR_STATS_COUNTER_TYPE=int64_t -Wno-dev
 mingw32-make -j%NUMBER_OF_PROCESSORS%
 mingw32-make install
 
