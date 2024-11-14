@@ -3,7 +3,7 @@ use std::mem;
 
 fn main() {
     unsafe {
-        let input = include_str!(r"D:\ApulisAoi\Data\Prog\board.json").as_bytes();
+        let input = include_str!(r"xxx.json").as_bytes();
         let mut compressed_output: Vec<u8> = vec![0; input.len()];
         let mut decompressed_output: Vec<u8> = vec![0; input.len()];
 
