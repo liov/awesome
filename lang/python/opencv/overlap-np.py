@@ -3,7 +3,7 @@ import numpy as np
 
 def load_image(image_path):
     """加载图片并返回NumPy数组"""
-    image = cv2.imread(image_path)
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     return np.array(image)
 
 def calculate_similarity(overlap_region1, overlap_region2):
@@ -42,13 +42,14 @@ def find_overlap(image1, image2,row=False,min_overlap=1, max_overlap=100):
             best_overlap = overlap
 
     return best_overlap, best_similarity
-
+dir= "xxx"
 def col_overlap(col):
     overlaps = []
     for i in range(len(col)-1):
         # 图片路径
-        image1_path = rf"xxx\{col[i]}.jpg"
-        image2_path = rf"xxx\{col[i+1]}.jpg"
+        image1_path = dir+rf"{col[i]}--light1.jpg"
+        image2_path = dir+rf"{col[i+1]}--light1.jpg"
+
 
         # 加载图片
         image1 = load_image(image1_path)
