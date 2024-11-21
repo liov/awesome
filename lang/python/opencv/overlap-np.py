@@ -42,7 +42,7 @@ def find_overlap(image1, image2,row=False,min_overlap=1, max_overlap=100):
             best_overlap = overlap
 
     return best_overlap, best_similarity
-dir= "xxx"
+dir= r"xxx"
 def col_overlap(col):
     overlaps = []
     for i in range(len(col)-1):
@@ -55,11 +55,28 @@ def col_overlap(col):
         image1 = load_image(image1_path)
         image2 = load_image(image2_path)
 
-        best_overlap, best_similarity = find_overlap(image1, image2, True,700,800)
+        best_overlap, best_similarity = find_overlap(image1, image2, True,2000,3000)
         overlaps.append(best_overlap)
     print(f"重合度: {overlaps}")
 
-col1 = [0,5,6,11,12,17,18,23]
-col2 = [2,3,8,9,14,15,20,21]
-col_overlap(col1)
-col_overlap(col2)
+def row_overlap(row):
+    overlaps = []
+    for i in range(len(row)-1):
+        # 图片路径
+        image1_path = dir+rf"{row[i]}--light1.jpg"
+        image2_path = dir+rf"{row[i+1]}--light1.jpg"
+
+        # 加载图片
+        image1 = load_image(image1_path)
+        image2 = load_image(image2_path)
+
+        best_overlap, best_similarity = find_overlap(image1, image2, False,2000,3000)
+        overlaps.append(best_overlap)
+    print(f"重合度: {overlaps}")
+
+# col1 = [0,5,6,11,12,17,18,23]
+# col2 = [2,3,8,9,14,15,20,21]
+# col_overlap(col1)
+# col_overlap(col2)
+row=[0,1]
+row_overlap(row)
