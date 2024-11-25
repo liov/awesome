@@ -4,7 +4,11 @@
   "type": "module",
   "dependencies": {
     "@techstark/opencv-js": "4.10.0-release.1",
+    "@tracespace/parser": "5.0.0-alpha.0",
+    "@tracespace/plotter": "5.0.0-alpha.0",
+    "gerber-parser": "^4.2.7",
     "jimp": "^1.6.0",
+    "pcb-stackup": "^4.2.8",
     "reflect-metadata": "^0.2.2",
     "sharp": "^0.33.5"
   },

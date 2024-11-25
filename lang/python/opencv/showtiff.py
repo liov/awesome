@@ -1,7 +1,7 @@
 import cv2
 
 # 读取 TIFF 文件
-tiff_image = cv2.imread(r'D:\work\scan-panel-0826\1.tiff', cv2.IMREAD_GRAYSCALE)
+tiff_image = cv2.imread(r'xxx.tiff', cv2.IMREAD_GRAYSCALE)
 resized_image = cv2.resize(tiff_image,(512,512))
 # 检查是否成功读取图像
 if tiff_image is None:
