@@ -3,13 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/coocood/freecache"
-	gocache "github.com/hopeio/utils/structure/cache/gocache"
+	"github.com/dgraph-io/ristretto"
 	"runtime/debug"
 	"sync"
 	"testing"
-	"time"
-
-	"github.com/dgraph-io/ristretto"
 
 	"github.com/hopeio/utils/structure/cache/gcache"
 )
@@ -41,18 +38,6 @@ func BenchmarkGCache(b *testing.B) {
 		_, err := gc.Get("key")
 		if err != nil {
 			panic(err)
-		}
-	}
-}
-
-func BenchmarkGoCache(b *testing.B) {
-	c := gocache.New(5*time.Minute, 10*time.Minute)
-	c.Set("foo", "bar", gocache.DefaultExpiration)
-	for i := 0; i < b.N; i++ {
-
-		_, found := c.Get("foo")
-		if !found {
-			fmt.Println("go-cache")
 		}
 	}
 }
