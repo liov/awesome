@@ -36,7 +36,7 @@ structopt = { version = "0.3", default-features = false }
 shared_memory = "0.12"
 napi = { version = "3.0.0-alpha.20", features = [ "async"] }
 napi-derive = {version = "3.0.0-alpha.18" }
-pyo3 = { version = "0.22", features = ["extension-module"] }
+pyo3 = { version = "0.23", features = ["extension-module"] }
 
 [dependencies.windows]
 version = "0.58"
