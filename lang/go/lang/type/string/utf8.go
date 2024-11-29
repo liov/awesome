@@ -20,7 +20,7 @@ func main() {
 		fmt.Println(i)
 	}
 	fmt.Println("-----------")
-	for i := 0; i < len(s); i++ {
+	for i := range len(s) {
 		fmt.Println(i, s[i])
 	}
 

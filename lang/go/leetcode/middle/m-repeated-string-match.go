@@ -50,7 +50,7 @@ func repeatedStringMatch(a string, b string) int {
 		bitmap |= 1 << (a[i] - 'a')
 	}
 	start, end, ans := -1, -1, 0
-	for i := 0; i < len(b); i++ {
+	for i := range b {
 		if bitmap>>(b[i]-'a')&1 != 1 {
 			return -1
 		}

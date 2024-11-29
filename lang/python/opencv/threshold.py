@@ -7,6 +7,7 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # 二值化图像
 _, binary = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
+
 # 查找轮廓（联通区域）
 contours, _ = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 print("Found %d objects" % len(contours))
@@ -24,34 +25,30 @@ for contour in contours:
         second_rect = max_rect
         max_rect = (x, y, w, h)
     # 提取矩形区域的像素
-    # roi = binary[y:y+h, x:x+w]
-    # total_pixels = w * h
-    # nonzero_pixels = cv2.countNonZero(roi)
-    # l,s = w,h
-    # if l < s:
-    #     l,s = s,l
-    # # 计算像素比值
-    # fill_ratio = nonzero_pixels / total_pixels
-    # if 600 > area and fill_ratio >= 0.5:  # 可根据需要调整阈值
-    #     # 绘制矩形框（绿色，线宽为2）
-    #     cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
+    roi = binary[y:y+h, x:x+w]
+    nonzero_pixels = cv2.countNonZero(roi)
+    # 计算像素比值
+    fill_ratio = nonzero_pixels / area
+    if area < 5000 and x != 1 and y != 1:
+        # 绘制矩形框（绿色，线宽为2）
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
 x, y, w, h = second_rect
 print(x, y, w, h)
 cropped_image = image[y:y+h, x:x+w]
 target=binary[y:y+h, x:x+w]
 # 高斯模糊，减少噪声
-blurred = cv2.GaussianBlur(target, (9, 9), 2)
+blurred = cv2.GaussianBlur(target, (9, 9), 0)
 
 # 使用 Hough Circle Transform 检测圆
 circles = cv2.HoughCircles(
     blurred,
     cv2.HOUGH_GRADIENT,  # 检测方法
     dp=1,                # 累加器分辨率与图像分辨率的反比
-    minDist=50,          # 圆之间的最小距离
+    minDist=200,          # 圆之间的最小距离
     param1=30,           # 边缘检测的高阈值（Canny 的参数）
     param2=30,           # 累加器阈值（越小检测越多假阳性）
-    minRadius=11,         # 最小半径
-    maxRadius=12         # 最大半径
+    minRadius=20,         # 最小半径
+    maxRadius=20         # 最大半径
 )
 print(f"Found {len(circles[0, :])} circles")
 if circles is not None:
@@ -61,15 +58,15 @@ if circles is not None:
 
         roi = target[y-radius:y+radius, x-radius:x+radius]
 
-        total_pixels = radius * radius
+        total_pixels = (radius*2) * (radius*2)
         nonzero_pixels = cv2.countNonZero(roi)
          # 计算像素比值
         fill_ratio = nonzero_pixels / total_pixels
         print(fill_ratio)
-        if fill_ratio >= 1:
+        if fill_ratio >= 0.8:
             print(f"Circle at ({x}, {y}) with radius {radius}")
             cv2.circle(cropped_image, (x, y), 1, (255, 0, 0), 1)  # 绘制圆
             cv2.circle(cropped_image, (x, y), radius, (0, 0, 255), 1) # 绘制圆心
-# 显示结果
+
 cv2.imwrite("output.png", cropped_image)
 

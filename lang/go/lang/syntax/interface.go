@@ -30,7 +30,7 @@ func main() {
 	fmt.Println(reflect.TypeOf(a).Implements(closeTyp))
 	var b B
 	typB := reflect.TypeOf(&b).Elem()
-	for i := 0; i < typB.NumField(); i++ {
+	for i := range typB.NumField() {
 		subType := typB.Field(i)
 		fmt.Println(subType.Type.Implements(closeTyp))
 		fmt.Println(reflect.ValueOf(&b).Elem().Field(i).Addr().Type().Implements(closeTyp))

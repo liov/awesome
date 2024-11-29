@@ -49,7 +49,7 @@ func main() {
 	flag := FlagConfig{}
 	vaule := reflect.ValueOf(&flag).Elem()
 
-	for i := 0; i < vaule.NumField(); i++ {
+	for i := range vaule.NumField() {
 		fmt.Println(vaule.Field(i).Type())
 	}
 

@@ -27,7 +27,7 @@ func SearchCircle(file string, rect image.Rectangle) {
 	defer blurred.Close()
 	img := gimg.Region(rect)
 	defer img.Close()
-	gocv.GaussianBlur(img, &blurred, image.Pt(9, 9), 2.0, 2.0, gocv.BorderDefault)
+	gocv.GaussianBlur(img, &blurred, image.Pt(9, 9), 0, 0, gocv.BorderDefault)
 	edges := gocv.NewMat()
 	defer edges.Close()
 	gocv.Canny(blurred, &edges, 50, 150)
@@ -35,7 +35,7 @@ func SearchCircle(file string, rect image.Rectangle) {
 	defer circles.Close()
 	gocv.HoughCirclesWithParams(edges, &circles, gocv.HoughGradient, 1.2, 200, 200, 80, 20, 100)
 	if !circles.Empty() {
-		for i := 0; i < circles.Cols(); i++ {
+		for i := range circles.Cols() {
 			v := circles.GetVecfAt(0, i)
 			x := int(v[0])
 			y := int(v[1])

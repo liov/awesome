@@ -22,12 +22,12 @@ func (receiver *A1) Foo() {
 func main() {
 	var a A1
 	v := reflect.ValueOf(&a)
-	for i := 0; i < v.NumMethod(); i++ {
+	for i := range v.NumMethod() {
 		fmt.Println(i, v.Method(i).Type().String())
 	}
 	fmt.Println(v.MethodByName("name").String())
 	t := reflect.TypeOf(&a)
-	for i := 0; i < t.NumMethod(); i++ {
+	for i := range t.NumMethod() {
 		fmt.Println(i, t.Method(i).Name)
 	}
 	fmt.Println(t.MethodByName("name"))
