@@ -91,3 +91,50 @@ func TestMarshalChan(t *testing.T) {
 	}
 	log.Info(string(data))
 }
+
+type Float struct {
+	A float64
+}
+
+func TestFloat(t *testing.T) {
+	data, err := json.Marshal(&Float{float64(1) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+	data, err = json.Marshal(&Float{float64(2) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+	data, err = json.Marshal(&Float{float64(3) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+	data, err = json.Marshal(&Float{float64(4) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+	data, err = json.Marshal(&Float{float64(5) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+	data, err = json.Marshal(&Float{float64(6) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+	data, err = json.Marshal(&Float{float64(7) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+	data, err = json.Marshal(&Float{float64(8) / 40})
+	if err != nil {
+		log.Info(err)
+	}
+	log.Info(string(data))
+}

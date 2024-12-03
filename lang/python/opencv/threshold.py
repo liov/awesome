@@ -29,9 +29,12 @@ for contour in contours:
     nonzero_pixels = cv2.countNonZero(roi)
     # 计算像素比值
     fill_ratio = nonzero_pixels / area
-    if area < 5000 and x != 1 and y != 1:
+    if area < 10000 and w != 1 and h != 1 :
         # 绘制矩形框（绿色，线宽为2）
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
+print(f"second {second_rect}")
+h,w = image.shape[:2]
+second_rect = (0, 0,w,h)
 x, y, w, h = second_rect
 print(x, y, w, h)
 cropped_image = image[y:y+h, x:x+w]
@@ -52,19 +55,19 @@ circles = cv2.HoughCircles(
 )
 print(f"Found {len(circles[0, :])} circles")
 if circles is not None:
-    circles = np.uint16(np.around(circles))  # 四舍五入并转为整数
+    circles = np.int32(np.around(circles))  # 四舍五入并转为整数
     for circle in circles[0, :]:
         x, y, radius = circle
+        print(f"Circle at ({x}, {y}) with radius {radius}")
 
-        roi = target[y-radius:y+radius, x-radius:x+radius]
+        roi = target[max(y-radius,0):y+radius, max(x-radius,0):x+radius]
 
         total_pixels = (radius*2) * (radius*2)
         nonzero_pixels = cv2.countNonZero(roi)
          # 计算像素比值
         fill_ratio = nonzero_pixels / total_pixels
         print(fill_ratio)
-        if fill_ratio >= 0.8:
-            print(f"Circle at ({x}, {y}) with radius {radius}")
+        if fill_ratio >= 0.7:
             cv2.circle(cropped_image, (x, y), 1, (255, 0, 0), 1)  # 绘制圆
             cv2.circle(cropped_image, (x, y), radius, (0, 0, 255), 1) # 绘制圆心
 
