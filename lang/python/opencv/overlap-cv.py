@@ -55,7 +55,7 @@ def col_overlap(col):
         image1 = load_image(image1_path)
         image2 = load_image(image2_path)
 
-        best_overlap, best_similarity = find_overlap(image1, image2, True,700,800)
+        best_overlap, best_similarity = find_overlap(image1, image2, True,300,2000)
         overlaps.append(best_overlap)
     print(f"重合度: {overlaps}")
 
@@ -70,12 +70,11 @@ def row_overlap(row):
         image1 = load_image(image1_path)
         image2 = load_image(image2_path)
 
-        best_overlap, best_similarity = find_overlap(image1, image2, False,2000,3000)
+        best_overlap, best_similarity = find_overlap(image1, image2, False,2000,4000)
         overlaps.append(best_overlap)
     print(f"重合度: {overlaps}")
-# col1 = [0,5,6,11,12,17,18,23]
-# col2 = [2,3,8,9,14,15,20,21]
-# col_overlap(col1)
-# col_overlap(col2)
+
+col = [0,3,4,7]
+col_overlap(col)
 row=[0,1]
 row_overlap(row)
