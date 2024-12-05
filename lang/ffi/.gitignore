@@ -1,0 +1,36 @@
+# Object files
+*.o
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+*.node
+
+/*_hello
+
+/nimcache
+/zig-cache
+/ocaml/*.bc
+/ocaml/*.nat
+/ocaml/*.cmi
+/ocaml/*.cmo
+/ocaml/*.cmx
+
+*.class
+*.hi
+
+.tup
+
+zig-out
