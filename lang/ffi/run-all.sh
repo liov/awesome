@@ -7,34 +7,34 @@
 echo "The results are elapsed time in milliseconds"
 echo "============================================"
 
-echo "\nluajit:"
+echo "luajit:"
 luajit hello.lua $@ && \
 luajit hello.lua $@
 
-echo "\nc:"
+echo "c:"
 ./c_hello $@ && \
 ./c_hello $@
 
-echo "\ncpp:"
+echo "cpp:"
 ./cpp_hello $@ && \
 ./cpp_hello $@
 
-echo "\nzig:"
-./zig-out/zig_hello $@ && \
-./zig-out/zig_hello $@
+echo "zig:"
+./zig-out/bin/zig_hello $@ && \
+./zig-out/bin/zig_hello $@
 
-echo "\nrust:"
+echo "rust:"
 ./rust_hello $@ && \
 ./rust_hello $@
 
-echo "\njava23:"
-D:/sdk/jdks/openjdk-23.0.1/binjava -cp . jhello.Hello $@ && \
-D:/sdk/jdks/openjdk-23.0.1/binjava -cp . jhello.Hello $@
+echo "java20:"
+D:/sdk/jdks/openjdk-20.0.1/bin/java -cp . jhello.Hello $@ && \
+D:/sdk/jdks/openjdk-20.0.1/bin/java -cp . jhello.Hello $@
 
-echo "\ngo:"
+echo "go:"
 ./go_hello $@ && \
 ./go_hello $@
 
-echo "\ndart:"
-dart hello.dart $@ && \
-dart hello.dart $@
+echo "dart:"
+dart.bat hello.dart $@ && \
+dart.bat hello.dart $@

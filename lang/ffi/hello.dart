@@ -10,16 +10,16 @@ typedef Plus = int Function(int,int);
 typedef PlusOneFunc = ffi.Int32 Function(ffi.Int32);
 typedef PlusOne = int Function(int);
 
-  final lib = ffi.DynamicLibrary.open('./newplus/libnewplus.dll');
-  final HelloWorld current_timestamp =
-  lib.lookup<ffi.NativeFunction<CurrentTimestampFunc>>("current_timestamp")
-      .asFunction();
-  final Plus plus =
-  lib.lookup<ffi.NativeFunction<PlusFunc>>("plus")
-      .asFunction();
-  final PlusOne plusone =
-  lib.lookup<ffi.NativeFunction<PlusOneFunc>>("plusone")
-      .asFunction();
+final lib = ffi.DynamicLibrary.open('libnewplus.dll');
+final HelloWorld current_timestamp =
+lib.lookup<ffi.NativeFunction<CurrentTimestampFunc>>("current_timestamp")
+    .asFunction();
+final Plus plus =
+lib.lookup<ffi.NativeFunction<PlusFunc>>("plus")
+    .asFunction();
+final PlusOne plusone =
+lib.lookup<ffi.NativeFunction<PlusOneFunc>>("plusone")
+    .asFunction();
 
 
 void run(int count) {

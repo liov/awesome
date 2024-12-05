@@ -9,7 +9,7 @@ int printf(const char *fmt, ...);
 ]]
 
 -- load
-local newplus = ffi.load("./newplus/libnewplus.dll")
+local newplus = ffi.load("libnewplus.dll")
 newplus.current_timestamp()
 newplus.plusone(0)
 
@@ -21,7 +21,7 @@ local function run(count)
         x = newplus.plusone(x)
     end
 
-    ffi.C.printf("%lld\n", newplus.current_timestamp() - start)
+    print(newplus.current_timestamp() - start)
 end
 
 local function start()

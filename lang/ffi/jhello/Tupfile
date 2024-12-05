@@ -2,7 +2,7 @@ include_rules
 
 # =====================================
 
-JAVA_HOME = D:/sdk/jdks/openjdk-23.0.1
+JAVA_HOME = D:/sdk/jdks/openjdk-20.0.1
 
 CFLAGS += -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/win32
 

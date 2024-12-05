@@ -16,7 +16,7 @@ public final class Hello
 
         String currentDir = file.getCanonicalPath();
 
-        System.load(currentDir + "/libjhello.so");
+        System.load(currentDir + "/libjhello.dll");
     }
 
     static void run(int count)
