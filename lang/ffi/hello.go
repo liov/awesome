@@ -1,25 +1,29 @@
 package main
 
-/*
- #cgo CFLAGS: -Wall -O2 -fPIC
- #cgo linux CFLAGS: -DLINUX=1
- #cgo LDFLAGS: -Lnewplus -lnewplus -Wl,-rpath='$ORIGIN'/newplus
- #include "newplus/plus.h"
-*/
 import "C"
-import "fmt"
-import "os"
-import "strconv"
+import (
+	"fmt"
+	"os"
+	"strconv"
+	"syscall"
+)
 
-func run(count C.int) {
-	start := C.current_timestamp()
+var (
+	newplus          = syscall.MustLoadDLL("libnewplus.dll")
+	currentTimestamp = newplus.MustFindProc("current_timestamp")
+	plusone          = newplus.MustFindProc("plusone")
+)
 
-	var x C.int = 0
+func run(count int) {
+	start, _, _ := currentTimestamp.Call()
+
+	var x int = 0
 	for x < count {
-		x = C.plusone(x)
+		ux, _, _ := plusone.Call(uintptr(x))
+		x = int(ux)
 	}
-
-	fmt.Println(C.current_timestamp() - start)
+	end, _, _ := currentTimestamp.Call()
+	fmt.Println(end - start)
 }
 
 func main() {
@@ -35,8 +39,9 @@ func main() {
 	}
 
 	// load
-	C.plusone(C.int(C.current_timestamp()))
+	start, _, _ := currentTimestamp.Call()
+	plusone.Call(start)
 
 	// start
-	run(C.int(count))
+	run(count)
 }

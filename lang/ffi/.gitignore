@@ -34,3 +34,4 @@
 .tup
 
 zig-out
+.zig-cache

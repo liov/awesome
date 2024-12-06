@@ -28,8 +28,13 @@ echo "rust:"
 ./rust_hello $@
 
 echo "java20:"
-D:/sdk/jdks/openjdk-20.0.1/bin/java -cp . jhello.Hello $@ && \
-D:/sdk/jdks/openjdk-20.0.1/bin/java -cp . jhello.Hello $@
+D:/sdk/jdks/openjdk-23.0.1/bin/java -cp . jhello.Hello $@ && \
+D:/sdk/jdks/openjdk-23.0.1/bin/java -cp . jhello.Hello $@
+
+echo "go-cgo:"
+./go_hello-cgo $@ && \
+./go_hello-cgo $@
+
 
 echo "go:"
 ./go_hello $@ && \

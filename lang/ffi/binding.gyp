@@ -1,9 +1,10 @@
 {
   "targets": [
     {
-      "target_name": "node-libtorrent",
+      "target_name": "newplus",
       "sources": [
         "node/newplus.cpp",
+        "newplus/plus.c",
     ]
     }
   ]

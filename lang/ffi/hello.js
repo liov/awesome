@@ -14,15 +14,6 @@ function run(count) {
     console.log(current_timestamp() - start);
 }
 
-function run_scoped(count) {
-    var start = current_timestamp();
-    var x = 0;
-    while (x < count) {
-        x = plusone_scoped(x);
-    }
-
-    console.log(current_timestamp() - start);
-}
 
 function start() {
     var args = process.argv;
@@ -37,13 +28,8 @@ function start() {
         return;
     }
 
-    if (args.length === 4 && args[3] === 'scoped') {
-        plusone_scoped(current_timestamp() === 0 ? 1 : 2);
-        run_scoped(count);
-    } else {
-        plusone(current_timestamp() === 0 ? 1 : 2);
-        run(count);
-    }
+    plusone(current_timestamp() === 0 ? 1 : 2);
+    run(count);
 }
 
 start();
