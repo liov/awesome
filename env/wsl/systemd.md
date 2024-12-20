@@ -21,3 +21,6 @@ systemd 支持
 systemd=true
 ```
 然后，需要使用 PowerShell 关闭 WSL 分发 wsl.exe --shutdown 版来重启 WSL 实例。 分发重启后，系统应运行。 可以使用以下命令进行确认： systemctl list-unit-files --type=service这将显示服务的状态。
+
+# 手动启动
+sudo systemctl start docker
