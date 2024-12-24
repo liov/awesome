@@ -30,9 +30,16 @@ vi /etc/docker/daemon.json
 {
     "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"],
     "insecure-registries":["${ip}"],
+    "features": {
+      "buildkit": true
+    }
+
 }
 
-
+{
+    "registry-mirrors": ["https://docker.hoper.xyz"],
+    "insecure-registries":["docker.hoper.xyz"]
+}
 docker login -u 用户名 -p 密码 ${ip}
 
 ## ali镜像

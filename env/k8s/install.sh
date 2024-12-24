@@ -1,18 +1,5 @@
 # docker
-
-vi /etc/docker/daemon.json
-{
-    "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"],
-    "insecure-registries":["${ip}"],
-}
-
-sudo gpasswd -a ${USER} docker
-newgrp docker
-sudo systemctl restart docker
-mkdir /etc/docker
-
-
-docker login -u 用户名 -p 密码 ${ip}
+../docker/install.md
 # k8s
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
