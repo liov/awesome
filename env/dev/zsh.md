@@ -38,7 +38,9 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 https://www.nerdfonts.com/font-downloads
 https://github.com/ryanoasis/nerd-fonts/releases
 选一个安装
-
+### ubuntu
+git clone https://github.com/ryanoasis/nerd-fonts
+cd 
 # starship 仅是提示符，或者说主题
 export CARGO_TARGET_DIR=/d/sdk/rust
 cargo install starship --locked (失败提示设置CARGO_TARGET_DIR,设置也失败)

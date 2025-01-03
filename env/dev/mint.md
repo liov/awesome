@@ -45,3 +45,6 @@ deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-fre
 deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free
 deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free
 deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security/ buster/updates main contrib non-free
+
+# nvidia驱动
+bios关闭secure boot
