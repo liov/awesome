@@ -87,11 +87,6 @@ helm repo add gitlab https://charts.gitlab.io/
 helm repo add aliyun https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
 
-
-# snap
-
-apt insatall snapd
-
 # linux
 vim /etc/profile
 export PATH=$PATH:/usr/local/go/bin:/usr/local/node/bin

@@ -439,7 +439,7 @@ updateStrategy: {}
 extraVolumes:
   - name: lua
     hostPath:
-      path: /root/code/app/hoper/_lang/zther/lua
+      path: /var/code/hopeio/hoper/_lang/zther/lua
 
 # -- Additional `volume`, See [Kubernetes Volumes](https://kubernetes.io/docs/concepts/storage/volumes/) for the detail.
 extraVolumeMounts:

@@ -1,4 +1,4 @@
-OVPN_DATA="/root/openvpn"
+OVPN_DATA="/var/data/openvpn"
 
 docker volume create --name $OVPN_DATA
 docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://${host}

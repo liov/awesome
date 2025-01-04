@@ -57,12 +57,6 @@ For example, this would mount your home directory to appear as /host within the 
 
 minikube mount $HOME:/host
 
-# helm
-
-$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-$ chmod 700 get_helm.sh
-$ ./get_helm.sh
-
 # etcd 
 ## 直接使用minikube的etcd
 etcdctl --endpoints=https://172.17.0.3:2379 --cacert=/var/lib/minikube/certs/etcd/ca.crt --cert=/var/lib/minikube/certs/etcd/server.crt --key=/var/lib/minikube/certs/etcd/server.key member list
