@@ -1,0 +1,14 @@
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: 0.0.0.0:6443
+    token: "yesx5d.4setvzq366owe409"
+    caCertHashes:
+      - "sha256:b99ab0ded9dacd03cc6b12996238eb306d3f7f4397d81fa64bd63ccf3c27f784"
+    # 请更改上面的认证信息，使之与你的集群中实际使用的令牌和 CA 证书匹配
+nodeRegistration:
+  criSocket: unix:///var/run/cri-dockerd.sock
+  kubeletExtraArgs:
+    - name: "node-ip"
+      value: "192.168.31.212"

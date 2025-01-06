@@ -1,4 +1,4 @@
-
+# 卸载
 # docker
 https://docs.docker.com/engine/install/ubuntu/#installation-methods
 
@@ -20,26 +20,43 @@ echo \
 "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
 $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
+# mint
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+$(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 可选(docker-compose-plugin)
 sudo gpasswd -a ${USER} docker && newgrp docker
-sudo systemctl restart docker
+
 mkdir /etc/docker
 vi /etc/docker/daemon.json
 {
-    "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"],
-    "insecure-registries":["${ip}"],
+    "exec-opts": [
+        "native.cgroupdriver=systemd"
+    ],
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "100m"
+    },
+    "storage-driver": "overlay2",
+    "registry-mirrors": [
+        "https://docker.hoper.xyz"
+    ],
+    "insecure-registries": [
+        "docker.hoper.xyz"
+    ],
     "features": {
-      "buildkit": true
-    }
-
+        "buildkit": true
+    },
+    "ipv6": true,
+    "fixed-cidr-v6": "fd00:2::/64",
+    "experimental": true,
+    "ip6tables": true
 }
+https://docker.mirrors.ustc.edu.cn
 
-{
-    "registry-mirrors": ["https://docker.hoper.xyz"],
-    "insecure-registries":["docker.hoper.xyz"]
-}
+sudo systemctl restart docker
 docker login -u 用户名 -p 密码 ${ip}
 
 ## ali镜像
