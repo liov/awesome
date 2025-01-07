@@ -1,13 +1,14 @@
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
+  "cniVersions": ["0.3.1", "0.4.0", "1.0.0", "1.1.0"],
   "name": "bridge",
   "plugins": [
     {
       "type": "bridge",
-      "bridge": "bridge",
+      "bridge": "cnio0",
       "isGateway": true,
       "ipMasq": true,
-      "promiscMode": true,
+      "hairpinMode": true,
       "ipam": {
         "type": "host-local",
         "ranges": [
@@ -26,8 +27,10 @@
     },
     {
       "type": "portmap",
-      "capabilities": {"portMappings": true},
-      "externalSetMarkChain": "KUBE-MARK-MASQ"
+      "capabilities": {"portMappings": true}
+    },
+    {
+      "type": "firewall"
     }
   ]
 }

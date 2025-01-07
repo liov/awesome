@@ -1,0 +1,22 @@
+{
+  "cniVersion": "0.4.0",
+  "cniVersions": ["0.3.1", "0.4.0"],
+  "name": "ipvlan",
+  "type": "ipvlan",
+  "mode": "l3",
+  "ipam": {
+      "type": "host-local",
+      "ranges": [
+        [{
+          "subnet": "10.244.0.0/16"
+        }],
+        [{
+          "subnet": "fd00:10:244::/64"
+        }]
+      ],
+      "routes": [
+        { "dst": "0.0.0.0/0" },
+        { "dst": "::/0" }
+      ]
+    }
+}

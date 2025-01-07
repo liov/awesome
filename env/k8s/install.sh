@@ -71,6 +71,15 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.1
 删除/etc/cni/net.d/1-k8s.conflist
 sudo cp /var/code/hopeio/hoper/awesome/env/k8s/1-k8s.conflist /etc/cni/net.d/1-k8s.conflist
 编辑/etc/crictl.yaml
+# 删除节点
+kubectl drain <节点名称> --delete-emptydir-data --force --ignore-daemonsets
+sudo kubeadm reset --cri-socket unix:///var/run/cri-dockerd.sock
+sudo iptables -F && sudo iptables -t nat -F && sudo iptables -t mangle -F && sudo iptables -X
+sudo ipvsadm -C
+sudo ip link set dev bridge down
+sudo ip link delete bridge type bridge
+sudo ip link set dev cni0 down
+sudo ip link delete cni0 type bridge
 # calico
 CURL -O -L https://raw.githubusercontent.com/projectcalico/calico/v3.29.1/manifests/tigera-operator.yaml
 curl -O -L https://raw.githubusercontent.com/projectcalico/calico/v3.29.1/manifests/custom-resources.yaml
@@ -87,6 +96,7 @@ kubectl apply -f /var/code/hopeio/hoper/awesome/env/k8s/cni-calico.yaml
 2025-01-06 01:56:16.088 [INFO][1] kube-controllers/client.go 260: Unable to initialize adminnetworkpolicy Tier error=client rate limiter Wait returned an error: context deadline exceeded
 2025-01-06 01:56:16.088 [INFO][1] kube-controllers/main.go 123: Failed to initialize datastore error=Get "https://10.96.0.1:443/apis/crd.projectcalico.org/v1/clusterinformations/default": dial tcp 10.96.0.1:443: i/o timeout
 2025-01-06 01:56:16.088 [FATAL][1] kube-controllers/main.go 136: Failed to initialize Calico datastore
+反复重装k8s,最后跑起来了，最后全部跑起来要手动删一下coredns的pod
 # 神坑！巨坑！无敌坑
 先说结论：cri-docker没有支持ipv6双栈
 不知道因为改了cni的配置后没重启还是cri-docker的service的ExecStart 加了--ipv6-dual-stack
