@@ -64,3 +64,40 @@ pg_dump -h localhost -U postgres -c -E UTF8 --inserts -t public.t_* > t_taste.sq
 
 重新授权 执行命令  chown -R postgres:postgres data/
 
+pg_dumpall -U postgres -p 5432 > bak.sql
+psql -U postgres -f bak.sql
+
+kubectl exec pod_name  -n tools -- pg_dumpall -U postgres -p 5432 > bak.sql
+kubectl exec pod_name  -n tools -- pg_dump -U postgres -p 5432 -d test > bak.sql
+
+
+kubectl exec -i pod_name  -n tools -- psql -U postgres < bak.sql
+--inserts #insert语句导出
+kubectl exec postgres-old --  pg_dumpall -U postgres | kubectl exec -i -- postgres-new psql -U postgres
+
+# 备份指定数据范围
+
+CREATE TABLE temp_table AS SELECT * FROM your_table WHERE created_at >= '2025-01-06';
+kubectl exec pod_name  -n tools -- pg_dump -U postgres -p 5432 -d dbname -t temp_table > bak.sql
+DROP TABLE temp_table;
+
+kubectl exec pod_name  -n tools -- psql -U postgres -p 5432 -d dbname > bak.sql
+INSERT INTO your_table SELECT * FROM temp_table ON CONFLICT (unique_column) DO NOTHING;
+DROP TABLE temp_table;
+
+## -n参数是无效的
+坑逼,-t schema.table
+# 设置时区
+kubectl exec -it pod_name  -n tools --  psql -U postgres;
+
+set time zone "Asia/Shanghai";
+SET TIMEZONE='Asia/Shanghai';
+
+# 改配置
+vim postgresql.conf
+log_timezone = 'Asia/Shanghai'
+timezone = 'Asia/Shanghai'
+
+vim /home/postgres/data/pg_hba.conf
+host    all     all     0.0.0.0/0        md5
+host    all     all     ::/0             md5
