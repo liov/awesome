@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 读取图像并转换为灰度图
-image = cv2.imread(r"D:\Download\gerbv-2.10.0-win64\bin\gerber1.png")
+image = cv2.imread(r"D:\work\1a25d9a8d9b9ef124847610c7debb1e7.png")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # 二值化图像
@@ -34,7 +34,6 @@ for contour in contours:
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
 print(f"second {second_rect}")
 h,w = image.shape[:2]
-second_rect = (0, 0,w,h)
 x, y, w, h = second_rect
 print(x, y, w, h)
 cropped_image = image[y:y+h, x:x+w]
@@ -50,8 +49,8 @@ circles = cv2.HoughCircles(
     minDist=200,          # 圆之间的最小距离
     param1=30,           # 边缘检测的高阈值（Canny 的参数）
     param2=30,           # 累加器阈值（越小检测越多假阳性）
-    minRadius=20,         # 最小半径
-    maxRadius=20         # 最大半径
+    minRadius=10,         # 最小半径
+    maxRadius=10         # 最大半径
 )
 print(f"Found {len(circles[0, :])} circles")
 if circles is not None:
