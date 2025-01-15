@@ -29,7 +29,7 @@ for contour in contours:
     nonzero_pixels = cv2.countNonZero(roi)
     # 计算像素比值
     fill_ratio = nonzero_pixels / area
-    if area < 10000 and w != 1 and h != 1 :
+    if area < 10000 and w != 1 and h != 1 and fill_ratio > 0.7:
         # 绘制矩形框（绿色，线宽为2）
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
 print(f"second {second_rect}")
@@ -52,7 +52,7 @@ circles = cv2.HoughCircles(
     minRadius=10,         # 最小半径
     maxRadius=10         # 最大半径
 )
-print(f"Found {len(circles[0, :])} circles")
+print(f"Found {len(circles)} circles")
 if circles is not None:
     circles = np.int32(np.around(circles))  # 四舍五入并转为整数
     for circle in circles[0, :]:
