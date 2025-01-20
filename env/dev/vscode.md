@@ -1,6 +1,3 @@
-vscode的启动速度已经快到可以接受的程度了
-似乎要与sublime说再见了
-
 remote-ssh 设置配置文件
 
 ssh $user@$domain -p $port -A

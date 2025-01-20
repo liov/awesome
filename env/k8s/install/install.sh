@@ -123,7 +123,7 @@ sudo apt-get install helm
 kubectl create namespace monitoring
 helm install kube-prometheus prometheus-community/kube-prometheus-stack -f helm.yaml -n monitoring
 # apisix
-cp -r /var/lib/minikube/certs/etcd /root/certs/ && chmod 666 /root/certs/etcd/server.key
+cp -r /etc/kubernetes/pki/etcd /root/certs/ && chmod 666 /root/certs/etcd/server.key
 kubectl create namespace ingress-apisix
 # acme
 kubectl apply -f tls.yaml

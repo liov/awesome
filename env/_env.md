@@ -29,21 +29,6 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 choco upgrade chocolatey
 ```
 
-
-# [minikube](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-minikube的ssh有问题，不能发送esc
-- https://github.com/kubernetes/minikube/releases/latest/download/minikube-installer.exe
-```bash
-win:
-choco install minikube
-unix:
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
-sudo install minikube /usr/local/bin
-
-minikube start --registry-mirror= --vm-driver=hyperv --hyperv-virtual-switch "Default Switch"
-```
-
-
 # ssh
 
 powershell ssh
@@ -71,8 +56,6 @@ maven { url "https://jitpack.io" }
 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key member list
 
 peer.xxx节点用 server.xxx外部用
-## minikube
-etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/var/lib/minikube/certs/etcd/ca.crt --cert=/var/lib/minikube/certs/etcd/server.crt --key=/var/lib/minikube/certs/etcd/server.key get --prefix /apisix
 
 # [helm](https://helm.sh/)
 wget https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz

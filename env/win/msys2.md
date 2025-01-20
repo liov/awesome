@@ -26,3 +26,9 @@ pacman -Sc：清理未安装的包文件，包文件位于 /var/cache/pacman/pkg
 pacman -Scc：清理所有的缓存文件
 
 不要用msys2的软件包，node(使用nvm)，python(使用pdm)
+
+# 装机
+pacman -S fish zip zsh
+pacman -S mingw-w64-ucrt-x86_64-ffmpeg
+pacman -S mingw-w64-ucrt-x86_64-opencv
+pacman -S mingw-w64-ucrt-x86_64-toolchain

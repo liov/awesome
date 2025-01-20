@@ -10,7 +10,7 @@ kubectl create ns ingress-apisix
 https://artifacthub.io/packages/helm/apisix/apisix/0.9.3
 
 dashboard false 没有挂载目录，tls的目录
-cp -r /var/lib/minikube/certs/etcd /root/certs/ && chmod 666 /root/certs/etcd/server.key || k8s.runAsUser=0 || initContainer.command - chown -R nobody:nobody /certs/etcd
+cp -r /etc/kubernetes/pki/etcd /root/certs/ && chmod 666 /root/certs/etcd/server.key || k8s.runAsUser=0 || initContainer.command - chown -R nobody:nobody /certs/etcd
 kubectl create secret generic etcd-ssl --from-file=/root/certs/etcd/ -n ingress-apisix
 kubectl create secret generic ssl --from-file=/root/certs/acme/hoper.xyz/ca.cer -n ingress-apisix
 

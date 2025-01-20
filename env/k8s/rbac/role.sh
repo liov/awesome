@@ -1,5 +1,5 @@
-cp /var/lib/minikube/certs/ca.crt  .
-cp /var/lib/minikube/certs/ca.key .
+cp /etc/kubernetes/pki/ca.crt  .
+cp /etc/kubernetes/pki/ca.key .
 
 # 创建根证书
 
