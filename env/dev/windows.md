@@ -1,15 +1,3 @@
-## win11专业版（报错）
-slmgr -ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
-
-slmgr -skms kms.0t.net.cn
-
-slmgr -ato
-
-## massgrave
-https://massgrave.dev/#download--how-to-use-it
-网上搜个密钥
-如 Windows11 激活密钥：NBQWQ-W9PTV-B4YWP-4K773-T6PKG
-断网,系统更改密钥输入密钥,安装重启
 ```powershell
 irm https://get.activated.win | iex
 ```
