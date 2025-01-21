@@ -1,6 +1,13 @@
+# nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
+## windows
 https://github.com/coreybutler/nvm-windows/releases
+NVM_HOME=D:\sdk\nvm
+NVM_SYMLINK=D:\sdk\nodejs
 nvm install latest 64
+nvm use latest
+# pnpm
 corepack enable pnpm
 
 pnpm config set registry https://registry.npmmirror.com/

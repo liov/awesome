@@ -49,8 +49,8 @@ export PATH=$PATH:"/d/Program Files/Git/cmd"
 
 在source ~/.zshrc这行之前添加PATH
 ~~PATH=/mingw64/bin:/ucrt64/bin:/usr/bin:/usr/local/bin:$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl~~
-/mingw64/bin 建议直接加入windows PATH win7
-/ucrt64/bin 较新的运行时,可与mingw64二选一,未测试cgo是否可用,建议直接加入windows PATH win10+ 建议用这个
+/mingw64/bin 建议不用
+/ucrt64/bin 较新的运行时,建议直接加入windows PATH win10+ 建议用这个
 /usr/local/bin:/bin 这两个目录实际不存在
 /usr/bin 建议直接加入windows PATH
 PATH=$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
@@ -66,7 +66,7 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\mingw64]
 @="MinGW64 Here"
-"icon"="C:\\msys64\\ucrt64.exe"
+"icon"="C:\\msys64\\ucrt64.ico"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\mingw64\command]
 @="C:\\msys64\\msys2_shell.cmd -ucrt64 -here"
@@ -149,3 +149,100 @@ for /f %%1 in ('git %*') do cygpath -w %%1
 
 Have fun!
 
+```settings.json
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": 
+    [
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+c"
+        },
+        {
+            "command": "paste",
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
+        },
+        {
+            "command": "find",
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        }
+    ],
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{f99f54c2-509d-455e-aefc-78c3f1400a0a}",
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "startingDirectory": "D:/"
+        },
+        "list": 
+        [
+            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
+                "commandline": "D:/sdk/msys64/msys2_shell.cmd -defterm -no-start -use-full-path -here -ucrt64",
+                "guid": "{a74cf3e4-410d-4d3f-a53b-b91aa3203a7b}",
+                "hidden": false,
+                "icon": "D:\\sdk\\msys64\\ucrt64.ico",
+                "name": "ucrt"
+            },
+            {
+                "commandline": "D:/sdk/msys64/usr/bin/fish",
+                "guid": "{f99f54c2-509d-455e-aefc-78c3f1400a0a}",
+                "hidden": false,
+                "icon": "D:\\sdk\\msys64\\ucrt64.ico",
+                "name": "fish"
+            }
+        ]
+    },
+    "schemes": [],
+    "themes": []
+}
+```

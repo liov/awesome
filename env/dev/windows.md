@@ -1,22 +1,9 @@
-# win10教育版（过时）
-slmgr /ipk NW6C2-QMPVW-D7KKK-3GKT6-VCFB2
-
-slmgr /skms kms.03k.org
-
-slmgr /ato
-
 ## win11专业版（报错）
 slmgr -ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
 
 slmgr -skms kms.0t.net.cn
 
 slmgr -ato
-## win激活，出现“非核心版本的计算机”的处理方法（无效）
-1 打开“注册表编辑器”；（Windows + R然后输入 Regedit）
-
-2 修改SkipRearm 的值为1；（在HKEY_LOCAL_MACHINE–》SOFTWARE–》Microsoft–》Windows NT–》CurrentVersion–》SoftwareProtectionPlatform里面，将SkipRearm的值修改为1）重启电脑
-
-3 以管理员身份启动cmd，slmgr -rearm，根据提示，再次重启电脑！
 
 ## massgrave
 https://massgrave.dev/#download--how-to-use-it
@@ -60,5 +47,8 @@ setx PATH "%PATH%;C:\path\to\your\directory"
 这里"%PATH%是系统+用户的,设置的是用户的,setx /M PATH  系统的
 其他终端慎用啊,直接清空了我的PATH
 
-# zsh 
+## zsh 
 setx PATH "$PATH;/c/path/to/your/directory"
+
+# 7zip
+https://www.7-zip.org/download.html
