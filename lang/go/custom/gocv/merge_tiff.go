@@ -10,7 +10,7 @@ import (
 
 func main() {
 	MergeTiff([][]int{{0, 1, 2}, {5, 4, 3}, {6, 7, 8}, {11, 10, 9}, {12, 13, 14}, {17, 16, 15}, {18, 19, 20}}, func(i int) ([]byte, error) {
-		return os.ReadFile(`D:\work\scan-panel-0826\` + strconv.Itoa(i) + ".tiff")
+		return os.ReadFile(`D:\work\` + strconv.Itoa(i) + ".tiff")
 	},
 		image.Rect(0,
 			0, 5120, 5120),

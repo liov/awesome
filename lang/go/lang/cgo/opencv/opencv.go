@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	imagePath := C.CString(`D:\work\z\0.96\21.bmp`)
+	imagePath := C.CString(`D:\work\1.bmp`)
 	defer C.free(unsafe.Pointer(imagePath))
 
 	width := C.load_image_width(imagePath)

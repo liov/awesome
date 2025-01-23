@@ -35,12 +35,12 @@ func calculateMSE(y int, img1, img2 []uint8, minOverlap, maxOverlap int) int {
 
 func main() {
 	now := time.Now()
-	file1, err := os.Open(`D:\work\scan-panel-0826\0--light1.jpg`)
+	file1, err := os.Open(`D:\work\1.jpg`)
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return
 	}
-	file2, err := os.Open(`D:\work\scan-panel-0826\1--light1.jpg`)
+	file2, err := os.Open(`D:\work\1.jpg`)
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return

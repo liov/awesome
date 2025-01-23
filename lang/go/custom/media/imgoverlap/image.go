@@ -15,9 +15,9 @@ func main() {
 	// img1 和 img2 是从文件加载的图像
 	// minOverlap 和 maxOverlap 是重叠范围
 	now := time.Now()
-	file1, _ := os.Open(`D:\work\scan-panel-0826\0--light1.jpg`)
+	file1, _ := os.Open(`D:\work\1.jpg`)
 	img1, _ := jpeg.Decode(file1)
-	file2, _ := os.Open(`D:\work\scan-panel-0826\1--light1.jpg`)
+	file2, _ := os.Open(`D:\work\1.jpg`)
 	img2, _ := jpeg.Decode(file2)
 	minOverlap := 1200
 	maXOverlap := 1300
