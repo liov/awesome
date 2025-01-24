@@ -7,7 +7,7 @@ def preprocess(image):
     cv2.imwrite("hsv.png", hsv)
     # 定义黑色背景的颜色范围
     lower_black = np.array([0, 0, 0])  # HSV下限
-    upper_black = np.array([180, 255, 50])  # HSV上限
+    upper_black = np.array([180, 255, 213])  # HSV上限
 
     # 创建掩码，去除黑色背景
     mask = cv2.inRange(hsv, lower_black, upper_black)
@@ -26,13 +26,13 @@ def preprocess(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, kernel_size)
 
     # 可选：平滑处理（腐蚀操作）
-    opening = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel, iterations=1)
+    opening = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel,)
     closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel, iterations=1)
     cv2.imwrite("smoothed.png", closing)
     return closing
 
 # 读取图像并转换为灰度图
-image = cv2.imread(r"D:\work\gerber.jpg", cv2.IMREAD_COLOR)
+image = cv2.imread(r"D:\work.jpg", cv2.IMREAD_COLOR)
 smoothed=preprocess(image)
 h,w = image.shape[:2]
 x, y = 0,0
@@ -60,7 +60,7 @@ for contour in contours:
         #print(f"Found rectangle at ({x}, {y}) with area {area} and fill ratio {fill_ratio}")
         # 绘制矩形框（绿色，线宽为2）
         #cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
-        cv2.polylines(image, [box], isClosed=True, color=(0, 255, 0), thickness=2)
+        cv2.polylines(image, [box], isClosed=True, color=(255, 0, 0), thickness=2)
 # 高斯模糊，减少噪声
 blurred = cv2.GaussianBlur(smoothed, (9, 9), 0)
 

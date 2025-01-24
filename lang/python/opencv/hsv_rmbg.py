@@ -8,16 +8,17 @@ def nothing(x):
 cv2.namedWindow('Trackbars', cv2.WINDOW_AUTOSIZE)
 
 # 创建滑动条用于调整HSV阈值
-cv2.createTrackbar('H Low', 'Trackbars', 0, 179, nothing)
-cv2.createTrackbar('H High', 'Trackbars', 179, 179, nothing)
+cv2.createTrackbar('H Low', 'Trackbars', 0, 180, nothing)
+cv2.createTrackbar('H High', 'Trackbars', 180, 180, nothing)
 cv2.createTrackbar('S Low', 'Trackbars', 0, 255, nothing)
 cv2.createTrackbar('S High', 'Trackbars', 255, 255, nothing)
 cv2.createTrackbar('V Low', 'Trackbars', 0, 255, nothing)
 cv2.createTrackbar('V High', 'Trackbars', 255, 255, nothing)
-image = cv2.imread(r"D:\work\3.jpg", cv2.IMREAD_COLOR)
+cv2.createTrackbar('T Low', 'Trackbars', 50, 255, nothing)
+image = cv2.imread(r"D:\work.jpg", cv2.IMREAD_COLOR)
 while True:
     # 假设 image 是你的输入图像
-    image = cv2.resize(image, (2560,2560), interpolation=cv2.INTER_AREA)
+    image = cv2.resize(image, (3928,2195), interpolation=cv2.INTER_AREA)
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     # 获取当前滑动条的位置
@@ -27,6 +28,7 @@ while True:
     s_high = cv2.getTrackbarPos('S High', 'Trackbars')
     v_low = cv2.getTrackbarPos('V Low', 'Trackbars')
     v_high = cv2.getTrackbarPos('V High', 'Trackbars')
+    t_low = cv2.getTrackbarPos('T Low', 'Trackbars')
 
     # 定义HSV颜色范围
     lower_bound = np.array([h_low, s_low, v_low])
@@ -34,9 +36,15 @@ while True:
 
     # 根据颜色范围创建掩码
     mask = cv2.inRange(hsv, lower_bound, upper_bound)
+    mask_inverted = cv2.bitwise_not(mask)  # 取反，保留非黑色部分
 
+    # 应用掩码，去除底版黑色
+    background_removed = cv2.bitwise_and(image, image, mask=mask_inverted)
+    gray = cv2.cvtColor(background_removed, cv2.COLOR_BGR2GRAY)
+    # 二值化
+    _, binary = cv2.threshold(gray, t_low, 255, cv2.THRESH_BINARY)
     # 显示结果
-    cv2.imshow('Mask', mask)
+    cv2.imshow('Mask', binary)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
