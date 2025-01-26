@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 读取图像并转换为灰度图
-image = cv2.imread(r"D:\work\1a25d9a8d9b9ef124847610c7debb1e7.png")
+image = cv2.imread(r"D:\work\1a25d9a8d9b9ef124847610c7debb1e7.jpg")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # 二值化图像
@@ -70,5 +70,5 @@ if circles is not None:
             cv2.circle(cropped_image, (x, y), 1, (255, 0, 0), 1)  # 绘制圆
             cv2.circle(cropped_image, (x, y), radius, (0, 0, 255), 1) # 绘制圆心
 
-cv2.imwrite("output.png", cropped_image)
+cv2.imwrite("output.jpg", cropped_image)
 

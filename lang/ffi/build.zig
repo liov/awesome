@@ -19,9 +19,7 @@ pub fn build(b: *std.Build) void {
         .files = &.{"newplus/plus.c"},
         .flags = &.{},
     });
-
-    exe.addRPath(b.path("$ORIGIN/newplus"));
-
+    exe.addRPath(b.path("$ORIGIN"));
     b.default_step.dependOn(&exe.step);
     b.installArtifact(exe);
 }

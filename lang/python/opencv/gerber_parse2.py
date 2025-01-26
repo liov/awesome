@@ -4,10 +4,10 @@ import numpy as np
 def preprocess(image):
     # 转换为 HSV 色彩空间
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    cv2.imwrite("hsv.png", hsv)
+    cv2.imwrite("hsv.jpg", hsv)
     # 定义黑色背景的颜色范围
     lower_black = np.array([0, 0, 0])  # HSV下限
-    upper_black = np.array([180, 255, 213])  # HSV上限
+    upper_black = np.array([180, 255, 180])  # HSV上限
 
     # 创建掩码，去除黑色背景
     mask = cv2.inRange(hsv, lower_black, upper_black)
@@ -18,7 +18,7 @@ def preprocess(image):
 
     # 转换为灰度图
     gray = cv2.cvtColor(background_removed, cv2.COLOR_BGR2GRAY)
-    cv2.imwrite("gray.png", gray)
+    cv2.imwrite("gray.jpg", gray)
     # 二值化
     _, binary = cv2.threshold(gray, 50, 255, cv2.THRESH_BINARY)
     # 定义膨胀核
@@ -26,17 +26,14 @@ def preprocess(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, kernel_size)
 
     # 可选：平滑处理（腐蚀操作）
-    opening = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel,)
-    closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel, iterations=1)
-    cv2.imwrite("smoothed.png", closing)
-    return closing
+    opening = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
+    #closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel)
+    cv2.imwrite("smoothed.jpg", opening)
+    return opening
 
 # 读取图像并转换为灰度图
 image = cv2.imread(r"D:\work.jpg", cv2.IMREAD_COLOR)
 smoothed=preprocess(image)
-h,w = image.shape[:2]
-x, y = 0,0
-print(x, y, w, h)
 
 # 查找轮廓（联通区域）
 contours, _ = cv2.findContours(smoothed, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -93,5 +90,5 @@ if circles is not None:
             cv2.circle(image, (x, y), 1, (255, 0, 0), 1)  # 绘制圆
             cv2.circle(image, (x, y), radius, (0, 0, 255), 1) # 绘制圆心
 
-cv2.imwrite("output.png", image)
+cv2.imwrite("output.jpg", image)
 

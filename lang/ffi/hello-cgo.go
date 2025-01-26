@@ -3,7 +3,7 @@ package main
 /*
  #cgo CFLAGS: -Wall -O2 -fPIC
  #cgo linux CFLAGS: -DLINUX=1
- #cgo LDFLAGS: -Lnewplus -lnewplus -Wl,-rpath='$ORIGIN'/newplus
+ #cgo LDFLAGS: -Lout -lnewplus -Wl,-rpath='$ORIGIN'
  #include "newplus/plus.h"
 */
 import "C"
