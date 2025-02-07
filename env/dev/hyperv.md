@@ -19,6 +19,9 @@ windows打开hyperv服务,创建虚拟机,磁盘选稍后添加
 总结，hyperv是垃圾
 试试vmware
 vmware可以
-但是建虚拟机的时候要选windows11,后面才能选uefi引导
+但是建虚拟机的时候要选windows11,后面才能选uefi引导(linux选ubuntu64位好像也行)
 网络选桥接，在编辑中手动选网卡
 坑: 数字键盘不能用
+
+sudo apt install open-vm-tools-desktop
+sudo apt install python3-pip

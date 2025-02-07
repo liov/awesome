@@ -1,19 +1,30 @@
 # zsh
 ```bash
 sudo apt install zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-vi ~/.zshrc
-
 ```
+
+# 安装字体
+https://www.nerdfonts.com/font-downloads
+https://github.com/ryanoasis/nerd-fonts/releases
+选一个安装
+### ubuntu
+git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
+or git clone --depth=1 https://gitcode.com/gh_mirrors/ne/nerd-fonts.git
+cd nerd-fonts && ./install.sh
+
 # oh my zsh
 官方网站: http://ohmyz.sh
 
 GitHub: https://github.com/ohmyzsh/ohmyzsh
 
-export PATH=$PATH:"/d/Program Files/Git/cmd"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-或者
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+win:`export PATH=$PATH:"/d/Program Files/Git/cmd"`
+curl	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+wget	sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fetch	sh -c "$(fetch -o - https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+curl	sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
+wget	sh -c "$(wget -O- https://install.ohmyz.sh/)"
+fetch	sh -c "$(fetch -o - https://install.ohmyz.sh/)"
 
 ohmyzsh插件，路径：
 
@@ -33,14 +44,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 执行下 source ~/.zshrc激活插件。
 
-# 乱码
-安装字体
-https://www.nerdfonts.com/font-downloads
-https://github.com/ryanoasis/nerd-fonts/releases
-选一个安装
-### ubuntu
-git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
-cd nerd-fonts && chmod +x ./install && ./install
+
 # starship 仅是提示符，或者说主题
 export CARGO_TARGET_DIR=/d/sdk/rust
 cargo install starship --locked (失败提示设置CARGO_TARGET_DIR,设置也失败)
