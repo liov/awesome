@@ -38,6 +38,9 @@ ninja -v -j$NUMBER_OF_PROCESSORS
 
 error: unable to find dynamic system library 'pthread' using strategy 'paths_first'. searched paths: none
 
-尝试失败https://github.com/ziglang/zig/issues/10989
+尝试失败
+
 zig不支持winpthread,怎么都找不到pthread.h
 不折腾了zig cc -I /clang64/include -L/clang64/lib -lpthread pthread.c 可以编译成功
+
+总结: 别浪费时间
