@@ -18,8 +18,9 @@ func main() {
 		return tx.Create(&e)
 	})
 	fmt.Println(sql)
-	defer initialize.Start(confdao.Config, confdao.Dao)()
-	confdao.Dao.DB.ToSQL(func(tx *gorm.DB) *gorm.DB {
+	global := initialize.NewGlobal[confdao.Config, confdao.Dao]()
+	defer global.Cleanup()
+	global.Dao.DB.ToSQL(func(tx *gorm.DB) *gorm.DB {
 		return tx.Create(&e)
 	})
 }

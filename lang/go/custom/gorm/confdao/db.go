@@ -19,6 +19,8 @@ type dao struct {
 
 var Dao = &dao{}
 var Config = &config{}
+
+// var Global = initialize.NewGlobal[*config, *dao]()
 var DB, _ = gorm.Open(tests.DummyDialector{}, &gorm.Config{
 	NamingStrategy: schema.NamingStrategy{
 		SingularTable: true,
