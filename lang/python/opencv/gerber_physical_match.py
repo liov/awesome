@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
+import requests
 
-def process(hsv,vHigh,image,origin,size,op):
+def process(hsv,vHigh,image,origin,size,op,affineMap):
 
     # 定义黑色背景的颜色范围
     lower_black = np.array([0, 0, 0])  # HSV下限
@@ -50,11 +51,22 @@ def process(hsv,vHigh,image,origin,size,op):
             rect = cv2.minAreaRect(contour)
             box = cv2.boxPoints(rect)
             box = np.intp(box)  # 将浮点数转换为整数
+            cv2.fillPoly(image, [box], ())
+            # 获取原始 rect 的属性
+            (x, y), size, angle = rect
+            dst = cv2.transform(np.float32([[x,y]]).reshape(-1, 1, 2),affineMap).reshape(-1),
+            #print(dst[0])
+            # 重新设置中心点
+            new_rect = ((dst[0][0], dst[0][1]), size, angle)
+            box = cv2.boxPoints(new_rect)
+            box = np.intp(box)  # 将浮点数转换为整数
             cv2.polylines(origin, [box], isClosed=True, color=(255, 0, 0), thickness=2)
-            cv2.fillPoly(image, [box], 0)
+
+
     return image
 
-def findCircle(hsv,image,origin):
+def pretreatment(hsv,image):
+
     lower_black = np.array([0, 0, 0])  # HSV下限
     upper_black = np.array([180, 255, 170])  # HSV上限
 
@@ -67,9 +79,13 @@ def findCircle(hsv,image,origin):
     # 转换为灰度图
     gray = cv2.cvtColor(background_removed, cv2.COLOR_BGR2GRAY)
     _, binary = cv2.threshold(gray, 50, 255, cv2.THRESH_BINARY)
+
+    return binary
+def findCircle(hsv,image):
+
+    binary = pretreatment(hsv,image)
     # 高斯模糊，减少噪声
     blurred = cv2.GaussianBlur(binary, (9,9), 0)
-
     # 使用 Hough Circle Transform 检测圆
     circles = cv2.HoughCircles(
         blurred,
@@ -81,7 +97,8 @@ def findCircle(hsv,image,origin):
         minRadius=90,         # 最小半径
         maxRadius=100         # 最大半径
     )
-    print(f"Found {len(circles)} circles")
+    print(f"Found {len(circles[0, :])} circles")
+    list =[]
     if circles is not None:
         circles = np.int32(np.around(circles))  # 四舍五入并转为整数
         for circle in circles[0, :]:
@@ -94,23 +111,30 @@ def findCircle(hsv,image,origin):
             nonzero_pixels = cv2.countNonZero(roi)
             # 计算像素比值
             fill_ratio = nonzero_pixels / total_pixels
-            print(fill_ratio)
+            #print(fill_ratio)
             if fill_ratio >= 0.7:
-                cv2.circle(origin, (x, y), 1, (0, 0, 255), 1)  # 绘制圆
-                cv2.circle(origin, (x, y), radius, (0, 0, 255), 1) # 绘制圆心
-                cv2.circle(image, (x, y), 1, 0, cv2.FILLED)  # 绘制圆
+                list.append(circle)
+    return list
 
 # 读取图像并转换为灰度图
-image = cv2.imread(r"D:\work.jpg", cv2.IMREAD_COLOR)
+image = cv2.imread(r"D:\work\test0115_top\gerber\(RGBW-0 255 255 255).jpg", cv2.IMREAD_COLOR)
 # 转换为 HSV 色彩空间
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-cv2.imwrite("hsv.jpg", hsv)
-cloned_image = image.copy()
-#findCircle(hsv,cloned_image,image)
-image1=process(hsv,235,cloned_image,image,(5,5),cv2.MORPH_CLOSE)
-cv2.imwrite("output1.jpg", image)
-image1=process(hsv,170,cloned_image,image,(3,3),cv2.MORPH_CLOSE)
-cv2.imwrite("output2.jpg", image)
-process(hsv,130,image1,image,(3,3),cv2.MORPH_OPEN)
-cv2.imwrite("output3.jpg", image)
+circles=findCircle(hsv,image)
+payload = {
+    "images": [{"type":"light1","path":r"D:\ApulisAoi\Data\Prog\test0218_top\stitch-panel\panel--light1.jpg"}],
+    "boxes_mark": [[int(circle[0])-200, int(circle[1])-200, int(circle[0])+200, int(circle[1])+200] for circle in circles[:3]]
+}
+
+headers = {"Content-Type": "application/json"}
+response = requests.post("http://192.168.4.90:5080/predict", json=payload, headers=headers)
+result = response.json()["boxes_mark_sam"]
+affineMap=cv2.getAffineTransform(np.float32([[circle[0],circle[1]] for circle in circles[:3]]), np.float32([[(box[0]+box[2])/2,(box[1]+box[3])/2] for box in result]))
+physical = cv2.imread(r"D:\work\test0115_top\stitch-panel\panel--light1.jpg", cv2.IMREAD_COLOR)
+image1=process(hsv,235,image,physical,(5,5),cv2.MORPH_CLOSE,affineMap)
+cv2.imwrite("output1.jpg", physical)
+# image1=process(hsv,170,image,image,(3,3),cv2.MORPH_CLOSE)
+# cv2.imwrite("output2.jpg", image)
+# process(hsv,130,image1,image,(3,3),cv2.MORPH_OPEN)
+# cv2.imwrite("output3.jpg", image)
 
