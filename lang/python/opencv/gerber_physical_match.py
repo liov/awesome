@@ -131,9 +131,9 @@ response = requests.post("http://192.168.4.90:5080/predict", json=payload, heade
 result = response.json()["boxes_mark_sam"]
 affineMap=cv2.getAffineTransform(np.float32([[circle[0],circle[1]] for circle in circles[:3]]), np.float32([[(box[0]+box[2])/2,(box[1]+box[3])/2] for box in result]))
 physical = cv2.imread(r"D:\work\test0115_top\stitch-panel\panel--light1.jpg", cv2.IMREAD_COLOR)
-image1=process(hsv,235,image,physical,(5,5),cv2.MORPH_CLOSE,affineMap)
+image=process(hsv,235,image,physical,(5,5),cv2.MORPH_CLOSE,affineMap)
+process(hsv,170,image,physical,(3,3),cv2.MORPH_CLOSE,affineMap)
 cv2.imwrite("output1.jpg", physical)
-# image1=process(hsv,170,image,image,(3,3),cv2.MORPH_CLOSE)
 # cv2.imwrite("output2.jpg", image)
 # process(hsv,130,image1,image,(3,3),cv2.MORPH_OPEN)
 # cv2.imwrite("output3.jpg", image)
