@@ -2,7 +2,7 @@ package confdao
 
 import (
 	"github.com/hopeio/initialize"
-	postgresi "github.com/hopeio/initialize/conf_dao/gormdb/postgres"
+	postgresi "github.com/hopeio/initialize/dao/gormdb/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 	"gorm.io/gorm/utils/tests"
