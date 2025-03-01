@@ -5,3 +5,9 @@ NVM_HOME D:\Program Files\nvm
 NVM_SYMLINK D:\Program Files\nodejs
 PKG_CONFIG_PATH D:\sdk\msys64\ucrt64\lib\pkgconfig
 VCPKG_ROOT
+PNPM_HOME D:\sdk\pnpm
+
+pnpm config set global-bin-dir "D:\sdk\pnpm\bin"
+pnpm config set cache-dir "D:\sdk\pnpm\cache"
+pnpm config set state-dir "D:\sdk\pnpm\state"
+pnpm config set global-dir "D:\sdk\pnpm\global"
