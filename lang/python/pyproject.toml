@@ -5,28 +5,29 @@ description = "lang test"
 authors = [
     {name = "贾一饼", email = "lby.i@qq.com"},
 ]
-dependencies = [
-    "pcb-tools>=0.1.6",
-    "flask>=3.0.3",
-    "requests>=2.32.3",
-    "cairocffi>=0.9.0",
-    "pygerber>=2.4.2",
-    "matplotlib>=3.9.0",
-    "itk>=5.4.0",
-    "vtk>=9.3.1",
-    "opencv-python>=4.11.0.86",
-    "opencv-contrib-python>=4.10.0.84",
-    "drawsvg>=2.4.0",
-    "cffi>=1.17.0",
-    "easyocr>=1.7.2",
-    "pandas>=2.2.3",
-    "yfinance>=0.2.52",
-    "akshare>=1.15.85",
-    "pyecharts>=2.0.8",
-]
+#dependencies = [
+#    "pcb-tools>=0.1.6",
+#    "flask>=3.0.3",
+#    "requests>=2.32.3",
+#    "cairocffi>=0.9.0",
+#    "pygerber>=2.4.2",
+#    "matplotlib>=3.9.0",
+#    "itk>=5.4.0",
+#    "vtk>=9.3.1",
+#    "opencv-python>=4.11.0.86",
+#    "opencv-contrib-python>=4.10.0.84",
+#    "drawsvg>=2.4.0",
+#    "cffi>=1.17.0",
+#    "easyocr>=1.7.2",
+#    "pandas>=2.2.3",
+#    "yfinance>=0.2.52",
+#    "akshare>=1.15.85",
+#    "pyecharts>=2.0.8",
+#]
 requires-python = "<3.13,>=3.11"
 readme = "README.md"
 license = {text = "MIT"}
+dependencies = ["mayavi>=4.8.2", "pyvista>=0.44.2"]
 
 [build-system]
 requires = ["pdm-backend","setuptools","setuptools-rust", "wheel", "Cython"]

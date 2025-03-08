@@ -13,3 +13,8 @@ corepack enable pnpm
 pnpm config set registry https://registry.npmmirror.com/
 
 pnpm config set registry https://registry.npmjs.org
+
+pnpm config set global-bin-dir D:\sdk\pnpm\bin
+pnpm config set cache-dir D:\sdk\pnpm\cache
+pnpm config set state-dir D:\sdk\pnpm\state
+pnpm config set global-dir D:\sdk\pnpm\bin\global
