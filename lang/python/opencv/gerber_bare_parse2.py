@@ -54,33 +54,29 @@ def process(hsv,vHigh,image,origin,size,op):
             cv2.fillPoly(image, [box], ())
     return image
 
-def findCircle(hsv,image,origin):
-    lower_black = np.array([0, 0, 0])  # HSV下限
-    upper_black = np.array([180, 255, 170])  # HSV上限
-
-    # 创建掩码，去除黑色背景
-    mask = cv2.inRange(hsv, lower_black, upper_black)
-    mask_inverted = cv2.bitwise_not(mask)  # 取反，保留非黑色部分
-    # 应用掩码，去除底版黑色
-    background_removed = cv2.bitwise_and(image, image, mask=mask_inverted)
+def findCircle(image,origin):
 
     # 转换为灰度图
-    gray = cv2.cvtColor(background_removed, cv2.COLOR_BGR2GRAY)
-    _, binary = cv2.threshold(gray, 50, 255, cv2.THRESH_BINARY)
+    #gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    _, binary = cv2.threshold(image, 80, 255, cv2.THRESH_BINARY)
+    cv2.imwrite("binary.jpg", binary)
     # 高斯模糊，减少噪声
-    blurred = cv2.GaussianBlur(binary, (9,9), 0)
-    for r in [100,75,50,25]:
+    blurred = cv2.GaussianBlur(binary, (7,7), 0)
+    cv2.imwrite("blurred.jpg", binary)
+    for r in [100,75,40,30,25]:
         # 使用 Hough Circle Transform 检测圆
         circles = cv2.HoughCircles(
             blurred,
             cv2.HOUGH_GRADIENT,  # 检测方法
             dp=1,                # 累加器分辨率与图像分辨率的反比
-            minDist=r*9,          # 圆之间的最小距离
-            param1=30,           # 边缘检测的高阈值（Canny 的参数）
-            param2=30,           # 累加器阈值（越小检测越多假阳性）
+            minDist=r,          # 圆之间的最小距离
+            param1=50,           # 边缘检测的高阈值（Canny 的参数）
+            param2=20,           # 累加器阈值（越小检测越多假阳性）
             minRadius=int(r*0.9),         # 最小半径
             maxRadius=int(r*1.1)         # 最大半径
         )
+        if circles is None:
+            continue
         print(f"Found {len(circles)} circles")
         if circles is not None:
             circles = np.int32(np.around(circles))  # 四舍五入并转为整数
@@ -95,18 +91,22 @@ def findCircle(hsv,image,origin):
                 # 计算像素比值
                 fill_ratio = nonzero_pixels / total_pixels
                 print(fill_ratio)
-                if fill_ratio >= 0.7  :
-                    cv2.circle(origin, (x, y), 1, (0, 0, 255), 1)  # 绘制圆
-                    cv2.circle(origin, (x, y), radius, (0, 0, 255), 1) # 绘制圆心
+                if fill_ratio >= 0.0  :
+                    cv2.circle(origin, (x, y), 1, (0, 0, 255), 1) # 绘制圆心
+                    cv2.circle(origin, (x, y), radius, (0, 0, 255), 5)  # 绘制圆
                     cv2.circle(image, (x, y), 1, 0, cv2.FILLED)  # 绘制圆
 
 # 读取图像并转换为灰度图
 image = cv2.imread(r"D:\xxx.jpg", cv2.IMREAD_COLOR)
+b, g, r = cv2.split(image)
+cv2.imwrite("b.jpg", b)
+cv2.imwrite("g.jpg", g)
+cv2.imwrite("r.jpg", r)
 # 转换为 HSV 色彩空间
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 cv2.imwrite("hsv.jpg", hsv)
 cloned_image = image.copy()
-findCircle(hsv,cloned_image,image)
+findCircle(b,image)
 cv2.imwrite("output2.jpg", image)
 # image1=process(hsv,250,cloned_image,image,(5,5),cv2.MORPH_CLOSE)
 # cv2.imwrite("output1.jpg", image)
