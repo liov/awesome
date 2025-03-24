@@ -19,7 +19,7 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.0.2
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/pflag v1.0.6
-	github.com/spf13/viper v1.20.0-alpha.6.0.20250217005313-66e3e2877d2a
+	github.com/spf13/viper v1.20.0
 	github.com/twpayne/go-geom v1.5.7
 	github.com/unicorn-engine/unicorn v0.0.0-20240926111503-d568885d64c8
 	github.com/xuri/excelize/v2 v2.9.0
