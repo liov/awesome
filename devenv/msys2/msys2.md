@@ -68,3 +68,5 @@ pip install msgpack --global-option=build_ext --global-option="--plat-name=win-a
 最可靠的方法是使用标准的 Windows Python 环境进行安装。如果一定要在 MSYS2 环境中工作，确保使用合适的 MinGW 工具链，并配置好编译选项以匹配 Python 扩展模块的构建需求。
 
 然后python -p xxx/pdm
+
+windows中的用户名下.ssh目录下文件复制一份到msys2 /home/username/.ssh中
