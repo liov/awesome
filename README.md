@@ -3,12 +3,12 @@
 ## lang
 go kotlin rust ts python的语法学习,总结的坑和黑魔法,刷LeetCode的解答
 ## note
-笔记
+个人笔记
 
 ## repost
 转发
 
-## deven
+## devenv
 开发及部署需要的操作总结脚本汇总，开发过程中遇到的坑总结
 - **config:** nginx/ rust cargo/ gradle的配置
 - **env:**
