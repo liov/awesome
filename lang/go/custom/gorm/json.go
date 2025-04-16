@@ -24,7 +24,7 @@ func main() {
 	})
 	fmt.Println(sql)
 	defer initialize.Start(confdao.Config, confdao.Dao)()
-	confdao.Dao.DB.ToSQL(func(tx *gorm.DB) *gorm.DB {
+	confdao.Dao.DB2111.ToSQL(func(tx *gorm.DB) *gorm.DB {
 		return tx.Create(&e)
 	})
 }

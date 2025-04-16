@@ -11,7 +11,7 @@ import (
 
 func main() {
 	defer initialize.Start(confdao.Config, confdao.Dao)()
-	DB := confdao.Dao.DB.DB
+	DB := confdao.Dao.DB2111.DB
 	user := model.User{
 		Account: model.Account{
 			Number: "123456",

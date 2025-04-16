@@ -1,0 +1,22 @@
+
+[DB2155]
+Charset = "utf8"
+EnablePrometheus = false
+EnableStdLogger = true
+MaxIdleConns = 10
+MaxOpenConns = 10
+Schema = ""
+TimeFormat = ""
+TimeZone = ""
+Type = "postgres"
+User = "postgres"
+
+[DB2155.Logger]
+Colorful = true
+IgnoreRecordNotFoundError = false
+LogLevel = 4
+ParameterizedQueries = false
+SlowThreshold = "200ms"
+
+[DB2155.NamingStrategy]
+SingularTable = true

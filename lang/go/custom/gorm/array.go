@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/initialize"
 	_ "github.com/hopeio/utils/dao/database/gorm/serializer"
 	"gorm.io/gorm"
 	"test/custom/gorm/confdao"
@@ -18,9 +17,8 @@ func main() {
 		return tx.Create(&e)
 	})
 	fmt.Println(sql)
-	global := initialize.NewGlobal[confdao.Config, confdao.Dao]()
-	defer global.Cleanup()
-	global.Dao.DB.ToSQL(func(tx *gorm.DB) *gorm.DB {
+	defer confdao.Global.Cleanup()
+	confdao.Dao.DB2155.ToSQL(func(tx *gorm.DB) *gorm.DB {
 		return tx.Create(&e)
 	})
 }

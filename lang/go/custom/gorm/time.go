@@ -10,5 +10,5 @@ import (
 func main() {
 	defer initialize.Start(confdao.Config, confdao.Dao)()
 	var tests []*model.Model
-	log.Info(confdao.Dao.DB.Table("test").Find(&tests))
+	log.Info(confdao.Dao.DB2111.Table("test").Find(&tests))
 }

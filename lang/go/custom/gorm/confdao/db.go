@@ -14,11 +14,13 @@ type config struct {
 
 type dao struct {
 	initialize.EmbeddedPresets
-	DB postgresi.DB
+	DB2155 postgresi.DB
 }
 
-var Dao = &dao{}
-var Config = &config{}
+var Global = initialize.NewGlobal[*config, *dao]()
+
+var Dao = Global.Dao
+var Config = Global.Config
 
 // var Global = initialize.NewGlobal[*config, *dao]()
 var DB, _ = gorm.Open(tests.DummyDialector{}, &gorm.Config{
