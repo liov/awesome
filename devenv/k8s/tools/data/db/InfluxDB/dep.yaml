@@ -7,14 +7,14 @@ metadata:
     app: influxdb
 data:
   DOCKER_INFLUXDB_INIT_MODE: "setup" # setup/upgrade
-  DOCKER_INFLUXDB_INIT_USERNAME: influxdb
+  DOCKER_INFLUXDB_INIT_USERNAME: "influxdb"
   DOCKER_INFLUXDB_INIT_PASSWORD: "123456"
-  DOCKER_INFLUXDB_INIT_ORG: influxdb
-  TZ: Asia/Shanghai
-  DOCKER_INFLUXDB_INIT_BUCKET: initbucket
+  DOCKER_INFLUXDB_INIT_ORG: "influxdb"
+  TZ: "Asia/Shanghai"
+  DOCKER_INFLUXDB_INIT_BUCKET: "initbucket"
   DOCKER_INFLUXDB_INIT_RETENTION: 1w
   DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: "token"
-  INFLUXD_BOLT_PATH: /data/influxdb/influxdb.bolt
+  INFLUXD_BOLT_PATH: "/data/influxdb/influxdb.bolt"
   INFLUXD_NO_TASKS: "true"
   INFLUXD_STORAGE_WAL_FSYNC_DELAY: "15m"
 ---

@@ -37,7 +37,7 @@ spec:
             failureThreshold: 3
           resources:
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2G
             requests:
               cpu: 200m
@@ -65,7 +65,7 @@ spec:
             failureThreshold: 3
           resources:
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 4G
             requests:
               cpu: 200m
