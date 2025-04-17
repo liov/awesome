@@ -15,6 +15,7 @@ type config struct {
 type dao struct {
 	initialize.EmbeddedPresets
 	DB2155 postgresi.DB
+	DB3111 postgresi.DB
 }
 
 var Global = initialize.NewGlobal[*config, *dao]()

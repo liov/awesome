@@ -43,11 +43,6 @@ type ModelA struct {
 
 const ModelTable = "model"
 
-type Test struct {
-	Id        int
-	DeletedAt sql.NullTime
-}
-
 type AB struct {
 	Id  int `json:"id" gorm:"primaryKey"`
 	BId int `json:"aId" `
@@ -104,9 +99,9 @@ func (m *ModelArray) TableName() string {
 	return "test"
 }
 
-type ModelJson struct {
+type Test struct {
 	gorm.Model
-	Json datatypes.JsonT[Tag] `gorm:"type:jsonb"`
+	V datatypes.NullJson[Tag] `gorm:"type:jsonb"`
 }
 
 type Tag struct {

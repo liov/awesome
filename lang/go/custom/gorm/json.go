@@ -1,30 +1,24 @@
 package main
 
 import (
-	"fmt"
-	"github.com/hopeio/initialize"
-	"github.com/hopeio/utils/dao/database/datatypes"
-	"gorm.io/gorm"
+	"github.com/hopeio/utils/log"
 	"test/custom/gorm/confdao"
 	"test/custom/gorm/model"
 )
 
 func main() {
-	e := model.ModelJson{
-		Json: datatypes.JsonT[model.Tag]{
-			Data: &model.Tag{
-				Model: gorm.Model{
-					ID: 1,
-				},
-			},
-		},
-	}
-	sql := confdao.DB.ToSQL(func(tx *gorm.DB) *gorm.DB {
-		return tx.Create(&e)
-	})
-	fmt.Println(sql)
-	defer initialize.Start(confdao.Config, confdao.Dao)()
-	confdao.Dao.DB2111.ToSQL(func(tx *gorm.DB) *gorm.DB {
-		return tx.Create(&e)
-	})
+	//confdao.Dao.DB3111.Migrator().CreateTable(&model.Test{})
+	defer confdao.Global.Cleanup()
+	//confdao.Dao.DB3111.Create(&model.Test{
+	//		V: datatypes.JsonT[model.Tag]{
+	//			V: model.Tag{
+	//				Model: gorm.Model{
+	//					ID: 1,
+	//				},
+	//			},
+	//		},
+	//	})
+	var e2 []model.Test
+	confdao.Dao.DB3111.Find(&e2)
+	log.Info(e2)
 }
