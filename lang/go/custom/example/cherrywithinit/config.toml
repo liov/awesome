@@ -1,0 +1,46 @@
+Module = "user"
+# dev | test | prod
+Env = "dev"
+
+[dev]
+debug = true
+ConfigTemplateDir = "./cherrywithinit"
+
+[dev.ConfigCenter]
+Format = "toml"
+Type = "local"
+NoInject = ["Apollo","Etcd", "Es"]
+
+[dev.ConfigCenter.local]
+ConfigPath = "./cherrywithinit/local.toml"
+ReloadType = "fsnotify"
+
+[test]
+Debug = false
+[test.ConfigCenter]
+Format = "json"
+configType = "nacos"
+Watch  = true
+NoInject = ["Apollo","Etcd", "Es"]
+
+[test.ConfigCenter.nacos]
+DataId = "pro"
+Group = "DEFAULT_GROUP"
+
+[[test.ConfigCenter.nacos.ServerConfigs]]
+Scheme = "http"
+IpAddr = "localhost"
+Port = 9000
+GrpcPort = 10000
+
+[test.ConfigCenter.nacos.ClientConfig]
+NamespaceId = ""
+username = "nacos"
+password = "123456"
+LogLevel = "debug"
+
+[prod]
+Debug = false
+[prod.ConfigCenter.http]
+Interval = 100
+Url = "http://localhost:6666/local.toml"
