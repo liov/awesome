@@ -1,11 +1,15 @@
 package client
 
 import (
+	"crypto/tls"
+	"net/http"
+	"os"
+	"testing"
+
 	"github.com/davecgh/go-spew/spew"
 	httpi "github.com/hopeio/utils/net/http"
 	"github.com/hopeio/utils/net/http/client"
 	clientv2 "github.com/hopeio/utils/net/http/client/v2"
-	"testing"
 )
 
 func TestUserList(t *testing.T) {
@@ -25,4 +29,20 @@ func TestUserListV2(t *testing.T) {
 	}
 
 	spew.Dump(res)
+}
+
+func TestU(t *testing.T) {
+	data, _ := os.ReadFile("D:/work/debug_infer.json")
+	var resp client.RawBytes
+	err := client.New().HttpClient(&http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true, // 禁用证书验证
+			},
+		},
+	}).Post("https://xxx", data, &resp)
+	if err != nil {
+		t.Log(err)
+	}
+	t.Log(string(resp))
 }
