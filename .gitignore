@@ -11,3 +11,6 @@ dist
 **/*.png
 **/*.svg
 **/*.dll
+lang/go/config.template.toml
+lang/go/local.template.toml
+lang/go/local.toml
