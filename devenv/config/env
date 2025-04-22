@@ -6,3 +6,4 @@ NVM_SYMLINK D:\Program Files\nodejs
 PKG_CONFIG_PATH D:\sdk\msys64\ucrt64\lib\pkgconfig
 VCPKG_ROOT
 PNPM_HOME D:\sdk\pnpm
+GRADLE_USER_HOME D:\sdk\gradle
