@@ -14,7 +14,7 @@ allprojects {
   apply<IdeaPlugin>()
   group = "xyz.hoper"
   version = "0.0.1-SNAPSHOT"
-  java.sourceCompatibility = JavaVersion.VERSION_11
+  java.sourceCompatibility = JavaVersion.VERSION_17
 
   repositories {
     maven("https://maven.aliyun.com/repository/public")
@@ -62,11 +62,11 @@ subprojects {
     }
 
     compileKotlin {
-      kotlinOptions.jvmTarget = "11"
+      kotlinOptions.jvmTarget = "17"
       kotlinOptions.freeCompilerArgs = listOf("-Xinline-classes")
     }
     compileTestKotlin {
-      kotlinOptions.jvmTarget = "11"
+      kotlinOptions.jvmTarget = "17"
       kotlinOptions.freeCompilerArgs = listOf("-Xinline-classes")
     }
   }
