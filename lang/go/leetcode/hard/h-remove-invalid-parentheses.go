@@ -113,7 +113,7 @@ func removeInvalidParentheses(s string) (ans []string) {
 			buf2 = append(buf2, buf1[i])
 		}
 	}
-	byteses = leetcode.reverse(buf2)
+	byteses = leetcode.Reverse(buf2)
 	var left, right []int
 	lremove, rremove := 0, 0
 	for i, ch := range byteses {

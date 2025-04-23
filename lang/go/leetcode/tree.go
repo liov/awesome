@@ -8,6 +8,21 @@ type TreeNode struct {
 	Left, Right *TreeNode
 }
 
+func (n *TreeNode) Insert(v int) {
+	if v > n.Val {
+		if n.Right == nil {
+			n.Right = &TreeNode{Val: v}
+		} else {
+			n.Right.Insert(v)
+		}
+	} else {
+		if n.Left == nil {
+			n.Left = &TreeNode{Val: v}
+		} else {
+			n.Left.Insert(v)
+		}
+	}
+}
 func NewTree(arr []int) *TreeNode {
 	root := &TreeNode{Val: arr[0]}
 	newTree(arr, root, 1, 2)
