@@ -1,6 +1,7 @@
 package leetcode
 
-/**
+/*
+*
 旋转图像
 
 给定一个 n × n 的二维矩阵表示一个图像。
@@ -47,22 +48,22 @@ package leetcode
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/rotate-image
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
-fun rotate(matrix: Array<IntArray>): Unit {
-  var n = matrix.size
-  var x: Int
-  var y: Int
-  var tmp: Int
-  while (n > 1) {
-    x = (matrix.size - n) / 2 //当前阶的第一位
-    y = x + n - 1 //当前阶的最后一位,matrix.size - 1 - x
-    for (i in 0 until n - 1) {
-      tmp = matrix[x][x + i]
-      matrix[x][x + i] = matrix[y - i][x]
-      matrix[y - i][x] = matrix[y][y - i]
-      matrix[y][y - i] = matrix[x + i][y]
-      matrix[x + i][y] = tmp
-    }
-    n -= 2
-  }
+*/
+func rotate(matrix [][]int) {
+	var n = len(matrix)
+	var x int
+	var y int
+	var tmp int
+	for n > 1 {
+		x = (len(matrix) - n) / 2 //当前阶的第一位
+		y = x + n - 1             //当前阶的最后一位,matrix.size - 1 - x
+		for i := range n - 1 {
+			tmp = matrix[x][x+i]
+			matrix[x][x+i] = matrix[y-i][x]
+			matrix[y-i][x] = matrix[y][y-i]
+			matrix[y][y-i] = matrix[x+i][y]
+			matrix[x+i][y] = tmp
+		}
+		n -= 2
+	}
 }

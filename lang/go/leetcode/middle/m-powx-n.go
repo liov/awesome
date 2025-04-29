@@ -1,5 +1,7 @@
 package leetcode
 
+import "math"
+
 /**
 50. Pow(x, n)
 
@@ -26,21 +28,35 @@ n 是 32 位有符号整数，其数值范围是 [−2^31, 2^31 − 1] 。
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/powx-n
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
+*/
 
-fun myPow(x: Double, n: Int): Double {
-  if (n == 0) return 1.0
-  var ret = 1.0
-  var vn = if (n < 0) -n else n
-  if (n == Int.MIN_VALUE) vn = Int.MAX_VALUE
-  var x1 = x
-  while (vn > 0) {
-    //n为15x^(1111),x^(1110)*x,x^(2*(111))*x,x^(2*(110))*x^2
-    //最后一位为1，则拆解开，剩余部分快速幂
-    if (vn and 1 == 1) ret *= x1
-    x1 *= x1
-    vn = vn shr 1
-  }
-  if (n == Int.MIN_VALUE) ret*=x
-  return if (n > 0) ret else 1 / ret
+func myPow(x float64, n int) float64 {
+	if n == 0 {
+		return 1.0
+	}
+	var ret = 1.0
+	vn := n
+	if n < 0 {
+		vn = -n
+	}
+	if n == math.MinInt64 {
+		vn = math.MaxInt64
+	}
+	var x1 = x
+	for vn > 0 {
+		//n为15x^(1111),x^(1110)*x,x^(2*(111))*x,x^(2*(110))*x^2
+		//最后一位为1，则拆解开，剩余部分快速幂
+		if vn&1 == 1 {
+			ret *= x1
+		}
+		x1 *= x1
+		vn = vn >> 1
+	}
+	if n == math.MinInt64 {
+		ret *= x
+	}
+	if n > 0 {
+		return ret
+	}
+	return 1 / ret
 }

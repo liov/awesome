@@ -1,5 +1,7 @@
 package leetcode
 
+import "test/leetcode"
+
 func Abs(a int) int {
 	if a >= 0 {
 		return a
@@ -49,4 +51,12 @@ func leftChild(i int) int {
 
 func rightChild(i int) int {
 	return i*2 + 2
+}
+
+func NewList(arr []int) *ListNode {
+	return leetcode.NewList(arr)
+}
+
+func NewTree(arr []int) *TreeNode {
+	return leetcode.NewTree(arr)
 }

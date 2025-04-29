@@ -1,8 +1,7 @@
 package leetcode
 
-java.lang.Math.pow
-
-/**
+/*
+*
 343. 整数拆分
 
 给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。
@@ -43,10 +42,10 @@ func integerBreak(n int) int {
 		mod = 1
 	}
 
-	return myPow(3, p) * mod
+	return integerBreakMyPow(3, p) * mod
 }
 
-func myPow(x int, n int) int {
+func integerBreakMyPow(x int, n int) int {
 	if n == 0 {
 		return 1
 	}
