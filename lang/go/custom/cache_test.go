@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/coocood/freecache"
-	"github.com/dgraph-io/ristretto"
+	"github.com/dgraph-io/ristretto/v2"
 	"runtime/debug"
 	"sync"
 	"testing"
