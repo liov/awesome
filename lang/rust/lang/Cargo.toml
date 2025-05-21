@@ -12,7 +12,6 @@ name = "lang"
 crate-type = ["staticlib", "cdylib", "lib"]
 
 [dependencies]
-p_macro = { path = "../p_macro" }
 rand = "0.8"
 rayon = "1"
 regex = "1"
@@ -57,20 +56,3 @@ bindgen = "0.70"
 cxx-build = "1.0"
 pkg-config = "0.3"
 napi-build = "2"
-
-
-[[bin]]
-name = "async"
-path = "src/bin/async/async.rs"
-
-[[bin]]
-name = "feature_recursive"
-path = "src/bin/async/feature_recursive.rs"
-
-[[bin]]
-name = "feature_select"
-path = "src/bin/async/feature_select.rs"
-
-[[bin]]
-name = "axum"
-path = "src/bin/axum/axum.rs"
