@@ -55,7 +55,9 @@ docker run --rm
 docker run --user="root" --privileged.
 # 细粒度权限控制
 --cap-add=NET_ADMIN
-
+# 打包镜像到文件
+docker save -o <file> <image>
+docker load -i <file>
 # 下表列出了Linux功能选项，这些选项是默认允许的，可以删除
 SETPCAP |修改进程的权限
 
