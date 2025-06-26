@@ -24,8 +24,8 @@ authorization:
 apiVersion: kubeadm.k8s.io/v1beta4
 kind: InitConfiguration
 nodeRegistration:
-  #criSocket: unix:///var/run/containerd/containerd.sock
-  criSocket: unix:///var/run/cri-dockerd.sock
+  #criSocket: unix:///run/containerd/containerd.sock
+  criSocket: unix:///run/cri-dockerd.sock
   #kubeletExtraArgs:
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
