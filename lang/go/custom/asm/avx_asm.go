@@ -25,10 +25,10 @@ void avx2_ssd_int16(const int16_t *a, const int16_t *b,const int32_t *sums) {
 import "C"
 import (
 	"fmt"
-	"github.com/hopeio/utils/iter"
+	slicesi "github.com/hopeio/utils/slices"
 	"math"
 	"math/rand/v2"
-	"slices"
+
 	"test/custom/asm/asm"
 	"test/custom/asm/goat"
 	"unsafe"
@@ -47,5 +47,5 @@ func main() {
 	fmt.Println("Result (first 10 values):", result)
 	sum := make([]int32, 8)
 	C.avx2_ssd_int16((*C.int16_t)(unsafe.Pointer(&a[0])), (*C.int16_t)(unsafe.Pointer(&b[0])), (*C.int32_t)(unsafe.Pointer(&sum[0])))
-	fmt.Println("Result (first 10 values):", iter.Sum(slices.Values(sum)), goat.Check(a, b))
+	fmt.Println("Result (first 10 values):", slicesi.Sum(sum), goat.Check(a, b))
 }
