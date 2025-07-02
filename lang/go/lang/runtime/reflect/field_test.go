@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"testing"
 )
 
 type FlagConfig struct {
@@ -45,7 +46,7 @@ type AfterSet2 struct {
 	Watch2 bool `FlagConfig:"name:awatch"`
 }
 
-func main() {
+func TestField(t *testing.T) {
 	flag := FlagConfig{}
 	vaule := reflect.ValueOf(&flag).Elem()
 
@@ -74,4 +75,26 @@ func main() {
 	flag3.a.Watch = false
 	fmt.Println(flag3)
 	fmt.Println(flag4)
+}
+
+type Foo struct {
+	A int
+}
+type Foo1 struct {
+	B int
+}
+
+type Bar struct {
+	Foo
+	Foo1
+}
+
+func TestStructFieldIndex(t *testing.T) {
+	b := Bar{}
+	bt := reflect.TypeOf(b)
+	for i := 0; i < bt.NumField(); i++ {
+		fmt.Println(bt.Field(i).Name, bt.Field(i).Index)
+	}
+	field, _ := bt.FieldByName("A")
+	fmt.Println(field.Index)
 }

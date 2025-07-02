@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"testing"
 )
 
 type A int
@@ -34,7 +35,7 @@ func (mt *MyType) String() string {
 	return fmt.Sprintf("%p", mt) + "--name:" + mt.name + " i:" + strconv.Itoa(mt.i)
 }
 
-func main() {
+func TestReflect(t *testing.T) {
 	var a A
 	// 取变量a的反射类型对象
 	typeOfA := reflect.TypeOf(a)
@@ -74,4 +75,92 @@ func main() {
 	params[0] = reflect.ValueOf("reflection hoper")
 	mtV.MethodByName("SetName").Call(params)
 	fmt.Println("After:", m2.Call(nil)[0])
+}
+
+type A1 struct{}
+
+func (receiver *A1) name() {
+
+}
+
+func (receiver *A1) Name() {
+
+}
+
+func (receiver *A1) Foo() {
+
+}
+
+func TestMethod(t *testing.T) {
+	var a A1
+	v := reflect.ValueOf(&a)
+	for i := range v.NumMethod() {
+		fmt.Println(i, v.Method(i).Type().String())
+	}
+	fmt.Println(v.MethodByName("name").String())
+	at := reflect.TypeOf(&a)
+	for i := range at.NumMethod() {
+		fmt.Println(i, at.Method(i).Name)
+	}
+	fmt.Println(at.MethodByName("name"))
+}
+
+func TestValid(t *testing.T) {
+	var a int
+	v := reflect.ValueOf(&a).Elem()
+	fmt.Println(v.IsValid())
+	var b *int
+	v = reflect.ValueOf(b).Elem()
+	fmt.Println(v.IsValid())
+}
+
+type Stack struct {
+	v []interface{}
+}
+
+type Queue []interface{}
+
+func TestSize(t *testing.T) {
+	tt := reflect.TypeOf(struct{}{})
+	t.Log(tt.Size())
+	tt = reflect.TypeOf(reflect.Value{})
+	t.Log(tt.Size())
+	tt = reflect.TypeOf(func() {})
+	t.Log(tt.Size())
+	tt = reflect.TypeOf([0][]int{})
+	t.Log(tt.Size())
+	var a *int8
+	tt = reflect.TypeOf(a)
+	t.Log(tt.Size())
+	tt = reflect.TypeOf(Stack{})
+	t.Log(tt.Size())
+	tt = reflect.TypeOf(Queue{})
+	t.Log(tt.Size())
+	var b interface{}
+	tt = reflect.TypeOf(b)
+	t.Log(tt.Size())
+}
+
+type A2 struct {
+	A int
+}
+
+func TestSetValue(t *testing.T) {
+	var a = A2{1}
+	var b = 2
+	reflect.ValueOf(&a).Elem().Field(0).Set(reflect.ValueOf(b))
+	fmt.Println(a)
+	b = 3
+	reflect.ValueOf(&a).Elem().Field(0).Set(reflect.ValueOf(&b).Elem())
+	fmt.Println(a)
+}
+
+func TestDeepEqual(t *testing.T) {
+	var a = []int{1, 2, 3}
+	var b = []int{3, 2, 1}
+	var c = []int{1, 2, 3}
+	var f = []int8{1, 2, 3}
+	fmt.Println(reflect.DeepEqual(a, b))
+	fmt.Println(reflect.DeepEqual(a, c))
+	fmt.Println(reflect.DeepEqual(a, f))
 }
