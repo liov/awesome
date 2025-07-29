@@ -1,6 +1,6 @@
 package model
 
-import "github.com/hopeio/utils/dao/database/datatypes"
+import "github.com/hopeio/utils/datax/database/datatypes"
 
 type TestJson struct {
 	ID        uint                      `json:"id" gorm:"primaryKey"`
