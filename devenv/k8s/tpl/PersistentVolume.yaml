@@ -1,14 +1,26 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: task-pv-volume
-  labels:
-    type: local
+  name: task-pv
 spec:
   storageClassName: manual
   capacity:
-    storage: 10Gi
+    storage: 300Mi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   hostPath:
     path: "/mnt/data"
+    type: DirectoryOrCreate
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: task-pvc
+spec:
+  storageClassName: manual
+  volumeName: task-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Mi

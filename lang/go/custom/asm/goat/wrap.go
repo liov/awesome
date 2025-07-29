@@ -2,7 +2,6 @@ package goat
 
 import (
 	"fmt"
-	"github.com/hopeio/utils/iter"
 	"slices"
 	"unsafe"
 )
