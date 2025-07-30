@@ -8,7 +8,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hopeio/utils/datastructure/cache/gcache"
+	"github.com/hopeio/gox/datastructure/cache/gcache"
 )
 
 func BenchmarkFree(b *testing.B) {

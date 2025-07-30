@@ -3,7 +3,7 @@ package kafka
 
 import (
 	"github.com/IBM/sarama"
-	"github.com/hopeio/utils/log"
+	"github.com/hopeio/gox/log"
 
 	"time"
 )
@@ -72,7 +72,7 @@ package kafka
 
 import (
 	"github.com/IBM/sarama"
-	"github.com/hopeio/utils/log"
+	"github.com/hopeio/gox/log"
 	"os"
 	"os/signal"
 	"time"

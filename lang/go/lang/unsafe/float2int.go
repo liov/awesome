@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/utils/math/bits"
-	reflecti "github.com/hopeio/utils/reflect"
+	"github.com/hopeio/gox/math/bits"
+	reflecti "github.com/hopeio/gox/reflect"
 	"unsafe"
 )
 

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"github.com/hopeio/cherry"
 	"github.com/hopeio/initialize/dao/gormdb/sqlite"
-	"github.com/hopeio/utils/os/fs"
-	timei "github.com/hopeio/utils/time"
+	"github.com/hopeio/gox/os/fs"
+	timei "github.com/hopeio/gox/time"
 	"runtime"
 	"time"
 )

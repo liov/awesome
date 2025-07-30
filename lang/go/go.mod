@@ -20,7 +20,7 @@ require (
 	github.com/hopeio/initialize v1.0.0
 	github.com/hopeio/iterext v0.0.0-20250702073926-d8365980d5a9
 	github.com/hopeio/protobuf v0.3.15
-	github.com/hopeio/utils v1.0.0
+	github.com/hopeio/gox v1.0.0
 	github.com/logdyhq/logdy-core v0.13.0
 	github.com/lucasb-eyer/go-colorful v1.0.2
 	github.com/spf13/pflag v1.0.6
@@ -216,5 +216,5 @@ require (
 replace (
 	github.com/hopeio/initialize => ../../../thirdparty/initialize
 	github.com/hopeio/protobuf => ../../../thirdparty/protobuf
-	github.com/hopeio/utils => ../../../thirdparty/utils
+	github.com/hopeio/gox => ./../../../thirdparty/gox
 )

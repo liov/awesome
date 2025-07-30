@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	imagei "github.com/hopeio/utils/media/image"
+	imagei "github.com/hopeio/gox/media/image"
 	"gocv.io/x/gocv"
 	"image"
 )

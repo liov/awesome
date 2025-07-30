@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	constraintsi "github.com/hopeio/utils/types/constraints"
+	constraintsi "github.com/hopeio/gox/types/constraints"
 	"math"
 )
 

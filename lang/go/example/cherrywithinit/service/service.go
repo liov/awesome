@@ -6,7 +6,7 @@ import (
 	user "test/example/cherrywithinit/proto"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hopeio/utils/errors/errcode"
+	"github.com/hopeio/gox/errors/errcode"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/hopeio/context/httpctx"

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	reflecti "github.com/hopeio/utils/reflect"
+	reflecti "github.com/hopeio/gox/reflect"
 	"reflect"
 	"unsafe"
 )

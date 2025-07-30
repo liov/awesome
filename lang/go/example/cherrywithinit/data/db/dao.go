@@ -4,7 +4,7 @@ import (
 	"test/example/cherrywithinit/model"
 
 	"github.com/hopeio/context/httpctx"
-	"github.com/hopeio/utils/log"
+	"github.com/hopeio/gox/log"
 	"gorm.io/gorm"
 )
 

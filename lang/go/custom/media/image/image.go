@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/hopeio/utils/log"
-	debugi "github.com/hopeio/utils/runtime/debug"
+	"github.com/hopeio/gox/log"
+	debugi "github.com/hopeio/gox/runtime/debug"
 	"image"
 	"image/draw"
 	"image/jpeg"

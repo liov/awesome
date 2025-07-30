@@ -1,6 +1,6 @@
 package errcode
 
-import "github.com/hopeio/utils/errors/errcode"
+import "github.com/hopeio/gox/errors/errcode"
 
 const (
 	DBError errcode.ErrCode = 21000

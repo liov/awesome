@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/hopeio/utils/encoding/gerber"
-	"github.com/hopeio/utils/encoding/gerber/svg"
-	"github.com/hopeio/utils/log"
+	"github.com/hopeio/gox/encoding/gerber"
+	"github.com/hopeio/gox/encoding/gerber/svg"
+	"github.com/hopeio/gox/log"
 	"os"
 )
 

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/hopeio/initialize"
-	"github.com/hopeio/utils/log"
+	"github.com/hopeio/gox/log"
 	"test/custom/gorm/confdao"
 	"test/custom/gorm/model"
 )

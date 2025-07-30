@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	httpi "github.com/hopeio/utils/net/http"
-	"github.com/hopeio/utils/net/http/client"
-	clientv2 "github.com/hopeio/utils/net/http/client/v2"
+	httpi "github.com/hopeio/gox/net/http"
+	"github.com/hopeio/gox/net/http/client"
+	clientv2 "github.com/hopeio/gox/net/http/client/v2"
 )
 
 func TestUserList(t *testing.T) {

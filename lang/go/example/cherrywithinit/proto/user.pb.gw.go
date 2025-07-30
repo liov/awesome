@@ -13,9 +13,9 @@ import (
 	"io"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hopeio/utils/net/http/gin/binding"
-	grpc_0 "github.com/hopeio/utils/net/http/grpc"
-	gin_0 "github.com/hopeio/utils/net/http/grpc/gateway/gin"
+	"github.com/hopeio/gox/net/http/gin/binding"
+	grpc_0 "github.com/hopeio/gox/net/http/grpc"
+	gin_0 "github.com/hopeio/gox/net/http/grpc/gateway/gin"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"

@@ -1,7 +1,7 @@
 package preformance
 
 import (
-	"github.com/hopeio/utils/cmp"
+	"github.com/hopeio/gox/cmp"
 	"testing"
 )
 

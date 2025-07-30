@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/hopeio/utils/log"
+	"github.com/hopeio/gox/log"
 	"testing"
 )
 

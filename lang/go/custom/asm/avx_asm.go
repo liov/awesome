@@ -25,7 +25,7 @@ void avx2_ssd_int16(const int16_t *a, const int16_t *b,const int32_t *sums) {
 import "C"
 import (
 	"fmt"
-	slicesi "github.com/hopeio/utils/slices"
+	slicesi "github.com/hopeio/gox/slices"
 	"math"
 	"math/rand/v2"
 

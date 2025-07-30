@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/utils/math/bits"
+	"github.com/hopeio/gox/math/bits"
 )
 
 const (

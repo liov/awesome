@@ -2,7 +2,7 @@ package model
 
 import (
 	"database/sql"
-	"github.com/hopeio/utils/datax/database/datatypes"
+	"github.com/hopeio/gox/datax/database/datatypes"
 	"gorm.io/gorm"
 	"time"
 )
