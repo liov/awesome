@@ -3,7 +3,7 @@ package leetcode
 import (
 	"bytes"
 	"github.com/hopeio/gox/slices"
-	stringsi "github.com/hopeio/gox/strings"
+	stringsx "github.com/hopeio/gox/strings"
 )
 
 /*
@@ -69,5 +69,5 @@ func addBinary(a string, b string) string {
 	if carry {
 		ret.WriteByte('1')
 	}
-	return stringsi.FromBytes(slices.Reverse(ret.Bytes()))
+	return stringsx.FromBytes(slices.Reverse(ret.Bytes()))
 }

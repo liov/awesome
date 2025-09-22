@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/hopeio/gox/net/http/client"
-	httpi "github.com/hopeio/gox/net/http/consts"
+	httpx "github.com/hopeio/gox/net/http/consts"
 	"github.com/hopeio/gox/scheduler/crawler"
 	"net/http"
 	"path"
@@ -21,7 +21,7 @@ func fetch(page string) *crawler.Request {
 	return &crawler.Request{
 		Key: page,
 		Run: func(ctx context.Context) ([]*crawler.Request, error) {
-			reader, err := client.New().AddHeader(httpi.HeaderUserAgent, client.UserAgentIphone).Request(http.MethodGet,
+			reader, err := client.New().AddHeader(httpx.HeaderUserAgent, client.UserAgentIphone).Request(http.MethodGet,
 				"https://m.yeitu.com/meinv/xinggan/20240321_33578_"+page+".html").DoStream(nil)
 			if err != nil {
 				return nil, err

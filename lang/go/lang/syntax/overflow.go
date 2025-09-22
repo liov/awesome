@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	constraintsi "github.com/hopeio/gox/types/constraints"
+	constraintsx "github.com/hopeio/gox/types/constraints"
 	"math"
 )
 
@@ -23,6 +23,6 @@ func f(i int) int {
 	return -i
 }
 
-func ValueFlip[T constraintsi.Number](i T) T {
+func ValueFlip[T constraintsx.Number](i T) T {
 	return -i
 }

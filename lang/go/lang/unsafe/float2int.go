@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/hopeio/gox/math/bits"
-	reflecti "github.com/hopeio/gox/reflect"
+	reflectx "github.com/hopeio/gox/reflect"
 	"unsafe"
 )
 
@@ -18,7 +18,7 @@ func main() {
 }
 
 func transform(f interface{}) interface{} {
-	p := (*reflecti.Eface)(unsafe.Pointer(&f)).Value
+	p := (*reflectx.Eface)(unsafe.Pointer(&f)).Value
 	switch f.(type) {
 	case float32:
 		return *(*int32)(p)
