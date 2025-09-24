@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	_ "github.com/hopeio/gox/dataaccess/database/gorm/serializer"
+	_ "github.com/hopeio/gox/database/sql/gorm/serializer"
 	"gorm.io/gorm"
 	"test/custom/gorm/confdao"
 	"test/custom/gorm/model"

@@ -2,9 +2,10 @@ package model
 
 import (
 	"database/sql"
-	"github.com/hopeio/gox/dataaccess/database/datatypes"
-	"gorm.io/gorm"
 	"time"
+
+	"github.com/hopeio/gox/database/sql/datatypes"
+	"gorm.io/gorm"
 )
 
 type Model struct {
