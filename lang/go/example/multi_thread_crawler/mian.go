@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
-	"github.com/PuerkitoBio/goquery"
-	"github.com/hopeio/gox/net/http/client"
-	httpx "github.com/hopeio/gox/net/http/consts"
-	"github.com/hopeio/gox/scheduler/crawler"
 	"net/http"
 	"path"
 	"strconv"
+
+	"github.com/PuerkitoBio/goquery"
+	httpx "github.com/hopeio/gox/net/http"
+	"github.com/hopeio/gox/net/http/client"
+	"github.com/hopeio/gox/scheduler/crawler"
 )
 
 func main() {

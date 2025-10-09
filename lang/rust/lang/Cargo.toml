@@ -1,0 +1,58 @@
+[package]
+name = "lang"
+version = "0.1.0"
+authors = ["贾一饼 <lby.i@qq.com>"]
+edition = "2021"
+build = "build.rs"
+exclude = ["index.node"]
+
+[lib]
+name = "lang"
+#  --crate-type [bin|lib|rlib|dylib|cdylib|staticlib|proc-macro]
+crate-type = ["staticlib", "cdylib", "lib"]
+
+[dependencies]
+rand = "0.8"
+rayon = "1"
+regex = "1"
+hashbrown = "0.15"
+serde = { version = "1", features = ["derive"] }
+serde_json = "*"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+warp = "0.3"
+tokio = { version = "1", features = ["full"] }
+async-std = { version = "1", features = ["unstable", "attributes"] }
+futures = "0.3"
+thiserror = "2"
+futures-timer = "3"
+axum = { version = "0.7" }
+console = "0.15"
+libc = "0.2"
+libloading = "0.8"
+cxx = "1"
+structopt = { version = "0.3", default-features = false }
+shared_memory = "0.12"
+napi = { version = "3.0.0-alpha.20", features = [ "async"] }
+napi-derive = {version = "3.0.0-alpha.18" }
+pyo3 = { version = "0.23", features = ["extension-module"] }
+
+[dependencies.windows]
+version = "0.58"
+features = [
+    "Data_Xml_Dom",
+    "Win32_System_Console",
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_Threading",
+    "Win32_UI_WindowsAndMessaging",
+]
+
+[dev-dependencies]
+
+[build-dependencies]
+cc = { version = "1", features = ["parallel"] }
+bindgen = "0.70"
+cxx-build = "1.0"
+pkg-config = "0.3"
+napi-build = "2"

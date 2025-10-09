@@ -1,11 +1,13 @@
 package errcode
 
-import "github.com/hopeio/gox/errors/errcode"
+import (
+	"github.com/hopeio/gox/errors"
+)
 
 const (
-	DBError errcode.ErrCode = 21000
+	DBError errors.ErrCode = 21000
 )
 
 func init() {
-	errcode.Register(DBError, "数据库错误")
+	errors.Register(DBError, "数据库错误")
 }
