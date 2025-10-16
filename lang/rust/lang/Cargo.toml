@@ -11,6 +11,10 @@ name = "lang"
 #  --crate-type [bin|lib|rlib|dylib|cdylib|staticlib|proc-macro]
 crate-type = ["staticlib", "cdylib", "lib"]
 
+[[bin]]
+name = "html-py-ever"
+path = "src/python.rs"
+
 [dependencies]
 rand = "0.8"
 rayon = "1"
@@ -35,7 +39,9 @@ structopt = { version = "0.3", default-features = false }
 shared_memory = "0.12"
 napi = { version = "3.0.0-alpha.20", features = [ "async"] }
 napi-derive = {version = "3.0.0-alpha.18" }
-pyo3 = { version = "0.23", features = ["extension-module"] }
+pyo3 = { version = "0.26", features = ["extension-module"] }
+kuchiki = "0.8.0"
+tendril = "0.4.3"
 
 [dependencies.windows]
 version = "0.58"

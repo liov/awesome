@@ -6,6 +6,8 @@ opt-level = 3
 
 [workspace]
 members = [
-    "lang"
+    "lang",
+    "p_macro",
+    "leetcode"
 ]
 resolver = "2"

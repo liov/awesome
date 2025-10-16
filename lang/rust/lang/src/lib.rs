@@ -1,8 +1,9 @@
-pub mod utils;
-pub mod math;
-pub mod timer_future;
-pub mod export;
+use pyo3::prelude::*;
 
+pub mod node;
+pub mod export;
+#[pymodule]
+pub mod python;
 pub mod bind{
     #![allow(non_upper_case_globals)]
     #![allow(non_camel_case_types)]
@@ -51,3 +52,4 @@ mod tests {
         assert_eq!(4, add(1, 3))
     }
 }
+
