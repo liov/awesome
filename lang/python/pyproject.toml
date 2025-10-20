@@ -28,7 +28,9 @@ dependencies = [
     #"pyecharts>=2.0.8",
     #"mayavi>=4.8.2",
     #"pyvista>=0.44.2"
-    "pillow-heif>=1.1.1"
+    "pillow-heif>=1.1.1",
+    "pymysql>=1.1.2",
+    "pysocks>=1.7.1"
 ]
 
 [build-system]

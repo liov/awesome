@@ -6,9 +6,10 @@ import time
 s = socket.socket()
 s.connect(('8.222.139.120', 3306))
 
-
+# 发送一个无效包，触发 Nebula 刷新缓冲区
+s.send(b'')  # 空数据包
 # 设置非阻塞或设置超时
-s.settimeout(5.0)  # 设置5秒超时
+s.settimeout(10.0)  # 设置5秒超时
 
 try:
     greeting = s.recv(1024)
