@@ -15,11 +15,12 @@ require (
 	github.com/google/wire v0.6.0
 	github.com/hashicorp/consul/api v1.31.0
 	github.com/hopeio/cherry v1.18.13
-	github.com/hopeio/context v0.3.7
+	github.com/hopeio/context v0.4.0
 	github.com/hopeio/gox v1.3.1
 	github.com/hopeio/initialize v1.0.0
 	github.com/logdyhq/logdy-core v0.13.0
 	github.com/lucasb-eyer/go-colorful v1.0.2
+	github.com/nacos-group/nacos-sdk-go/v2 v2.2.5
 	github.com/spf13/pflag v1.0.6
 	github.com/spf13/viper v1.20.0
 	github.com/tidwall/gjson v1.18.0
@@ -39,6 +40,7 @@ require (
 require (
 	dmitri.shuralyov.com/gpu/mtl v0.0.0-20201218220906-28db891af037 // indirect
 	github.com/DATA-DOG/go-sqlmock v1.5.2 // indirect
+	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/RoaringBitmap/roaring v1.9.3 // indirect
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/alibabacloud-go/darabonba-array v0.1.0 // indirect
@@ -78,6 +80,7 @@ require (
 	github.com/blevesearch/zapx/v16 v16.1.4 // indirect
 	github.com/brianvoe/gofakeit/v6 v6.28.0 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
+	github.com/bytedance/gopkg v0.1.3 // indirect
 	github.com/bytedance/sonic v1.14.1 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -96,6 +99,17 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-openapi/jsonpointer v0.21.1 // indirect
 	github.com/go-openapi/swag v0.24.1 // indirect
+	github.com/go-openapi/swag/cmdutils v0.24.0 // indirect
+	github.com/go-openapi/swag/conv v0.24.0 // indirect
+	github.com/go-openapi/swag/fileutils v0.24.0 // indirect
+	github.com/go-openapi/swag/jsonname v0.24.0 // indirect
+	github.com/go-openapi/swag/jsonutils v0.24.0 // indirect
+	github.com/go-openapi/swag/loading v0.24.0 // indirect
+	github.com/go-openapi/swag/mangling v0.24.0 // indirect
+	github.com/go-openapi/swag/netutils v0.24.0 // indirect
+	github.com/go-openapi/swag/stringutils v0.24.0 // indirect
+	github.com/go-openapi/swag/typeutils v0.24.0 // indirect
+	github.com/go-openapi/swag/yamlutils v0.24.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.27.0 // indirect
@@ -146,7 +160,6 @@ require (
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
 	github.com/mschoch/smat v0.2.0 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/nacos-group/nacos-sdk-go/v2 v2.2.5 // indirect
 	github.com/nxadm/tail v1.4.11 // indirect
 	github.com/oasdiff/yaml v0.0.0-20250309154309-f31be36b4037 // indirect
 	github.com/oasdiff/yaml3 v0.0.0-20250309153720-d2182401db90 // indirect
@@ -199,6 +212,7 @@ require (
 	go.uber.org/mock v0.5.2 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
+	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	golang.org/x/arch v0.14.0 // indirect
 	golang.org/x/crypto v0.41.0 // indirect
 	golang.org/x/image v0.26.0 // indirect
@@ -222,6 +236,8 @@ require (
 )
 
 replace (
+	github.com/hopeio/cherry => ../../../thirdparty/cherry
+	github.com/hopeio/context => ../../../thirdparty/context
 	github.com/hopeio/gox => ./../../../thirdparty/gox
 	github.com/hopeio/initialize => ../../../thirdparty/initialize
 	github.com/hopeio/protobuf => ../../../thirdparty/protobuf
