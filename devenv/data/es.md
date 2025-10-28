@@ -1,5 +1,15 @@
+绑定 0.0.0.0
+sudo vim /etc/elasticsearch/elasticsearch.yml
+# 绑定到所有网络接口
+network.host: 0.0.0.0
+
+# 或者同时指定 HTTP 和传输接口
+network.host: 0.0.0.0
+http.host: 0.0.0.0
+transport.host: 0.0.0.0
+sudo systemctl restart elasticsearch
 命令行连接 Elasticsearch 的几种方法
-以下是使用命令行工具连接 Elasticsearch 的几种常用方式：
+以下是使用命令行工具连接 Elasticsearch 的几种常用方式： 
 
 # 使用 curl命令
 ```bash
