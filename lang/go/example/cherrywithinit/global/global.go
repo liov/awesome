@@ -3,12 +3,13 @@ package global
 import (
 	"database/sql"
 	"fmt"
-	"github.com/hopeio/cherry"
-	"github.com/hopeio/initialize/dao/gormdb/sqlite"
-	"github.com/hopeio/gox/os/fs"
-	timei "github.com/hopeio/gox/time"
 	"runtime"
 	"time"
+
+	"github.com/hopeio/cherry"
+	"github.com/hopeio/gox/os/fs"
+	timex "github.com/hopeio/gox/time"
+	"github.com/hopeio/initialize/dao/gormdb/sqlite"
 )
 
 var (
@@ -42,14 +43,14 @@ type serverConfig struct {
 }
 
 func (c *config) BeforeInject() {
-	c.Customize.TokenMaxAge = timei.Day
+	c.Customize.TokenMaxAge = timex.Day
 }
 
 func (c *config) AfterInject() {
 	if runtime.GOOS == "windows" {
 	}
 
-	c.Customize.TokenMaxAge = timei.StdDuration(c.Customize.TokenMaxAge, time.Hour)
+	c.Customize.TokenMaxAge = timex.StdDuration(c.Customize.TokenMaxAge, time.Hour)
 }
 
 // dao dao.
