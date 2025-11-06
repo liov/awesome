@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	imagei "github.com/hopeio/gox/media/image"
-	"gocv.io/x/gocv"
 	"image"
+
+	imagex "github.com/hopeio/gox/media/image"
+	"gocv.io/x/gocv"
 )
 
 func main() {
 	centerX, centerY, length, width, angle := 8646, 17943, 5152, 1672, float64(180)
-	points := imagei.RectRotateByCenter(centerX, centerY, length, width, angle)
+	points := imagex.RectRotateByCenter(centerX, centerY, length, width, angle)
 	srcPoints := gocv.NewPointVectorFromPoints(points)
 	dstPoints := gocv.NewPointVectorFromPoints([]image.Point{
 		{X: 0, Y: 0},
