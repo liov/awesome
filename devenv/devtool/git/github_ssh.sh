@@ -4,9 +4,6 @@ cat ~/.ssh/liov.pub
 # Ubuntu/Debian
 sudo apt-get install gnupg
 
-# CentOS/RHEL
-sudo yum install gnupg
-
 # macOS (Homebrew)
 brew install gnupg
 
