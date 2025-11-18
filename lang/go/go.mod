@@ -1,6 +1,6 @@
 module test
 
-go 1.24.0
+go 1.25.0
 
 require (
 	bou.ke/monkey v1.0.2
@@ -15,8 +15,8 @@ require (
 	github.com/google/wire v0.6.0
 	github.com/hashicorp/consul/api v1.31.0
 	github.com/hopeio/cherry v1.18.13
-	github.com/hopeio/context v0.5.3
-	github.com/hopeio/gox v1.3.9
+	github.com/hopeio/context v0.5.4
+	github.com/hopeio/gox v1.3.10
 	github.com/hopeio/initialize v1.0.0
 	github.com/logdyhq/logdy-core v0.13.0
 	github.com/lucasb-eyer/go-colorful v1.0.2
@@ -30,7 +30,7 @@ require (
 	gocv.io/x/gocv v0.41.0
 	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b
 	golang.org/x/exp/shiny v0.0.0-20220414153411-bcd21879b8fd
-	golang.org/x/sys v0.35.0
+	golang.org/x/sys v0.36.0
 	gonum.org/v1/gonum v0.16.0
 	google.golang.org/grpc v1.76.0
 	google.golang.org/protobuf v1.36.8
@@ -55,7 +55,7 @@ require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.712 // indirect
 	github.com/aliyun/alibabacloud-dkms-gcs-go-sdk v0.5.1 // indirect
 	github.com/aliyun/alibabacloud-dkms-transfer-go-sdk v0.1.9 // indirect
-	github.com/andybalholm/brotli v1.1.1 // indirect
+	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/apache/arrow/go/v14 v14.0.2 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
@@ -197,7 +197,7 @@ require (
 	github.com/xuri/nfp v0.0.1 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
 	go.etcd.io/bbolt v1.4.0 // indirect
-	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
+	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.54.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.59.0 // indirect
 	go.opentelemetry.io/otel v1.38.0 // indirect
@@ -214,13 +214,13 @@ require (
 	go.uber.org/zap v1.27.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	golang.org/x/arch v0.14.0 // indirect
-	golang.org/x/crypto v0.41.0 // indirect
+	golang.org/x/crypto v0.42.0 // indirect
 	golang.org/x/image v0.26.0 // indirect
 	golang.org/x/mobile v0.0.0-20230531173138-3c911d8e3eda // indirect
 	golang.org/x/mod v0.27.0 // indirect
-	golang.org/x/net v0.43.0 // indirect
-	golang.org/x/sync v0.16.0 // indirect
-	golang.org/x/text v0.28.0 // indirect
+	golang.org/x/net v0.44.0 // indirect
+	golang.org/x/sync v0.17.0 // indirect
+	golang.org/x/text v0.29.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
 	golang.org/x/tools v0.36.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
