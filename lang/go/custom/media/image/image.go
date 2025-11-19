@@ -1,8 +1,6 @@
 package main
 
 import (
-	"github.com/hopeio/gox/log"
-	debugi "github.com/hopeio/gox/runtime/debug"
 	"image"
 	"image/draw"
 	"image/jpeg"
@@ -10,10 +8,13 @@ import (
 	"runtime"
 	"runtime/debug"
 	"runtime/pprof"
+
+	"github.com/hopeio/gox/log"
+	debugi "github.com/hopeio/gox/runtime/debug"
 )
 
 // pacman -S mingw-w64-ucrt-x86_64-graphviz
-// go tool pprof -http 127.0.0.1:8080 memprofile.out
+// go tool pprof -http=:8080 memprofile.out
 func main() {
 	debug.SetGCPercent(-1)
 	runtime.MemProfileRate = 1

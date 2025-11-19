@@ -7,7 +7,7 @@ import (
 )
 
 //install graphviz
-//go tool pprof http://localhost:8080/debug/pprof/profile?seconds=60
+//go tool pprof -http=:8080 cup.pprof
 
 // Go性能优化
 // Go语言项目中的性能优化主要有以下几个方面：

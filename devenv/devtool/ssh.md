@@ -43,3 +43,73 @@ $ sudo ufw reload
 您还可以通过键入来检查 ufw 防火墙的状态和完整详细信息。
 
 $ sudo ufw status verbose
+
+
+# 上传单个文件
+scp local_file.txt username@remote_host:/path/to/destination/
+
+# 上传整个目录（递归）
+scp -r local_directory/ username@remote_host:/path/to/destination/
+
+# 指定端口（非默认22端口时）
+scp -P 2222 local_file.txt username@remote_host:/path/to/destination/
+
+# 下载单个文件
+scp username@remote_host:/path/to/remote_file.txt ./local_directory/
+
+# 下载整个目录
+scp -r username@remote_host:/path/to/remote_directory/ ./local_directory/
+
+# 指定端口下载
+scp -P 2222 username@remote_host:/path/to/file.txt ./
+
+# 基本上传（显示进度）
+rsync -avP local_file.txt username@remote_host:/path/to/destination/
+
+# 上传目录
+rsync -avP local_directory/ username@remote_host:/path/to/destination/
+
+# 删除目标端多余文件（保持完全同步）
+rsync -avP --delete local_directory/ username@remote_host:/path/to/destination/
+
+# 指定端口
+rsync -avP -e "ssh -p 2222" local_file.txt username@remote_host:/path/
+
+# 从远程下载
+rsync -avP username@remote_host:/path/to/remote_file.txt ./
+
+# 下载目录
+rsync -avP username@remote_host:/path/to/remote_directory/ ./
+
+# 指定端口下载
+rsync -avP -e "ssh -p 2222" username@remote_host:/path/to/file.txt ./
+# 生成 SSH 密钥对
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+# 将公钥上传到服务器
+ssh-copy-id -i ~/.ssh/id_rsa.pub username@remote_host
+# 或手动复制
+cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+# 指定密钥文件
+scp -i ~/.ssh/private_key.pem local_file.txt username@remote_host:/path/
+rsync -avP -e "ssh -i ~/.ssh/private_key.pem" local_file.txt username@remote_host:/path/
+
+# scp 压缩
+scp -C local_large_file.txt username@remote_host:/path/
+
+# rsync 压缩
+rsync -avzP local_large_file.txt username@remote_host:/path/
+
+# 使用 sz/rz命令（Zmodem 协议）
+   需要在服务器和本地都安装支持 Zmodem 的终端工具。
+   服务器端安装：
+# Ubuntu/Debian
+sudo apt-get install lrzsz
+
+# 下载文件到本地
+sz filename.txt
+
+# 上传文件到服务器
+rz
+
+# 跳板机
+scp -J  xx@xxx:22 xxx@192.168.xx.xx:/dir/* ./dir/
