@@ -46,8 +46,8 @@ import (
 //
 // go tool pprof默认是使用-inuse_space进行统计，还可以使用-inuse-objects查看分配对象的数量。
 // http://localhost:8080/debug/pprof/
-// curl -o heap.out http://localhost:8080/debug/pprof/profile?seconds=300 (参数仅profile生效)
-// curl -o heap.out http://localhost:8080/debug/pprof/heap
+// curl -o cpu.pprof http://localhost:12345/debug/pprof/profile?seconds=300 (参数仅profile生效)
+// curl -o heap.pprof http://localhost:8080/debug/pprof/heap
 func main() {
 	http.ListenAndServe(":8080", nil)
 }
