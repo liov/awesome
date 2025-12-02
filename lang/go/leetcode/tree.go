@@ -32,11 +32,11 @@ func NewTree(arr []int) *TreeNode {
 func newTree(arr []int, root *TreeNode, left, right int) {
 	if left < len(arr) && arr[left] != 0 {
 		root.Left = &TreeNode{Val: arr[left]}
-		newTree(arr, root.Left, leftChild(left), rightChild(left))
+		newTree(arr, root.Left, LeftChild(left), rightChild(left))
 	}
 	if right < len(arr) && arr[right] != 0 {
 		root.Right = &TreeNode{Val: arr[right]}
-		newTree(arr, root.Right, leftChild(right), rightChild(right))
+		newTree(arr, root.Right, LeftChild(right), rightChild(right))
 	}
 }
 

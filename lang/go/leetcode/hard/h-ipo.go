@@ -168,11 +168,11 @@ func (heap MaxHeapIPO) Put(v *ProfitNodeIPO1) {
 }
 
 func (heap MaxHeapIPO) adjustUp(i int) {
-	p := leetcode.parent(i)
+	p := leetcode.Parent(i)
 	for p >= 0 && heap[i].Profit > heap[p].Profit {
 		heap.swap(i, p)
 		i = p
-		p = leetcode.parent(i)
+		p = leetcode.Parent(i)
 	}
 
 }
@@ -181,7 +181,7 @@ func (heap MaxHeapIPO) swap(i, j int) {
 	heap[i], heap[j] = heap[j], heap[i]
 }
 func (heap MaxHeapIPO) adjustDown(i int) {
-	child := leetcode.leftChild(i)
+	child := leetcode.LeftChild(i)
 	for child < len(heap) {
 		if child+1 < len(heap) && heap[child+1].Profit > heap[child].Profit {
 			child++
@@ -191,7 +191,7 @@ func (heap MaxHeapIPO) adjustDown(i int) {
 		}
 		heap.swap(i, child)
 		i = child
-		child = leetcode.leftChild(i)
+		child = leetcode.LeftChild(i)
 	}
 }
 
@@ -248,7 +248,7 @@ func findMaximizedCapital(k int, w int, profits []int, capital []int) int {
 	for {
 		for i < len(capital) && capital[i] <= w {
 			profitsHeap = append(profitsHeap, profits[i])
-			profitsHeap.adjustUp(len(profitsHeap) - 1)
+			profitsHeap.AdjustUp(len(profitsHeap) - 1)
 			i++
 		}
 		if len(profitsHeap) == 0 || profitsHeap[0] == 0 {
@@ -260,7 +260,7 @@ func findMaximizedCapital(k int, w int, profits []int, capital []int) int {
 			return w
 		}
 		profitsHeap[0] = 0
-		profitsHeap.adjustDown(0)
+		profitsHeap.AdjustDown(0)
 	}
 	return w
 }

@@ -50,7 +50,7 @@ func (c *config) AfterInject() {
 	if runtime.GOOS == "windows" {
 	}
 
-	c.Customize.TokenMaxAge = timex.StdDuration(c.Customize.TokenMaxAge, time.Hour)
+	c.Customize.TokenMaxAge = timex.NormalizeDuration(c.Customize.TokenMaxAge, time.Hour)
 }
 
 // dao dao.

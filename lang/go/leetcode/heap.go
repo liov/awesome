@@ -17,7 +17,7 @@ func NewMaxHeap(l int) MaxHeap {
 func NewMaxHeapFromArr(arr []int) MaxHeap {
 	heap := MaxHeap(arr)
 	for i := 1; i < len(arr); i++ {
-		heap.adjustUp(i)
+		heap.AdjustUp(i)
 	}
 	return heap
 }
@@ -25,7 +25,7 @@ func NewMaxHeapFromArr(arr []int) MaxHeap {
 func NewMaxHeapFromArr2(arr []int) MaxHeap {
 	heap := MaxHeap(arr)
 	for i := len(arr)/2 - 1; i >= 0; i-- {
-		heap.adjustDown(i)
+		heap.AdjustDown(i)
 	}
 	return heap
 }
@@ -35,21 +35,21 @@ func (heap MaxHeap) Put(val int) {
 		return
 	}
 	heap[0] = val
-	heap.adjustDown(0)
+	heap.AdjustDown(0)
 }
 
-func (heap MaxHeap) adjustUp(i int) {
-	p := parent(i)
+func (heap MaxHeap) AdjustUp(i int) {
+	p := Parent(i)
 	for p >= 0 && heap[i] > heap[p] {
 		Swap(heap, i, p)
 		i = p
-		p = parent(i)
+		p = Parent(i)
 	}
 
 }
 
-func (heap MaxHeap) adjustDown(i int) {
-	child := leftChild(i)
+func (heap MaxHeap) AdjustDown(i int) {
+	child := LeftChild(i)
 	for child < len(heap) {
 		if child+1 < len(heap) && heap[child+1] > heap[child] {
 			child++
@@ -59,7 +59,7 @@ func (heap MaxHeap) adjustDown(i int) {
 		}
 		Swap(heap, i, child)
 		i = child
-		child = leftChild(i)
+		child = LeftChild(i)
 	}
 }
 
