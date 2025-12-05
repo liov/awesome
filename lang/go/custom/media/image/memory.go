@@ -1,26 +1,27 @@
 package main
 
 import (
-	debugi "github.com/hopeio/gox/runtime/debug"
 	"image"
 	"image/jpeg"
 	"os"
 	"strconv"
+
+	runtimex "github.com/hopeio/gox/runtime"
 )
 
 func main() {
 	var img image.RGBA
 	ptr(&img)
-	debugi.PrintMemoryUsage(len(img.Pix))
+	runtimex.PrintMemoryUsage(len(img.Pix))
 	ptr(&img)
-	debugi.PrintMemoryUsage(len(img.Pix))
+	runtimex.PrintMemoryUsage(len(img.Pix))
 	ptr(&img)
-	debugi.PrintMemoryUsage(len(img.Pix))
+	runtimex.PrintMemoryUsage(len(img.Pix))
 	for i := range 3 {
 		outFile, _ := os.Create("D:/" + strconv.Itoa(i) + ".jpg")
 		jpeg.Encode(outFile, &img, &jpeg.Options{Quality: 100})
 		outFile.Close()
-		debugi.PrintMemoryUsage(1)
+		runtimex.PrintMemoryUsage(1)
 	}
 }
 

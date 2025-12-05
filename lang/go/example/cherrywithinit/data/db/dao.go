@@ -3,7 +3,7 @@ package db
 import (
 	"test/example/cherrywithinit/model"
 
-	"github.com/hopeio/context/httpctx"
+	"github.com/hopeio/gox/context/httpctx"
 	"github.com/hopeio/gox/log"
 	"gorm.io/gorm"
 )

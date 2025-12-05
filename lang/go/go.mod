@@ -15,8 +15,8 @@ require (
 	github.com/google/wire v0.6.0
 	github.com/hashicorp/consul/api v1.31.0
 	github.com/hopeio/cherry v1.18.13
-	github.com/hopeio/context v0.5.13
-	github.com/hopeio/gox v1.3.23
+	github.com/hopeio/context v0.5.15
+	github.com/hopeio/gox v1.3.25
 	github.com/hopeio/initialize v1.0.0
 	github.com/logdyhq/logdy-core v0.13.0
 	github.com/lucasb-eyer/go-colorful v1.0.2
@@ -236,7 +236,6 @@ require (
 
 replace (
 	github.com/hopeio/cherry => ../../../thirdparty/cherry
-	github.com/hopeio/context => ../../../thirdparty/context
 	github.com/hopeio/gox => ./../../../thirdparty/gox
 	github.com/hopeio/initialize => ../../../thirdparty/initialize
 	github.com/hopeio/protobuf => ../../../thirdparty/protobuf
