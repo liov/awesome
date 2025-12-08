@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	constraintsx "github.com/hopeio/gox/types/constraints"
 	"math"
+
+	constraintsx "github.com/hopeio/gox/types/constraints"
 )
 
 type Foo struct {
