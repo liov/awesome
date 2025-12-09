@@ -66,7 +66,7 @@ func main() {
 	})
 	defer speedInputEvt.Release()
 
-	// Handle mouse
+	// Handler mouse
 	doc.Call("addEventListener", "mousemove", mouseMoveEvt)
 	doc.Call("getElementById", "count").Call("addEventListener", "change", countChangeEvt)
 	doc.Call("getElementById", "speed").Call("addEventListener", "input", speedInputEvt)

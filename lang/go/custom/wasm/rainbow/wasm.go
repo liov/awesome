@@ -44,7 +44,7 @@ func main() {
 
 	var renderFrame js.Func
 	renderFrame = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		// Handle window resizing
+		// Handler window resizing
 		curBodyW := doc.Get("body").Get("clientWidth").Float()
 		curBodyH := doc.Get("body").Get("clientHeight").Float()
 		if curBodyW != bodyW || curBodyH != bodyH {
