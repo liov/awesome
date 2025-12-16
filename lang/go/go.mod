@@ -16,7 +16,7 @@ require (
 	github.com/hashicorp/consul/api v1.31.0
 	github.com/hopeio/cherry v1.18.13
 	github.com/hopeio/context v0.5.15
-	github.com/hopeio/gox v1.6.7
+	github.com/hopeio/gox v1.6.11
 	github.com/hopeio/initialize v1.0.0
 	github.com/logdyhq/logdy-core v0.13.0
 	github.com/lucasb-eyer/go-colorful v1.0.2
