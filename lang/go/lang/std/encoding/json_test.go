@@ -3,8 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/hopeio/gox/log"
 	"testing"
+
+	"github.com/hopeio/gox/log"
 )
 
 type Foo struct {
@@ -137,4 +138,11 @@ func TestFloat(t *testing.T) {
 		log.Info(err)
 	}
 	log.Info(string(data))
+}
+
+func TestSlice(t *testing.T) {
+	var a any
+	var b = `[1,2,3]`
+	json.Unmarshal([]byte(b), &a)
+	t.Log(a)
 }
