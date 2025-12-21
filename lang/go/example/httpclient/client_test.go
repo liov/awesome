@@ -13,7 +13,7 @@ import (
 )
 
 func TestUserList(t *testing.T) {
-	var res httpx.RespData[UserListRes]
+	var res httpx.CommonResp[UserListRes]
 	client := client.New().AddHeader("Content-Type", "application/json").LogLevel(client.LogLevelInfo)
 	err := client.Request("GET", "http://localhost:8080/api/user").Do(&Page{1, 2}, &res)
 	if err != nil {
@@ -23,7 +23,7 @@ func TestUserList(t *testing.T) {
 }
 
 func TestUserListV2(t *testing.T) {
-	res, err := clientv2.NewRequest[httpx.RespData[UserListRes]]("GET", "http://localhost:8080/api/user").Do(&Page{1, 2})
+	res, err := clientv2.NewRequest[httpx.CommonResp[UserListRes]]("GET", "http://localhost:8080/api/user").Do(&Page{1, 2})
 	if err != nil {
 		t.Log(err)
 	}
