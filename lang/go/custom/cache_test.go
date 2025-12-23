@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/coocood/freecache"
 	"github.com/dgraph-io/ristretto/v2"
+	"github.com/hopeio/gox/container/cache"
+
 	"runtime/debug"
 	"sync"
 	"testing"
-
-	"github.com/hopeio/gox/container/cache/gcache"
 )
 
 func BenchmarkFree(b *testing.B) {
@@ -29,7 +30,7 @@ func BenchmarkFree(b *testing.B) {
 }
 
 func BenchmarkGCache(b *testing.B) {
-	gc := gcache.New(20).
+	gc := cache.New(20).
 		LRU().
 		Build()
 	gc.Set("key", "ok")
