@@ -3,8 +3,9 @@ package main
 import (
 	"log"
 	"path"
+	"testing"
 )
 
-func main() {
+func TestDir(t *testing.T) {
 	log.Println(path.Dir("F:\\a\\video"))
 }

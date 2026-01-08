@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
-func main() {
+func TestFmt(t *testing.T) {
 	var a = []int{1, 2, 3, 4, 5}
 	fmt.Printf("%v\n", a)
 }
