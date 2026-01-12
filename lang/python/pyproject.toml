@@ -21,7 +21,7 @@ dependencies = [
     "opencv-contrib-python>=4.10.0.84",
     #"drawsvg>=2.4.0",
     "cffi>=1.17.0",
-    #"easyocr>=1.7.2",
+    "easyocr>=1.7.2",
     #"pandas>=2.2.3",
     #"yfinance>=0.2.52",
     #"akshare>=1.15.85",
@@ -34,14 +34,14 @@ dependencies = [
 ]
 
 [build-system]
-requires = ["pdm-backend","setuptools","setuptools-rust", "wheel", "Cython"]
-build-backend = "pdm.backend"
+requires = ["uv_build>=0.9.23,<0.10.0"]
+build-backend = "uv_build"
 
+[tool.uv.build-backend]
+module-name = "tests"
+module-root = ""
 
-[tool.pdm]
-distribution = true
-
-[[tool.pdm.source]]
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-verify_ssl = true
-name = "pypi"
+[tool.uv.workspace]
+members = [
+    "example",
+]
