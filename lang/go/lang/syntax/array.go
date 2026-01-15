@@ -3,13 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	var a A
+	var a Arr
 	a.method()
 	fmt.Println(a)
 }
 
-type A [5]int
+type Arr [5]int
 
-func (a *A) method() {
+func (a *Arr) method() {
 	a[0] = 1
 }

@@ -4,12 +4,14 @@ import (
 	"container/list"
 	"fmt"
 	"reflect"
+	"testing"
+	"unsafe"
 )
 
-type Foo1 uint32
+type S1 uint32
 
 func main() {
-	var foo Foo1
+	var foo S1
 	t := reflect.TypeOf(&foo).Elem()
 	println(t.Kind())
 	v := reflect.ValueOf(&foo).Elem()
@@ -25,7 +27,7 @@ func Tpy(v interface{}) {
 	switch v.(type) {
 	case uint32:
 		println("uint32")
-	case Foo1:
+	case S1:
 		println("Foo")
 	}
 }
@@ -44,4 +46,53 @@ func (receiver Queue) Point() {
 
 type List struct {
 	list.List
+}
+
+type Func func()
+type Foo1 struct {
+	arr []Func
+	a   int
+}
+
+type Foo2 struct {
+	arr []struct{}
+	a   int
+}
+
+func TestSizeof(t *testing.T) {
+	foo1 := Foo1{
+		arr: []Func{
+			func() {
+				println("foo1")
+			},
+		},
+		a: 1,
+	}
+	foo2 := Foo2{
+		arr: []struct{}{
+			{},
+		},
+		a: 1,
+	}
+	fmt.Println(unsafe.Sizeof(foo1))
+	fmt.Println(unsafe.Sizeof(foo2))
+}
+
+type FooPtr1 struct {
+	A string
+}
+
+type FooPtr2 struct {
+	*FooPtr1
+}
+
+func TestPtr(t *testing.T) {
+	var a FooPtr1
+	a.A = "hello"
+	var b FooPtr2
+	b.FooPtr1 = &a
+	fmt.Println(unsafe.Sizeof(&a))
+	fmt.Println(unsafe.Sizeof(b))
+	fmt.Println(unsafe.Pointer(&a))
+	fmt.Println(unsafe.Pointer(uintptr(*(*uint)(unsafe.Pointer(&b)))))
 }

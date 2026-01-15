@@ -4,9 +4,10 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
+	"testing"
 )
 
-func main() {
+func TestParse(t *testing.T) {
 	// src是我们要打印AST的输入。
 	src := `
 package main
