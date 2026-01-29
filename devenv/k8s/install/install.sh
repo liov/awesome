@@ -130,3 +130,24 @@ kubectl apply -f tls.yaml
 # tools
 kubectl create namespace tools
 
+# 证书过期
+sudo kubeadm certs renew all
+sudo kubeadm init phase kubeconfig admin # 元宝问的没有这行
+sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# 查看 kubelet 当前使用的证书（需要 root 权限）
+sudo openssl x509 -in /var/lib/kubelet/pki/kubelet.crt -text -noout
+# 1. 删除旧的 kubelet 证书（自动触发重新生成）
+sudo rm -f /var/lib/kubelet/pki/kubelet.crt
+sudo rm -f /var/lib/kubelet/pki/kubelet.key
+
+# 查找并重启相关容器
+systemctl restart kubelet
+docker restart $(docker ps | grep kube-apiserver | awk '{print $1}')
+docker restart $(docker ps | grep kube-controller-manager | awk '{print $1}')
+docker restart $(docker ps | grep kube-scheduler | awk '{print $1}')
+## 自动续期
+sudo vim /var/lib/kubelet/config.yaml
+rotateCertificates: true
+serverTLSBootstrap: true
