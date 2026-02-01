@@ -131,22 +131,30 @@ kubectl apply -f tls.yaml
 kubectl create namespace tools
 
 # 证书过期
-sudo kubeadm certs renew all
+sudo kubeadm init phase certs all
 sudo kubeadm init phase kubeconfig admin # 元宝问的没有这行
-sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+sudo kubeadm init phase kubeconfig kubelet --node-name pc
 
 # 查看 kubelet 当前使用的证书（需要 root 权限）
 sudo openssl x509 -in /var/lib/kubelet/pki/kubelet.crt -text -noout
-# 1. 删除旧的 kubelet 证书（自动触发重新生成）
-sudo rm -f /var/lib/kubelet/pki/kubelet.crt
-sudo rm -f /var/lib/kubelet/pki/kubelet.key
+# 1. 清理所有 kubelet 证书
+sudo rm -f /var/lib/kubelet/pki/kubelet.crt /var/lib/kubelet/pki/kubelet.key
+
+sudo kubeadm certs renew all
+sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # 查找并重启相关容器
-systemctl restart kubelet
+sudo systemctl restart kubelet
 docker restart $(docker ps | grep kube-apiserver | awk '{print $1}')
 docker restart $(docker ps | grep kube-controller-manager | awk '{print $1}')
 docker restart $(docker ps | grep kube-scheduler | awk '{print $1}')
+
+同时，在拥有 /etc/kubernetes/pki/ca.key文件的控制平面节点（Master）上，检查是否有待处理的证书签名请求（CSR）：
+kubectl get csr
+如果看到状态为 Pending的 CSR，手动批准它：
+kubectl certificate approve <csr-name>
+
 ## 自动续期
 sudo vim /var/lib/kubelet/config.yaml
 rotateCertificates: true
