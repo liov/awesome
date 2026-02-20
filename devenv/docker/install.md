@@ -41,11 +41,15 @@ vi /etc/docker/daemon.json
     },
     "storage-driver": "overlay2",
     "registry-mirrors": [
-        "https://docker.hoper.xyz"
+        //"https://docker.hoper.xyz"
     ],
     "insecure-registries": [
-        "docker.hoper.xyz"
-    ],
+       // "docker.hoper.xyz"
+    ], 
+    "proxies":{
+      "http-proxy":"http://127.0.0.1:10808",
+      "https-proxy":"http://127.0.0.1:10808"
+    },
     "features": {
         "buildkit": true
     },

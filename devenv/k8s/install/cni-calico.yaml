@@ -5,7 +5,7 @@ kind: Installation
 metadata:
   name: default
 spec:
-  registry: docker.hoper.xyz
+  #registry: docker.hoper.xyz
   # Configures Calico networking.
   calicoNetwork:
     ipPools:

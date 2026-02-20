@@ -31,8 +31,8 @@ sudo containerd config default > /etc/containerd/config.toml
   sandbox_image = "registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.10"
 [plugins."io.containerd.grpc.v1.cri".registry]
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
-    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
-      endpoint = ["https://docker.hoper.xyz"]
+    #[plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+      #endpoint = ["https://docker.hoper.xyz"]
     [plugins."io.containerd.grpc.v1.cri".registry.mirrors."k8s.gcr.io"]
       endpoint = ["https://registry.cn-hangzhou.aliyuncs.com/google_containers"]
 ```/etc/containerd/config.toml
