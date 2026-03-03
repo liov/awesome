@@ -5,6 +5,6 @@ Env = "dev"
 [dev]
 Debug = true
 ConfigTemplateDir = "."
-#NoInject = ["GORMDB"]
+#SkipInjectDaos = ["GORMDB"]
 [dev.localConfig]
 Paths = ["local.toml"]
