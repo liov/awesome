@@ -268,3 +268,18 @@ git submodule foreach -q --recursive 'git checkout $(git config -f $toplevel/.gi
 # git更改远程仓库
 git remote set-url origin https://github.com/新的仓库.git
 git remote set-url origin https://github.com/xxx.git
+
+# 切分支失败
+```bash
+git checkout master
+error: Your local changes to the following files would be overwritten by checkout:
+        submodule/protocol
+Please commit your changes or stash them before you switch branches.
+Aborting
+```
+把文件恢复到 HEAD 版本
+git restore --staged --source=HEAD -- <file>
+git checkout HEAD -- <file>
+
+
+git checkout master
