@@ -5,7 +5,7 @@ import (
 	"test/custom/gorm/confdao"
 	"test/custom/gorm/model"
 
-	_ "github.com/hopeio/gox/database/sql/gorm/serializer"
+	_ "github.com/hopeio/gox/database/sql/gorm"
 	"gorm.io/gorm"
 )
 

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/hopeio/gox/database/sql/datatypes"
+	sqlx "github.com/hopeio/gox/database/sql"
 	"gorm.io/gorm"
 )
 
@@ -102,7 +102,7 @@ func (m *ModelArray) TableName() string {
 
 type Test struct {
 	gorm.Model
-	V datatypes.NullJson[Tag] `gorm:"type:jsonb"`
+	V sqlx.NullJson[Tag] `gorm:"type:jsonb"`
 }
 
 type Tag struct {
