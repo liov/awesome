@@ -8,6 +8,3 @@ pub mod rotate_right;
 pub mod rotate;
 pub mod trap_rain_water;
 pub mod h_trap_rain_water_ii;
-
-pub mod node;
-pub mod python;

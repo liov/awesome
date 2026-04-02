@@ -1,8 +1,14 @@
 use pyo3::prelude::*;
-/// Formats the sum of two numbers as string.
+use pyo3::types::PyModule;
 use std::io::Read;
 use std::path::Path;
 use tendril::stream::TendrilSink;
+
+/// Formats the sum of two numbers as string.
+#[pyfunction]
+fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
+    Ok((a + b).to_string())
+}
 
 /// A parsed html document
 #[pyclass(unsendable)]
@@ -46,4 +52,13 @@ fn parse_file(path: &str) -> PyResult<Document> {
 fn parse_text(text: &str) -> PyResult<Document> {
     let document = Document::from_reader(&mut text.as_bytes())?;
     Ok(document)
+}
+
+#[pymodule]
+fn _lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
+    m.add_class::<Document>()?;
+    m.add_function(wrap_pyfunction!(parse_file, m)?)?;
+    m.add_function(wrap_pyfunction!(parse_text, m)?)?;
+    Ok(())
 }

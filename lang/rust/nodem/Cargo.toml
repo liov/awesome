@@ -1,15 +1,21 @@
 [package]
-name = "leetcode"
+name = "nodem"
 version = "0.1.0"
 authors = ["贾一饼 <lby.i@qq.com>"]
-edition = "2021"
+edition = "2024"
+exclude = ["index.node"]
+build = "build.rs"
 
 [lib]
-name = "leetcode"
+name = "nodem"
 #  --crate-type [bin|lib|rlib|dylib|cdylib|staticlib|proc-macro]
 crate-type = ["staticlib", "cdylib", "lib"]
 
 [dependencies]
+shared_memory = "0.12"
+napi = { version = "3.0.0-alpha.20", features = [ "async"] }
+napi-derive = {version = "3.0.0-alpha.18" }
+tokio = { version = "1", features = ["fs"] }
 
 [dependencies.windows]
 version = "0.58"

@@ -1,5 +1,3 @@
-#![feature(write_all_vectored)]
-
 use std::thread;
 use std::time::Duration;
 use std::io::{self, BufWriter, Write};

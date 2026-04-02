@@ -2,18 +2,14 @@
 name = "lang"
 version = "0.1.0"
 authors = ["贾一饼 <lby.i@qq.com>"]
-edition = "2021"
+edition = "2024"
 build = "build.rs"
-exclude = ["index.node"]
 
 [lib]
 name = "lang"
 #  --crate-type [bin|lib|rlib|dylib|cdylib|staticlib|proc-macro]
 crate-type = ["staticlib", "cdylib", "lib"]
 
-[[bin]]
-name = "html-py-ever"
-path = "src/python.rs"
 
 [dependencies]
 rand = "0.8"
@@ -37,11 +33,8 @@ libloading = "0.8"
 cxx = "1"
 structopt = { version = "0.3", default-features = false }
 shared_memory = "0.12"
-napi = { version = "3.0.0-alpha.20", features = [ "async"] }
-napi-derive = {version = "3.0.0-alpha.18" }
-pyo3 = { version = "0.26", features = ["extension-module"] }
-kuchiki = "0.8.0"
-tendril = "0.4.3"
+
+
 
 [dependencies.windows]
 version = "0.58"
@@ -58,7 +51,7 @@ features = [
 
 [build-dependencies]
 cc = { version = "1", features = ["parallel"] }
-bindgen = "0.70"
+bindgen = "0.72"
 cxx-build = "1.0"
 pkg-config = "0.3"
 napi-build = "2"

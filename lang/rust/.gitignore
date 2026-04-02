@@ -10,3 +10,4 @@ gen
 protobuf
 !/**/mod.rs
 *.lock
+.venv

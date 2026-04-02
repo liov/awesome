@@ -6,7 +6,7 @@ use std::ffi::{CStr, c_void};
 use std::os::raw::c_char;
 use std::time::{ SystemTime};
 #[link(name = "clib")]
-extern {
+unsafe extern "C" {
     fn fibonacci(n: c_uint) -> c_ulonglong;
     fn your_func(arg1: c_int, arg2: *mut c_void) -> size_t; // 声明ffi函数
     fn your_func2(arg1: c_int, arg2: *mut c_void) -> size_t;

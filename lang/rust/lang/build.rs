@@ -13,7 +13,7 @@ fn main() {
     //build具体到bin中的某个文件无效，猜测可能是库crate才有效
 }
 
-#[cfg(windows)]
+
 fn build(){
     //gcc -shared -O2 -o clib.dll clib.c
     cc::Build::new()
@@ -21,8 +21,6 @@ fn build(){
         .define("FOO", Some("bar"))
         .include("c")
         .opt_level(2)
-        .shared_flag(true)
-        .static_flag(true)
         .compile("clib");
 }
 
@@ -41,6 +39,7 @@ fn rustbind(){
             // The input header we would like to generate
             // bindings for.
             .header("c/wrapper.h")
+            .rust_edition(bindgen::RustEdition::Edition2024)
             // Tell cargo to invalidate the built crate whenever any of the
             // included header files changed.
             .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
