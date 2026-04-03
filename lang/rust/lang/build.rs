@@ -7,6 +7,7 @@ fn main() {
     println!("cargo:rerun-if-changed=c/*");
     println!("cargo:rerun-if-changed=build.rs");
     build();
+    build_dylib();
     rustbind();
     opencv();
     println!("build successfully");
@@ -15,13 +16,25 @@ fn main() {
 
 
 fn build(){
-    //gcc -shared -O2 -o clib.dll clib.c
     cc::Build::new()
         .file("c/clib.c")
         .define("FOO", Some("bar"))
         .include("c")
         .opt_level(2)
         .compile("clib");
+}
+
+fn build_dylib() {
+    let ext = if cfg!(target_os = "macos") { "dylib" } else { "so" };
+    let manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+    let output = format!("{}/c/libclib.{}", manifest_dir, ext);
+    let compiler = cc::Build::new().opt_level(2).get_compiler();
+    let status = compiler.to_command()
+        .args(["-shared", "-fPIC", "-O2", "-o", &output, "c/clib.c"])
+        .status()
+        .expect("compiler not found");
+    assert!(status.success(), "clib dylib build failed");
+    println!("cargo:rustc-env=CLIB_DYLIB_PATH={}", output);
 }
 
 fn rustbind(){

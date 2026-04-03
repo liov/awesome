@@ -11,3 +11,5 @@ protobuf
 !/**/mod.rs
 *.lock
 .venv
+*.dSYM
+*.dylib

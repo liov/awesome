@@ -74,7 +74,7 @@ fn rust_fibonacci(n:usize) -> u64{
 fn call_dynamic() {
     let now = SystemTime::now();
     unsafe {
-        let lib = libloading::Library::new("./c/clib.dll").unwrap();
+        let lib = libloading::Library::new(env!("CLIB_DYLIB_PATH")).unwrap();
         let func: libloading::Symbol<unsafe extern fn(u32) -> u64> = lib.get(b"fibonacci").unwrap();
         let value = func(43);
         println!("C_fib:{:?},{:?}", SystemTime::now().duration_since(now).unwrap().as_millis(),value);

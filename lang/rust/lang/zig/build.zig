@@ -1,26 +1,26 @@
 const std = @import("std");
-// 跑不了，别搞zig了,坑多资料少, opencv去lib下找opencv_core.dll不找libopencv_core.dll
+
 pub fn build(b: *std.Build) void {
-    // 标准构建目标
     const target = b.standardTargetOptions(.{});
-    // 标准构建模式
     const optimize = b.standardOptimizeOption(.{
         .preferred_optimize_mode = .ReleaseFast,
     });
-    const exe = b.addExecutable(.{
-        .name = "opencv_test",
+    const mod = b.createModule(.{
         .root_source_file = b.path("win.zig"),
         .target = target,
         .optimize = optimize,
     });
+    const exe = b.addExecutable(.{
+        .name = "win",
+        .root_module = mod,
+    });
 
     exe.linkLibC();
     exe.linkLibCpp();
-    // 添加 OpenCV 库
-    exe.linkSystemLibrary("opencv4");
+    exe.addIncludePath(.{ .cwd_relative = "/opt/homebrew/opt/opencv/include/opencv4" });
+    exe.addLibraryPath(.{ .cwd_relative = "/opt/homebrew/opt/opencv/lib" });
+    exe.linkSystemLibrary("opencv_highgui");
+    exe.linkSystemLibrary("opencv_core");
 
-    // 编译
-    exe.addRPath(b.path("$ORIGIN"));
-    b.default_step.dependOn(&exe.step);
     b.installArtifact(exe);
 }

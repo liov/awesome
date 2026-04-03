@@ -1,0 +1,2 @@
+[console_scripts]
+sum-cli = hello_world.sum_cli:main
