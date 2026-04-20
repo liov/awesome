@@ -79,12 +79,12 @@ func TestMarshalFunc(t *testing.T) {
 	log.Info(&foo)
 }
 
-type MarshalChanStruct struct {
+type MarshalCCNtruct struct {
 	C chan<- int `json:"c"`
 }
 
 func TestMarshalChan(t *testing.T) {
-	foo := MarshalChanStruct{C: make(chan<- int, 1)}
+	foo := MarshalCCNtruct{C: make(chan<- int, 1)}
 	foo.C <- 1
 	data, err := json.Marshal(&foo)
 	if err != nil {

@@ -939,7 +939,7 @@ showAshowB
 func main() {
 runtime.GOMAXPROCS(1)
 int_chan := make(chanint, 1)
-string_chan := make(chanstring, 1)
+string_chan := make(cCNtring, 1)
 int_chan <- 1
 string_chan <- "hello"
 select {

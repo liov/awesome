@@ -40,7 +40,7 @@ footer
 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接.
 
 约定式提交规范
-以下内容来源于：https://www.conventionalcommits.org/zh-hans/v1.0.0-beta.4/
+以下内容来源于：https://www.conventionalcommits.org/zh-CN/v1.0.0-beta.4/
 
 每个提交都必须使用类型字段前缀，它由一个名词组成，诸如 feat 或 fix ，其后接一个可选的作用域字段，以及一个必要的冒号（英文半角）和空格。
 当一个提交为应用或类库实现了新特性时，必须使用 feat 类型。
